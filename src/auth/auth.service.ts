@@ -10,10 +10,14 @@ export class AuthService {
     ) { }
 
     async signUp(authCredentialsDto: AuthCredentialsDto){
-        return this.client.send({ role: 'user', cmd: 'register' }, authCredentialsDto)
+        return this.client.send({ role: 'user', cmd: 'register' }, authCredentialsDto);
     }
 
     async signIn(authCredentialsDto: AuthCredentialsDto) {
-        return this.client.send({ role: 'user', cmd: 'login' }, authCredentialsDto)
+        return this.client.send({ role: 'user', cmd: 'login' }, authCredentialsDto);
+    }
+
+    async getUserId(authCredentialsDto: AuthCredentialsDto) {
+        return this.client.send({ role: 'user', cmd: 'getId' }, authCredentialsDto);
     }
 }
