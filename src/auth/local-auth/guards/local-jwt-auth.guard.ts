@@ -1,4 +1,4 @@
-import { CanActivate, Inject, ExecutionContext, Logger } from "@nestjs/common";
+import { CanActivate, Inject, ExecutionContext } from "@nestjs/common";
 import { ClientProxy } from "@nestjs/microservices";
 
 export class LocalJwtAuthGuard implements CanActivate {
@@ -14,14 +14,13 @@ export class LocalJwtAuthGuard implements CanActivate {
   
       try{
         const res = await this.client.send(
-          { role: 'auth', cmd: 'check' },
+          { role: 'local-auth', cmd: 'checkJwt' },
           { jwt: req.headers['authorization']?.split(' ')[1]})
           .pipe()
           .toPromise<boolean>();
   
           return res;
       } catch(err) {
-        Logger.error(err);
         return false;
       }
     }

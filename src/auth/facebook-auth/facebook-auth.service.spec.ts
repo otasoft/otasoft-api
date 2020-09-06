@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthService } from './auth.service';
+import { FacebookAuthService } from './facebook-auth.service';
 
-describe('AuthService', () => {
-  let service: AuthService;
+describe('FacebookAuthService', () => {
+  let service: FacebookAuthService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [AuthService],
+      providers: [FacebookAuthService],
     }).compile();
 
-    service = module.get<AuthService>(AuthService);
+    service = module.get<FacebookAuthService>(FacebookAuthService);
   });
 
   it('should be defined', () => {
