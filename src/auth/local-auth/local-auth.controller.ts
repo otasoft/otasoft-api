@@ -6,7 +6,6 @@ import { LocalJwtAuthGuard } from './guards/local-jwt-auth.guard';
 @Controller('local-auth')
 export class LocalAuthController {
     constructor(private readonly localAuthService: LocalAuthService) { }
-
     @Post('/signup')
     async signUp(@Body() authCredentialsDto: AuthCredentialsDto) {
         return this.localAuthService.signUp(authCredentialsDto);
