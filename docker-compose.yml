@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  rabbitmq:
+    image: rabbitmq:3.8.8-management-alpine
+    hostname: otasoft-api-rabbitmq
+    ports:
+        - ${RABBITMQ_FIRST_HOST_PORT}:5672
+        - ${RABBITMQ_SECOND_HOST_PORT}:15672
+    volumes:
+        - ./data/rabbitmq:/var/lib/rabbitmq/mnesia/rabbit@app-rabbitmq:cached
+    env_file: 
+      - .env
+    networks: 
+      - otasoft-api-network
+
+networks:
+  otasoft-api-network:
+    driver: bridge
