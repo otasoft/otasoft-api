@@ -1,24 +1,26 @@
 import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { LocalAuthService } from './local-auth.service';
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { LocalJwtAuthGuard } from './guards/local-jwt-auth.guard';
+import { SignUpCredentialsDto } from './dto/sign-up-credentials.dto';
+import { SignInCredentialsDto } from './dto/sign-in-credentials.dto';
 
 @Controller('local-auth')
 export class LocalAuthController {
     constructor(private readonly localAuthService: LocalAuthService) { }
+
     @Post('/signup')
-    async signUp(@Body() authCredentialsDto: AuthCredentialsDto) {
-        return this.localAuthService.signUp(authCredentialsDto);
+    async signUp(@Body() signUpCredentialsDto: SignUpCredentialsDto) {
+        return this.localAuthService.signUp(signUpCredentialsDto);
     }
 
     @Post('/signin')
-    async signIn(@Body() authCredentialsDto: AuthCredentialsDto) {
-        return this.localAuthService.signIn(authCredentialsDto);
+    async signIn(@Body() signInCredentialsDto: SignInCredentialsDto) {
+        return this.localAuthService.signIn(signInCredentialsDto);
     }
 
     @UseGuards(LocalJwtAuthGuard)
     @Get('/get-user-id')
-    async getUserId(@Body() authCredentialsDto: AuthCredentialsDto) {
-        return this.localAuthService.getUserId(authCredentialsDto);
+    async getUserId(@Body() signInCredentialsDto: SignInCredentialsDto) {
+        return this.localAuthService.getUserId(signInCredentialsDto);
     }
 }
