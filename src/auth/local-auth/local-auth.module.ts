@@ -1,28 +1,15 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ClientsModule } from '@nestjs/microservices';
 import { LocalAuthController } from './local-auth.controller';
 import { LocalAuthService } from './local-auth.service';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { connectMicroservice } from '../../microservice-connection/microservice-connection'
 
 @Module({
   imports: [
-    ClientsModule.registerAsync([{
-      name: 'AUTH_MICROSERVICE',
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        transport: Transport.RMQ,
-        options: {
-          urls: [
-            `amqp://${configService.get('RABBITMQ_DEFAULT_USER')}:${configService.get('RABBITMQ_DEFAULT_PASS')}@localhost:${configService.get('RABBITMQ_FIRST_HOST_PORT')}/${configService.get('RABBITMQ_DEFAULT_VHOST')}` 
-          ],
-          queue: 'auth_queue',
-          queueOptions: {
-            durable: false,
-          }
-        }
-      })
-    }])
+    ClientsModule.registerAsync([
+      connectMicroservice('auth'),
+      // connectMicroservice('customer')
+    ]),
   ],
   controllers: [LocalAuthController],
   providers: [LocalAuthService]
