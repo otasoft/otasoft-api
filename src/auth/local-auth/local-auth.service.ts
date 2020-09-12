@@ -1,10 +1,10 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { ClientProxy, RpcException } from '@nestjs/microservices';
+import { Injectable, Inject, BadRequestException } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
 import { SignUpCredentialsDto } from './dto/sign-up-credentials.dto';
 import { SignInCredentialsDto } from './dto/sign-in-credentials.dto';
-import { Observable } from 'rxjs';
 import { IMailObject } from 'src/mail/sendgrid/interfaces/mail-object.interface';
 import { ICustomerObject } from 'src/customer/interfaces/customer-object.interface';
+import { IAuthObject } from './interfaces/auth-object.interface';
 
 @Injectable()
 export class LocalAuthService {
@@ -17,40 +17,25 @@ export class LocalAuthService {
         private readonly mailClient: ClientProxy
     ) { }
 
-    async signUp(signUpCredentialsDto: SignUpCredentialsDto) {
+    // Move the logic of each particular microservice to separate methods to increase readability
+    async signUp(signUpCredentialsDto: SignUpCredentialsDto): Promise<void> {
         const { first_name, last_name, ...credentials } = signUpCredentialsDto;
-        let auth_id: number;
+        const authObject: IAuthObject = await this.authClient.send({ role: 'local-auth', cmd: 'register' }, credentials).toPromise();
+        const { auth_id, token } = authObject;
+        if (!auth_id) throw new BadRequestException() // Change to more appropriate exception
 
-        try {
-            auth_id = await this.authClient.send({ role: 'local-auth', cmd: 'register' }, credentials).toPromise();
-        } catch (error) {
-            throw new RpcException(error);
-        }
-
+        // Refactor -> Move this logic to customer module
         const { email } = credentials;
         const customerObject: ICustomerObject = {
             auth_id,
             first_name,
             last_name
         }
-        let customerCreated: Observable<any>;
-        try {
-            if (auth_id) {
-                customerCreated = this.customerClient.send({ role: 'customer', cmd: 'create' }, customerObject);
-            }
-        } catch (error) {
-            throw new RpcException(error);
-        }
+        const isCustomerCreated: Promise<boolean> = await this.customerClient.send({ role: 'customer', cmd: 'create' }, customerObject).toPromise();
+        if (!isCustomerCreated) throw new BadRequestException() // Change to more appropriate exception
 
-        try {
-            if (auth_id && customerCreated) {
-                const mailObject: IMailObject = { emailTo: email, emailType: 'confirmation' }
-                this.mailClient.send({ role: 'mail', cmd: 'send' }, mailObject)
-                return 'User created';
-            }
-        } catch (error) {
-            throw new RpcException(error);
-        }
+        const mailObject: IMailObject = { customer_email: email, email_type: 'confirmation', confirmation_token: token }
+        await this.mailClient.send({ role: 'mail', cmd: 'send', type: 'confirmation' }, mailObject).toPromise();
     }
 
     async signIn(signInCredentialsDto: SignInCredentialsDto) {
@@ -59,5 +44,9 @@ export class LocalAuthService {
 
     async getUserId(signInCredentialsDto: SignInCredentialsDto) {
         return this.authClient.send({ role: 'local-auth', cmd: 'getId' }, signInCredentialsDto);
+    }
+
+    async confirmAccountCreation(token: string) {
+        return this.authClient.send({ role: 'local-auth', cmd: 'confirm' }, token)
     }
 }
