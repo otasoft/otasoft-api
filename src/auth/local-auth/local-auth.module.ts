@@ -8,7 +8,8 @@ import { connectMicroservice } from '../../microservice-connection/microservice-
   imports: [
     ClientsModule.registerAsync([
       connectMicroservice('auth'),
-      connectMicroservice('customer')
+      connectMicroservice('customer'),
+      connectMicroservice('mail')
     ]),
   ],
   controllers: [LocalAuthController],
