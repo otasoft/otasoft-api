@@ -24,7 +24,7 @@ export class LocalAuthController {
         return this.localAuthService.getUserId(signInCredentialsDto);
     }
 
-    @Get('/mail-confirmation/:token')
+    @Get('/confirm/:token')
     async confirmAccountCreation(@Param('token') token: string) {
         return this.localAuthService.confirmAccountCreation(token);
     }
