@@ -15,14 +15,4 @@ export class SignUpCredentialsDto {
         { message: 'password too weak' },
     )
     password: string;
-
-    @IsString()
-    @MinLength(4)
-    @MaxLength(20)
-    first_name: string;
-
-    @IsString()
-    @MinLength(4)
-    @MaxLength(20)
-    last_name: string;
 }
