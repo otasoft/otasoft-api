@@ -12,7 +12,7 @@ export const connectMicroservice = (microserviceName: string):ClientsProviderAsy
             transport: Transport.RMQ,
             options: {
                 urls: [
-                `amqp://${configService.get('RABBITMQ_DEFAULT_USER')}:${configService.get('RABBITMQ_DEFAULT_PASS')}@localhost:${configService.get('RABBITMQ_FIRST_HOST_PORT')}/${configService.get('RABBITMQ_DEFAULT_VHOST')}` 
+                `amqp://${configService.get('RABBITMQ_DEFAULT_USER')}:${configService.get('RABBITMQ_DEFAULT_PASS')}@${configService.get('RABBITMQ_NODENAME')}:${configService.get('RABBITMQ_FIRST_HOST_PORT')}/${configService.get('RABBITMQ_DEFAULT_VHOST')}` 
                 ],
                 queue: `${microserviceName}_queue`,
                 queueOptions: {
