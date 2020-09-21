@@ -1,17 +1,25 @@
-FROM node:12-alpine as build
+FROM node:12-alpine as dev
 
-WORKDIR /usr/share/otasoft-api
+WORKDIR /usr/share/api-gateway/otasoft-api
 
-COPY dist package.json ./
+COPY package.json ./
 
-RUN yarn --production
+RUN yarn install
 
-FROM node:12-alpine
+COPY . .
 
-WORKDIR /usr/share/otasoft-api
+RUN yarn run build
 
-COPY --from=build /usr/share/otasoft-api .
+# COPY dist package.json ./
 
-EXPOSE 3000
+# RUN yarn --production
 
-CMD ["node", "main.js"]
+# FROM node:12-alpine
+
+# WORKDIR /usr/share/api-gateway/otasoft-api
+
+# COPY --from=build /usr/share/api-gateway/otasoft-api/dist ./dist
+
+# EXPOSE 3000
+
+# CMD ["node", "dist/main"]
