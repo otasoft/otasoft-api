@@ -1,0 +1,14 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Customer {
+  id: Int!
+  auth_id: Float
+  first_name: String!
+  last_name: String!
+}
+
+type Query {
+  getCustomerProfile(id: Int!): Customer!
+}

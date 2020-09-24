@@ -3,6 +3,7 @@ import { CustomerController } from './customer.controller';
 import { ClientsModule } from '@nestjs/microservices';
 import { connectMicroservice } from 'src/microservice-connection/microservice-connection';
 import { CustomerService } from './customer.service';
+import { CustomerQueryResolver } from './customer-query.resolver';
 
 @Module({
   imports: [
@@ -12,6 +13,6 @@ import { CustomerService } from './customer.service';
     ]),
   ],
   controllers: [CustomerController],
-  providers: [CustomerService]
+  providers: [CustomerService, CustomerQueryResolver]
 })
 export class CustomerModule {}

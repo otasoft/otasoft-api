@@ -9,7 +9,7 @@ export class CustomerController {
 
     @UseGuards(LocalJwtAuthGuard)
     @Get('/profile/:id')
-    async getCustomerProfie(@Param('id') id) {
+    async getCustomerProfile(@Param('id') id) {
         return this.customerService.getCustomerProfile(id);
     }
 
