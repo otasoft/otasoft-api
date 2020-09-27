@@ -1,16 +1,16 @@
 import { NotFoundException } from "@nestjs/common";
 import { Args, Resolver, Int, Query } from "@nestjs/graphql";
-import { Customer } from "./customer.model";
-import { CustomerService } from "./customer.service";
+import { GqlCustomer } from "./models/customer-gql.model";
+import { CustomerService } from "../customer.service";
 
-@Resolver(of => Customer)
+@Resolver(of => GqlCustomer)
 export class CustomerQueryResolver {
     constructor(
         private readonly customerService: CustomerService,
     ) {}
 
-    @Query(returns => Customer)
-    async getCustomerProfile(@Args('id', { type: () => Int }) id: number): Promise<Customer> {
+    @Query(returns => GqlCustomer)
+    async getCustomerProfile(@Args('id', { type: () => Int }) id: number): Promise<GqlCustomer> {
         const customer = await this.customerService.getCustomerProfile(id);
 
         if (!customer) {

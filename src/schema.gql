@@ -2,19 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Customer {
+type GqlCustomer {
   id: Int!
-  auth_id: Float
   first_name: String!
   last_name: String!
 }
 
 type Query {
-  getCustomerProfile(id: Int!): Customer!
+  getCustomerProfile(id: Int!): GqlCustomer!
 }
 
 type Mutation {
-  createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): Customer!
+  createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
 }
 
 input CreateCustomerProfileInput {

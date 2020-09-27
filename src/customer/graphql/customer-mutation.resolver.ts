@@ -1,18 +1,18 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
-import { Customer } from "./customer.model";
-import { CustomerService } from "./customer.service";
-import { CreateCustomerProfileInput } from "./dto/create-customer-profile.input";
+import { GqlCustomer } from "./models/customer-gql.model";
+import { CustomerService } from "../customer.service";
+import { CreateCustomerProfileInput } from "./input/create-customer-profile.input";
 
-@Resolver(of => Customer)
+@Resolver(of => GqlCustomer)
 export class CustomerMutationResolver {
     constructor(
         private readonly customerService: CustomerService
     ) {}
 
-    @Mutation(returns => Customer)
+    @Mutation(returns => GqlCustomer)
     async createCustomerProfile(
         @Args('createCustomerProfileData') createCustomerProfileData: CreateCustomerProfileInput,
-    ): Promise<Customer> {
+    ): Promise<GqlCustomer> {
         const newCustomerProfile = await this.customerService.createCustomerProfile(createCustomerProfileData);
 
         return newCustomerProfile;
