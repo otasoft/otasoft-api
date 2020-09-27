@@ -12,3 +12,12 @@ type Customer {
 type Query {
   getCustomerProfile(id: Int!): Customer!
 }
+
+type Mutation {
+  createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): Customer!
+}
+
+input CreateCustomerProfileInput {
+  first_name: String!
+  last_name: String!
+}

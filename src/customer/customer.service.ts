@@ -1,6 +1,8 @@
 import { Injectable, Inject, BadRequestException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { Customer } from './customer.model';
 import { CreateCustomerProfileDto } from './dto/create-customer-profile.dto';
+import { CreateCustomerProfileInput } from './dto/create-customer-profile.input';
 
 @Injectable()
 export class CustomerService {
@@ -9,12 +11,13 @@ export class CustomerService {
         public readonly customerClient: ClientProxy
     ) {}
 
-    async getCustomerProfile(id: number) {
-        return this.customerClient.send({ role: 'customer', cmd: 'get' }, id);
+    async getCustomerProfile(id: number): Promise<Customer> {
+        return this.customerClient.send({ role: 'customer', cmd: 'get' }, id).toPromise();
     }
 
-    async createCustomerProfile(createCustomerProfileDto: CreateCustomerProfileDto) {
-        const isCustomerCreated: Promise<boolean> = await this.customerClient.send({ role: 'customer', cmd: 'create' }, createCustomerProfileDto).toPromise();
-        if (!isCustomerCreated) throw new BadRequestException() // Change to more appropriate exception
+    async createCustomerProfile(createCustomerProfileInput: CreateCustomerProfileInput) {
+        const newCustomerProfile = await this.customerClient.send({ role: 'customer', cmd: 'create' }, createCustomerProfileInput).toPromise();
+        if (!newCustomerProfile) throw new BadRequestException() // Change to more appropriate exception
+        return newCustomerProfile;
     }
 }
