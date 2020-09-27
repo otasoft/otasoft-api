@@ -19,9 +19,9 @@ export class CustomerService {
     }
 
     async createCustomerProfile(
-        createCustomerProfileInput: CreateCustomerProfileInput
+        createCustomerProfileData: CreateCustomerProfileInput | CreateCustomerProfileDto
     ): Promise<GqlCustomer | RestCustomer> {
-        const newCustomerProfile = await this.customerClient.send({ role: 'customer', cmd: 'create' }, createCustomerProfileInput).toPromise();
+        const newCustomerProfile = await this.customerClient.send({ role: 'customer', cmd: 'create' }, createCustomerProfileData).toPromise();
         if (!newCustomerProfile) throw new BadRequestException() // Change to more appropriate exception
         return newCustomerProfile;
     }
