@@ -15,9 +15,15 @@ type Query {
 type Mutation {
   createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
   removeCustomerProfile(id: Float!): Boolean!
+  updateCustomerProfile(updateCustomerProfileData: UpdateCustomerProfileInput!, id: Float!): GqlCustomer!
 }
 
 input CreateCustomerProfileInput {
+  first_name: String!
+  last_name: String!
+}
+
+input UpdateCustomerProfileInput {
   first_name: String!
   last_name: String!
 }

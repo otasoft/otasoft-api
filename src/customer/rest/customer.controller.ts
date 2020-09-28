@@ -1,8 +1,9 @@
-import { Controller, Param, Get, UseGuards, Post, Body, Delete } from '@nestjs/common';
+import { Controller, Param, Get, UseGuards, Post, Body, Delete, Put } from '@nestjs/common';
 import { CustomerService } from '../customer.service';
 import { LocalJwtAuthGuard } from 'src/auth/local-auth/guards/local-jwt-auth.guard';
 import { CreateCustomerProfileDto } from './dto/create-customer-profile.dto';
 import { RestCustomer } from './models/customer-rest.model';
+import { UpdateCustomerProfileDto } from './dto/update-customer-profile.dto';
 
 @Controller('customer')
 export class CustomerController {
@@ -31,5 +32,13 @@ export class CustomerController {
         @Param('id') id: number
     ): Promise<Boolean> {
         return this.customerService.removeCustomerProfile(id);
+    }
+
+    @Put('/update/:id')
+    async updateCustomerProfile(
+        @Param('id') id: number,
+        @Body() updateCustomerProfileDto: UpdateCustomerProfileDto
+    ): Promise<RestCustomer> {
+        return this.customerService.updateCustomerProfile(id, updateCustomerProfileDto);
     }
 }
