@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type GqlCustomer {
-  id: Int!
+  id: ID!
   first_name: String!
   last_name: String!
 }
@@ -14,6 +14,7 @@ type Query {
 
 type Mutation {
   createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
+  removeCustomerProfile(id: Float!): Boolean!
 }
 
 input CreateCustomerProfileInput {

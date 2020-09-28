@@ -25,4 +25,11 @@ export class CustomerService {
         if (!newCustomerProfile) throw new BadRequestException() // Change to more appropriate exception
         return newCustomerProfile;
     }
+
+    async removeCustomerProfile(
+        id: number
+    ): Promise<Boolean> {
+        const customerRemoved = await this.customerClient.send({ role: 'customer', cmd: 'remove' }, id).toPromise();
+        return customerRemoved;
+    }
 }

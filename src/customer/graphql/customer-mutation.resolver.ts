@@ -11,10 +11,17 @@ export class CustomerMutationResolver {
 
     @Mutation(returns => GqlCustomer)
     async createCustomerProfile(
-        @Args('createCustomerProfileData') createCustomerProfileData: CreateCustomerProfileInput,
+        @Args('createCustomerProfileData') createCustomerProfileInput: CreateCustomerProfileInput,
     ): Promise<GqlCustomer> {
-        const newCustomerProfile = await this.customerService.createCustomerProfile(createCustomerProfileData);
+        const newCustomerProfile = await this.customerService.createCustomerProfile(createCustomerProfileInput);
 
         return newCustomerProfile;
+    }
+
+    @Mutation(returns => Boolean)
+    async removeCustomerProfile(
+        @Args('id') id: number
+    ): Promise<Boolean> {
+        return this.customerService.removeCustomerProfile(id);
     }
 }

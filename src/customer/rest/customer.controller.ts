@@ -1,4 +1,4 @@
-import { Controller, Param, Get, UseGuards, Post, Body } from '@nestjs/common';
+import { Controller, Param, Get, UseGuards, Post, Body, Delete } from '@nestjs/common';
 import { CustomerService } from '../customer.service';
 import { LocalJwtAuthGuard } from 'src/auth/local-auth/guards/local-jwt-auth.guard';
 import { CreateCustomerProfileDto } from './dto/create-customer-profile.dto';
@@ -24,5 +24,12 @@ export class CustomerController {
         @Body() createCustomerProfileDto: CreateCustomerProfileDto
     ): Promise<RestCustomer> {
         return this.customerService.createCustomerProfile(createCustomerProfileDto);
+    }
+
+    @Delete('/delete/:id')
+    async removeCustomerProfile(
+        @Param('id') id: number
+    ): Promise<Boolean> {
+        return this.customerService.removeCustomerProfile(id);
     }
 }
