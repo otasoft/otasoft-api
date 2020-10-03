@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule } from '@nestjs/microservices';
-import { LocalAuthController } from './local-auth.controller';
+import { LocalAuthController } from './rest/local-auth.controller';
 import { LocalAuthService } from './local-auth.service';
 import { connectMicroservice } from '../../microservice-connection/microservice-connection'
+import { LocalAuthQueryResolver } from './graphql/local-auth-query.resolver';
+import { LocalAuthMutationResolver } from './graphql/local-auth-mutation.resolver';
 
 @Module({
   imports: [
@@ -13,6 +15,10 @@ import { connectMicroservice } from '../../microservice-connection/microservice-
     ]),
   ],
   controllers: [LocalAuthController],
-  providers: [LocalAuthService]
+  providers: [
+    LocalAuthService,
+    LocalAuthQueryResolver,
+    LocalAuthMutationResolver,
+  ]
 })
 export class LocalAuthModule {}
