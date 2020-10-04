@@ -12,7 +12,7 @@ type GqlAuthUserId {
 }
 
 type GqlAuthUserToken {
-  token: String!
+  accessToken: String!
 }
 
 type GqlCustomer {

@@ -1,5 +1,6 @@
 import { Injectable, Inject, BadRequestException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { AuthCredentialsInput } from './graphql/input/auth-credentials.input';
 // import { IMailObject } from 'src/mail/sendgrid/interfaces/mail-object.interface';
 import { GqlAuthUser } from './graphql/models/auth-user-gql.model';
 import { GqlAuthUserId } from './graphql/models/auth-user-id-gql.model';
@@ -18,8 +19,8 @@ export class AuthService {
         // private readonly mailClient: ClientProxy
     ) { }
 
-    async signUp(authCredentialsDto: AuthCredentialsDto): Promise<GqlAuthUser | RestAuthUser> {
-        return await this.authClient.send({ role: 'auth', cmd: 'register' }, authCredentialsDto).toPromise();
+    async signUp(authCredentialsData: AuthCredentialsDto | AuthCredentialsInput): Promise<GqlAuthUser | RestAuthUser> {
+        return await this.authClient.send({ role: 'auth', cmd: 'register' }, authCredentialsData).toPromise();
 
         // Create microservice event emiter for `auth-user-created` event and react for it in customer module/microservice.
 
@@ -36,11 +37,11 @@ export class AuthService {
         return this.authClient.send({ role: 'auth', cmd: 'confirm' }, token).toPromise();
     }
 
-    async signIn(authCredentialsDto: AuthCredentialsDto): Promise<GqlAuthUserToken | RestAuthUserToken> {
-        return this.authClient.send({ role: 'auth', cmd: 'login' }, authCredentialsDto).toPromise();
+    async signIn(authCredentialsData: AuthCredentialsDto | AuthCredentialsInput): Promise<GqlAuthUserToken | RestAuthUserToken> {
+        return this.authClient.send({ role: 'auth', cmd: 'login' }, authCredentialsData).toPromise();
     }
 
-    async getUserId(authCredentialsDto: AuthCredentialsDto): Promise<GqlAuthUserId | RestAuthUserId> {
-        return this.authClient.send({ role: 'auth', cmd: 'getId' }, authCredentialsDto).toPromise();
+    async getUserId(authCredentialsData: AuthCredentialsDto | AuthCredentialsInput): Promise<GqlAuthUserId | RestAuthUserId> {
+        return this.authClient.send({ role: 'auth', cmd: 'getId' }, authCredentialsData).toPromise();
     }
 }

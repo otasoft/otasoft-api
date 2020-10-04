@@ -10,9 +10,13 @@ export class JwtAuthGuard implements CanActivate {
     async canActivate(
       context: ExecutionContext,
     ): Promise<boolean> {
-      const req = context.switchToHttp().getRequest();
+      let req: Request;
+      req = context.getArgs()[context.getArgs().length - 2].req;
+      if (!req) {
+        req = context.switchToHttp().getRequest();
+      }
   
-      try{
+      try {
         const res = await this.client.send(
           { role: 'auth', cmd: 'checkJwt' },
           { jwt: req.headers['authorization']?.split(' ')[1]})
