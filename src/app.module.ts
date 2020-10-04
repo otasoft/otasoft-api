@@ -1,27 +1,22 @@
 import { Module } from '@nestjs/common';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
-import { CustomerModule } from './customer/customer.module';
-import { MailModule } from './mail/mail.module';
-import { GraphQLModule } from '@nestjs/graphql';
-import { join } from 'path'
+import { AuthModule } from './microservices/auth/auth.module';
+import { CustomerModule } from './microservices/customer/customer.module';
+import { MailModule } from './microservices/mail/mail.module';
+import { GqlConfigService } from 'src/graphql/gql-config.service';
+import { BookingModule } from './microservices/booking/booking.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    GraphQLModule.forRoot({
-      include: [
-        AuthModule,
-        CustomerModule,
-        MailModule
-      ],
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-    }),
+    GraphQLModule.forRootAsync({ useClass: GqlConfigService }),
     AuthModule,
     CustomerModule,
-    MailModule
+    MailModule,
+    BookingModule
   ],
   controllers: [AppController],
   providers: [AppService],
