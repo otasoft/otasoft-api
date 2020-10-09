@@ -1,10 +1,10 @@
 {
   "name": "otasoft-api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "API Gateway for Otasoft ecosystem",
+  "author": "Jakub Andrzejewski",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",

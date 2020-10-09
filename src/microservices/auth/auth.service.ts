@@ -13,6 +13,7 @@ import { RestAuthUserId } from './rest/models/auth-user-id-rest.model';
 import { RestAuthUser } from './rest/models/auth-user-rest.model';
 import { RestAuthUserToken } from './rest/models/auth-user-token-rest.model';
 import { RestAuthChangeResponse } from './rest/models/auth-change-response-rest.model';
+import { GqlAuthChangeResponse } from './graphql/models/auth-change-response-gql.model';
 
 @Injectable()
 export class AuthService {
@@ -47,13 +48,13 @@ export class AuthService {
 
     async changeUserPassword(
         id: number, changePasswordDto: ChangePasswordDto
-    ): Promise<RestAuthChangeResponse> {
+    ): Promise<GqlAuthChangeResponse | RestAuthChangeResponse> {
         return this.authClient.send({ role: 'auth', cmd: 'changePassword' }, { id, changePasswordDto }).toPromise();
     }
 
     async deleteUserAccount(
         id: number
-    ): Promise<RestAuthChangeResponse> {
+    ): Promise<GqlAuthChangeResponse | RestAuthChangeResponse> {
         return this.authClient.send({ role: 'auth', cmd: 'deleteAccount' }, id).toPromise();
     }
 }
