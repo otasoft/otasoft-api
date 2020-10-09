@@ -43,11 +43,13 @@ export class AuthService {
     async getUserId(
         authEmailData: AuthEmailDto | AuthEmailInput
     ): Promise<GqlAuthUserId | RestAuthUserId> {
+        console.log(authEmailData)
         return this.authClient.send({ role: 'auth', cmd: 'getId' }, authEmailData).toPromise();
     }
 
     async changeUserPassword(
-        id: number, changePasswordDto: ChangePasswordDto
+        id: number,
+        changePasswordDto: ChangePasswordDto
     ): Promise<GqlAuthChangeResponse | RestAuthChangeResponse> {
         return this.authClient.send({ role: 'auth', cmd: 'changePassword' }, { id, changePasswordDto }).toPromise();
     }
