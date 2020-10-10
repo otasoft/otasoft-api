@@ -17,46 +17,56 @@ import { GqlAuthChangeResponse } from './graphql/models/auth-change-response-gql
 
 @Injectable()
 export class AuthService {
-    constructor(
-        @Inject('AUTH_MICROSERVICE')
-        private readonly authClient: ClientProxy,
-    ) { }
+  constructor(
+    @Inject('AUTH_MICROSERVICE')
+    private readonly authClient: ClientProxy,
+  ) {}
 
-    async signUp(
-        authCredentialsData: AuthCredentialsDto | AuthCredentialsInput
-    ): Promise<GqlAuthUser | RestAuthUser> {
-        return await this.authClient.send({ role: 'auth', cmd: 'register' }, authCredentialsData).toPromise();
-    }
+  async signUp(
+    authCredentialsData: AuthCredentialsDto | AuthCredentialsInput,
+  ): Promise<GqlAuthUser | RestAuthUser> {
+    return await this.authClient
+      .send({ role: 'auth', cmd: 'register' }, authCredentialsData)
+      .toPromise();
+  }
 
-    async confirmAccountCreation(
-        token: string
-    ): Promise<boolean> {
-        return this.authClient.send({ role: 'auth', cmd: 'confirm' }, token).toPromise();
-    }
+  async confirmAccountCreation(token: string): Promise<boolean> {
+    return this.authClient
+      .send({ role: 'auth', cmd: 'confirm' }, token)
+      .toPromise();
+  }
 
-    async signIn(
-        authCredentialsData: AuthCredentialsDto | AuthCredentialsInput
-    ): Promise<GqlAuthUserToken | RestAuthUserToken> {
-        return this.authClient.send({ role: 'auth', cmd: 'login' }, authCredentialsData).toPromise();
-    }
+  async signIn(
+    authCredentialsData: AuthCredentialsDto | AuthCredentialsInput,
+  ): Promise<GqlAuthUserToken | RestAuthUserToken> {
+    return this.authClient
+      .send({ role: 'auth', cmd: 'login' }, authCredentialsData)
+      .toPromise();
+  }
 
-    async getUserId(
-        authEmailData: AuthEmailDto | AuthEmailInput
-    ): Promise<GqlAuthUserId | RestAuthUserId> {
-        console.log(authEmailData)
-        return this.authClient.send({ role: 'auth', cmd: 'getId' }, authEmailData).toPromise();
-    }
+  async getUserId(
+    authEmailData: AuthEmailDto | AuthEmailInput,
+  ): Promise<GqlAuthUserId | RestAuthUserId> {
+    console.log(authEmailData);
+    return this.authClient
+      .send({ role: 'auth', cmd: 'getId' }, authEmailData)
+      .toPromise();
+  }
 
-    async changeUserPassword(
-        id: number,
-        changePasswordDto: ChangePasswordDto
-    ): Promise<GqlAuthChangeResponse | RestAuthChangeResponse> {
-        return this.authClient.send({ role: 'auth', cmd: 'changePassword' }, { id, changePasswordDto }).toPromise();
-    }
+  async changeUserPassword(
+    id: number,
+    changePasswordDto: ChangePasswordDto,
+  ): Promise<GqlAuthChangeResponse | RestAuthChangeResponse> {
+    return this.authClient
+      .send({ role: 'auth', cmd: 'changePassword' }, { id, changePasswordDto })
+      .toPromise();
+  }
 
-    async deleteUserAccount(
-        id: number
-    ): Promise<GqlAuthChangeResponse | RestAuthChangeResponse> {
-        return this.authClient.send({ role: 'auth', cmd: 'deleteAccount' }, id).toPromise();
-    }
+  async deleteUserAccount(
+    id: number,
+  ): Promise<GqlAuthChangeResponse | RestAuthChangeResponse> {
+    return this.authClient
+      .send({ role: 'auth', cmd: 'deleteAccount' }, id)
+      .toPromise();
+  }
 }

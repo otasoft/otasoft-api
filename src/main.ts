@@ -1,9 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule } from '@nestjs/swagger';
-import * as helmet from 'helmet'
+import * as helmet from 'helmet';
 import * as rateLimit from 'express-rate-limit';
 import { AppModule } from './app.module';
-import { swaggerOptions } from './doc/swagger-options'
+import { swaggerOptions } from './doc/swagger-options';
 import { rateLimitConfigObject } from './security/rateLimitConfig';
 
 (async function bootstrap() {
@@ -20,4 +20,4 @@ import { rateLimitConfigObject } from './security/rateLimitConfig';
   }
 
   await app.listen(3000);
-})()
+})();

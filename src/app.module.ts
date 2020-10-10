@@ -16,7 +16,7 @@ import { BookingModule } from './microservices/booking/booking.module';
     AuthModule,
     CustomerModule,
     MailModule,
-    BookingModule
+    BookingModule,
   ],
   controllers: [AppController],
   providers: [AppService],

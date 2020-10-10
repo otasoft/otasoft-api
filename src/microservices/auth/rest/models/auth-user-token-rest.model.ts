@@ -1,6 +1,6 @@
-import { IsString } from "class-validator";
+import { IsString } from 'class-validator';
 
 export class RestAuthUserToken {
-    @IsString()
-    accessToken: string;
+  @IsString()
+  accessToken: string;
 }
