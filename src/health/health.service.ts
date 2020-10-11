@@ -8,6 +8,7 @@ export class HealthService {
         private readonly healthCheckService: HealthCheckService,
         private readonly dnsHealthIndicator: DNSHealthIndicator,
         private readonly diskHealthIndicator: DiskHealthIndicator,
+        private readonly memoryHealthIndicator: MemoryHealthIndicator,
         private readonly configService: ConfigService,
     ) {}
 
@@ -27,6 +28,13 @@ export class HealthService {
                 'otasoft-api',
                 { thresholdPercent: 0.9, path: '/' }
             )
+        ]);
+    }
+
+    checkMemory() {
+        return this.healthCheckService.check([
+            () => this.memoryHealthIndicator.checkHeap('memory_heap', 150 * 1024 * 1024),
+            () => this.memoryHealthIndicator.checkRSS('memory_rss', 150 * 1024 * 1024)
         ]);
     }
 }

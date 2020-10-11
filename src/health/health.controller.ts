@@ -19,4 +19,10 @@ export class HealthController {
     checkDisk() {
         return this.healthService.checkDisk();
     }
+
+    @Get('/check-memory')
+    @HealthCheck()
+    checkMemory() {
+        return this.healthService.checkMemory();
+    }
 }
