@@ -4,6 +4,6 @@ import { SendgridService } from './sendgrid.service';
 
 @Module({
   controllers: [SendgridController],
-  providers: [SendgridService]
+  providers: [SendgridService],
 })
 export class SendgridModule {}

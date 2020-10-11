@@ -1,14 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule } from '@nestjs/swagger';
-import * as helmet from 'helmet'
+import * as helmet from 'helmet';
 import * as rateLimit from 'express-rate-limit';
 import { AppModule } from './app.module';
-import { swaggerOptions } from './doc/swagger-options'
+import { swaggerOptions } from './doc/swagger-options';
 import { rateLimitConfigObject } from './security/rateLimitConfig';
 
-async function bootstrap() {
+(async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('api')
+  app.setGlobalPrefix('api');
 
   if (process.env.ENVIRONMENT === 'development') {
     const document = SwaggerModule.createDocument(app, swaggerOptions);
@@ -20,5 +20,4 @@ async function bootstrap() {
   }
 
   await app.listen(3000);
-}
-bootstrap();
+})();

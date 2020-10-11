@@ -10,14 +10,10 @@ import { CustomerMutationResolver } from './graphql/customer-mutation.resolver';
   imports: [
     ClientsModule.registerAsync([
       connectMicroservice('auth'),
-      connectMicroservice('customer')
+      connectMicroservice('customer'),
     ]),
   ],
   controllers: [CustomerController],
-  providers: [
-    CustomerService,
-    CustomerQueryResolver,
-    CustomerMutationResolver
-  ]
+  providers: [CustomerService, CustomerQueryResolver, CustomerMutationResolver],
 })
 export class CustomerModule {}

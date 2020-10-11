@@ -11,6 +11,10 @@ type GqlAuthUserId {
   auth_id: ID!
 }
 
+type GqlAuthChangeResponse {
+  response: String!
+}
+
 type GqlAuthUserToken {
   accessToken: String!
 }
@@ -22,9 +26,23 @@ type GqlCustomer {
 }
 
 type Query {
-  getUserId(authCredentials: AuthCredentialsInput!): GqlAuthUserId!
+  getUserId(email: AuthEmailInput!): GqlAuthUserId!
   confirmAccountCreation(token: String!): Boolean!
   getCustomerProfile(id: Int!): GqlCustomer!
+}
+
+input AuthEmailInput {
+  email: String!
+}
+
+type Mutation {
+  signUp(authCredentials: AuthCredentialsInput!): GqlAuthUser!
+  signIn(authCredentials: AuthCredentialsInput!): GqlAuthUserToken!
+  changeUserPassword(changePasswordInput: ChangePasswordInput!, id: Float!): GqlAuthChangeResponse!
+  deleteUserAccount(id: Float!): GqlAuthChangeResponse!
+  createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
+  removeCustomerProfile(id: Float!): Boolean!
+  updateCustomerProfile(updateCustomerProfileData: UpdateCustomerProfileInput!, id: Float!): GqlCustomer!
 }
 
 input AuthCredentialsInput {
@@ -32,12 +50,9 @@ input AuthCredentialsInput {
   password: String!
 }
 
-type Mutation {
-  signUp(authCredentials: AuthCredentialsInput!): GqlAuthUser!
-  signIn(authCredentials: AuthCredentialsInput!): GqlAuthUserToken!
-  createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
-  removeCustomerProfile(id: Float!): Boolean!
-  updateCustomerProfile(updateCustomerProfileData: UpdateCustomerProfileInput!, id: Float!): GqlCustomer!
+input ChangePasswordInput {
+  old_password: String!
+  new_password: String!
 }
 
 input CreateCustomerProfileInput {

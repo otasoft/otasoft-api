@@ -1,6 +1,6 @@
-import { IsInt } from "class-validator";
+import { IsInt } from 'class-validator';
 
 export class RestAuthUserId {
-    @IsInt()
-    auth_id: number;
+  @IsInt()
+  auth_id: number;
 }
