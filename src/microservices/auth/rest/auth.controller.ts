@@ -7,7 +7,6 @@ import {
   Param,
   Put,
   Delete,
-  Req,
   Query,
 } from '@nestjs/common';
 import { AuthService } from '../auth.service';
@@ -17,7 +16,6 @@ import { RestAuthUserToken } from './models/auth-user-token-rest.model';
 import { RestAuthUserId } from './models/auth-user-id-rest.model';
 import { RestAuthUser } from './models/auth-user-rest.model';
 import { RestAuthChangeResponse } from './models/auth-change-response-rest.model';
-import { Request } from 'express';
 import { AuthEmailDto } from './dto/auth-email.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 

@@ -4,10 +4,8 @@ import { HealthController } from './health.controller';
 import { HealthService } from './health.service';
 
 @Module({
-  imports: [
-    TerminusModule
-  ],
+  imports: [TerminusModule],
   controllers: [HealthController],
-  providers: [HealthService]
+  providers: [HealthService],
 })
 export class HealthModule {}

@@ -16,9 +16,9 @@ export const connectMicroservice = (
         urls: [
           `amqp://${configService.get(
             'RABBITMQ_DEFAULT_USER',
-          )}:${configService.get('RABBITMQ_DEFAULT_PASS')}@${
-            process.env.RABBITMQ_NODENAME
-          }:${configService.get(
+          )}:${configService.get('RABBITMQ_DEFAULT_PASS')}@${configService.get(
+            'RABBITMQ_NODENAME',
+          )}:${configService.get(
             'RABBITMQ_FIRST_HOST_PORT',
           )}/${configService.get('RABBITMQ_DEFAULT_VHOST')}`,
         ],

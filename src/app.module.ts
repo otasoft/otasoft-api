@@ -18,7 +18,7 @@ import { HealthModule } from './health/health.module';
     CustomerModule,
     MailModule,
     BookingModule,
-    HealthModule
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
