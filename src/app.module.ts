@@ -8,15 +8,17 @@ import { CustomerModule } from './microservices/customer/customer.module';
 import { MailModule } from './microservices/mail/mail.module';
 import { GqlConfigService } from 'src/graphql/gql-config.service';
 import { BookingModule } from './microservices/booking/booking.module';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     GraphQLModule.forRootAsync({ useClass: GqlConfigService }),
     AuthModule,
     CustomerModule,
     MailModule,
     BookingModule,
+    HealthModule
   ],
   controllers: [AppController],
   providers: [AppService],
