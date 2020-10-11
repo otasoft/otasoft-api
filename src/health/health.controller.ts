@@ -25,4 +25,12 @@ export class HealthController {
     checkMemory() {
         return this.healthService.checkMemory();
     }
+
+    @Get('/check-microservice/:name')
+    @HealthCheck()
+    checkMicroservice(
+        @Param('name') microserviceName: string
+    ) {
+        return this.healthService.checkMicroservice(microserviceName);
+    }
 }
