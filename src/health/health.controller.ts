@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { HealthCheck } from '@nestjs/terminus';
 import { HealthService } from './health.service';
 
@@ -11,6 +11,12 @@ export class HealthController {
     @Get('/check-dns')
     @HealthCheck()
     checkDns() {
-        return this.healthService.checkDns()
+        return this.healthService.checkDns();
+    }
+
+    @Get('/check-disk')
+    @HealthCheck()
+    checkDisk() {
+        return this.healthService.checkDisk();
     }
 }
