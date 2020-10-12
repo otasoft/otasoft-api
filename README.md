@@ -1,18 +1,18 @@
 <br />
 <p align="center">
   <a href="https://github.com/otasoft/otasoft-core">
-    <img src="doc/otasoft-core-logo.png" alt="Otasoft Logo" width="128" height="128">
+    <img src="src/doc/otasoft-api-logo.png" alt="Otasoft Logo" width="128" height="128">
   </a>
 
-  <h1 align="center">Otasoft Core - Booking engine for Online Travel Agencies</h1>
+  <h1 align="center">Otasoft API - Booking engine for Online Travel Agencies</h1>
 
   <p align="center">
     <!-- <a href="https://github.com/otasoft/otasoft-core"><strong>Explore the docs »</strong></a> -->
     <!-- <a href="https://github.com/otasoft/otasoft-core">View Demo</a> -->
     <!-- · -->
-    <a href="https://github.com/otasoft/otasoft-core/issues">Report Bug</a>
+    <a href="https://github.com/otasoft/otasoft-api/issues">Report Bug</a>
     ·
-    <a href="https://github.com/otasoft/otasoft-core/issues">Request Feature</a>
+    <a href="https://github.com/otasoft/otasoft-api/issues">Request Feature</a>
   </p>
   <p align="center">
     <a href="https://github.com/otasoft/otasoft-api/actions"><img src="https://github.com/otasoft/otasoft-api/workflows/Node.js%20CI/badge.svg?branch=master" alt="CI"></a>
@@ -78,7 +78,7 @@ yarn start:dev
  
 The Otasoft API acts as a gateway/proxy for the different microservices it exposes. The GraphQL resolvers and REST controllers make calls to the RabbitMQ microservices through client-server communication. All elements of the Otasoft Core system are packed into docker images and can be run as containers.
 
-![Architecture Diagram](doc/otasoft-core-architecture.png)
+![Architecture Diagram](src/doc/otasoft-core-architecture.png)
 
 This architecture implements the following Microservice Design Patterns:
 
