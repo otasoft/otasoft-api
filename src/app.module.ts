@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
@@ -9,11 +9,13 @@ import { MailModule } from './microservices/mail/mail.module';
 import { GqlConfigService } from 'src/graphql/gql-config.service';
 import { BookingModule } from './microservices/booking/booking.module';
 import { HealthModule } from './health/health.module';
+import { CacheConfigService } from './cache/cache-config.service';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     GraphQLModule.forRootAsync({ useClass: GqlConfigService }),
+    CacheModule.registerAsync({ useClass: CacheConfigService }),
     AuthModule,
     CustomerModule,
     MailModule,
