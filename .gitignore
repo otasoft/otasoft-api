@@ -36,3 +36,7 @@ lerna-debug.log*
 
 # Compodoc documentation
 /src/doc/documentation
+
+# Public Certificate and Private Key
+/src/security/secrets/private-key.pem
+/src/security/secrets/public-cert.pem
