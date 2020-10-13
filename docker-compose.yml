@@ -12,6 +12,11 @@ services:
       - .env
     networks: 
       - otasoft-api-network
+  redis:
+    container_name: redis
+    image: redis:5-alpine
+    networks: 
+      - otasoft-api-network
 
 networks:
   otasoft-api-network:
