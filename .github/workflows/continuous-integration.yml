@@ -48,5 +48,7 @@ jobs:
       if: |
         steps.cache-yarn-cache.outputs.cache-hit != 'true' ||
         steps.cache-node-modules.outputs.cache-hit != 'true'
+    - name: Run prettier
+      run: yarn format
     - name: Build project
       run: yarn build
