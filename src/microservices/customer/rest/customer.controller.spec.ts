@@ -9,12 +9,14 @@ describe('CustomerController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ClientsModule.registerAsync([
-        connectMicroservice('auth'),
-        connectMicroservice('customer'),
-      ])],
+      imports: [
+        ClientsModule.registerAsync([
+          connectMicroservice('auth'),
+          connectMicroservice('customer'),
+        ]),
+      ],
       controllers: [CustomerController],
-      providers: [CustomerService]
+      providers: [CustomerService],
     }).compile();
 
     controller = module.get<CustomerController>(CustomerController);
