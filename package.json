@@ -27,6 +27,7 @@
     "@nestjs/graphql": "^7.7.0",
     "@nestjs/microservices": "^7.4.4",
     "@nestjs/platform-express": "^7.4.4",
+    "@nestjs/schedule": "^0.4.1",
     "@nestjs/swagger": "^4.6.0",
     "@nestjs/terminus": "^7.0.1",
     "amqp-connection-manager": "^3.2.0",
