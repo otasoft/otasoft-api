@@ -50,5 +50,7 @@ jobs:
         steps.cache-node-modules.outputs.cache-hit != 'true'
     - name: Run prettier
       run: yarn format
+    - name: Run tests
+      run: yarn test
     - name: Build project
       run: yarn build
