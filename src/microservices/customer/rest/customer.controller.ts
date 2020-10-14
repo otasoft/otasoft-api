@@ -9,7 +9,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { CustomerService } from '../customer.service';
-import { JwtAuthGuard } from 'src/microservices/auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { CreateCustomerProfileDto } from './dto/create-customer-profile.dto';
 import { RestCustomer } from './models/customer-rest.model';
 import { UpdateCustomerProfileDto } from './dto/update-customer-profile.dto';
@@ -32,11 +32,13 @@ export class CustomerController {
     return this.customerService.createCustomerProfile(createCustomerProfileDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('/delete/:id')
   async removeCustomerProfile(@Param('id') id: number): Promise<Boolean> {
     return this.customerService.removeCustomerProfile(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('/update/:id')
   async updateCustomerProfile(
     @Param('id') id: number,

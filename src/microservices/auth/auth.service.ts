@@ -1,8 +1,7 @@
-import { Injectable, Inject, BadRequestException } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthCredentialsInput } from './graphql/input/auth-credentials.input';
 import { AuthEmailInput } from './graphql/input/auth-email.input';
-// import { IMailObject } from 'src/mail/sendgrid/interfaces/mail-object.interface';
 import { GqlAuthUser } from './graphql/models/auth-user-gql.model';
 import { GqlAuthUserId } from './graphql/models/auth-user-id-gql.model';
 import { GqlAuthUserToken } from './graphql/models/auth-user-token-gql.model';
