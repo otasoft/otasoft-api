@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Transport } from '@nestjs/microservices';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import {
   DiskHealthIndicator,
   DNSHealthIndicator,
@@ -20,6 +21,7 @@ export class HealthService {
     private readonly configService: ConfigService,
   ) {}
 
+  @Cron(CronExpression.EVERY_30_MINUTES)
   checkDns() {
     return this.healthCheckService.check([
       () =>
