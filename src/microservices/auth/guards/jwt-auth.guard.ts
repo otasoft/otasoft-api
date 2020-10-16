@@ -1,4 +1,4 @@
-import { CanActivate, Inject, ExecutionContext } from '@nestjs/common';
+import { CanActivate, Inject, ExecutionContext, UnauthorizedException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
 export class JwtAuthGuard implements CanActivate {
@@ -13,6 +13,8 @@ export class JwtAuthGuard implements CanActivate {
     if (!req) {
       req = context.switchToHttp().getRequest();
     }
+
+    if (!req.headers['authorization']) throw new UnauthorizedException()
 
     try {
       const res = await this.client
