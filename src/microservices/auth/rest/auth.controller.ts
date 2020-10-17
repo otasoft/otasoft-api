@@ -18,6 +18,7 @@ import { RestAuthUser } from './models/auth-user-rest.model';
 import { RestAuthChangeResponse } from './models/auth-change-response-rest.model';
 import { AuthEmailDto } from './dto/auth-email.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { AccessControlGuard } from '../guards/access-control.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -52,7 +53,7 @@ export class AuthController {
     return this.authService.confirmAccountCreation(token);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AccessControlGuard)
   @Put('/:id/change-user-password')
   async changeUserPassword(
     @Param('id') id: number,
@@ -61,7 +62,7 @@ export class AuthController {
     return this.authService.changeUserPassword(id, changePasswordDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AccessControlGuard)
   @Delete('/:id/delete-user-account')
   async deleteUserAccount(
     @Param('id') id: number,
