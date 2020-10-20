@@ -1,4 +1,9 @@
-import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Request } from 'express';
 import { Observable } from 'rxjs';
 
@@ -13,8 +18,9 @@ export class FrontendCookieGuard implements CanActivate {
       req = context.switchToHttp().getRequest();
     }
 
-    if (req.cookies.frontend_cookie !== process.env.FRONTEND_COOKIE) throw new UnauthorizedException('You cannot access this resource')
-    
+    if (req.cookies.frontend_cookie !== process.env.FRONTEND_COOKIE)
+      throw new UnauthorizedException('You cannot access this resource');
+
     return true;
   }
 }

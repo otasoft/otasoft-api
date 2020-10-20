@@ -27,7 +27,8 @@ export class AccessControlGuard implements CanActivate {
 
     if (!jwt) throw new UnauthorizedException('User not authenticated');
 
-    const id: number = parseInt(req.params.id, 10) || parseInt(context.getArgs()[1].id, 10);
+    const id: number =
+      parseInt(req.params.id, 10) || parseInt(context.getArgs()[1].id, 10);
 
     if (!id) throw new BadRequestException('Missing user ID');
 
