@@ -24,15 +24,18 @@ export class AccessControlGuard implements CanActivate {
     }
 
     const jwt: string = req.headers['authorization']?.split(' ')[1];
-    const id: number = parseInt(req.params.id, 10);
+
+    if (!jwt) throw new UnauthorizedException('User not authenticated');
+
+    const id: number =
+      parseInt(req.params.id, 10) || parseInt(context.getArgs()[1].id, 10);
+
+    if (!id) throw new BadRequestException('Missing user ID');
 
     const accessControlObject: IAccessControl = {
       jwt,
       id,
     };
-
-    if (!jwt) throw new UnauthorizedException('User not authenticated');
-    if (!id) throw new BadRequestException('Missing user ID');
 
     try {
       const res = await this.authClient
