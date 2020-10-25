@@ -11,12 +11,12 @@ type GqlAuthUserId {
   auth_id: ID!
 }
 
-type GqlAuthChangeResponse {
-  response: String!
-}
-
 type GqlAuthUserToken {
   accessToken: String!
+}
+
+type GqlAuthChangeResponse {
+  response: String!
 }
 
 type GqlCustomer {
