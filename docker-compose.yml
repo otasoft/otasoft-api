@@ -1,5 +1,6 @@
 version: '3.7'
 services:
+  
   rabbitmq:
     image: rabbitmq:3.8.8-management-alpine
     hostname: otasoft-api-rabbitmq
@@ -12,9 +13,17 @@ services:
       - .env
     networks: 
       - otasoft-api-network
+
   redis:
     container_name: redis
     image: redis:5-alpine
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - $PWD/src/cache/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    ports: 
+      - ${REDIS_PORT}:6379
     networks: 
       - otasoft-api-network
 
