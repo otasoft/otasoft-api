@@ -1,5 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { CreateActivityInput } from '../../graphql/input/activity/create-activity.input';
+import { UpdateActivityInput } from '../../graphql/input/activity/update-activity.input';
+import { GqlActivityModel } from '../../graphql/models/activity/gql-activity.model';
+import { GqlTextResponseModel } from '../../graphql/models/gql-text-response.model';
 import { CreateActivityDto, UpdateActivityDto } from '../../rest/dto/activity';
 import { RestActivityModel } from '../../rest/models/activity/rest-activity.model';
 import { RestTextResponseModel } from '../../rest/models/rest-text-response.model';
@@ -13,31 +17,31 @@ export class ActivityService {
 
     async getSingleActivity(
         id: number
-    ): Promise<RestActivityModel> {
+    ): Promise<RestActivityModel | GqlActivityModel> {
         return this.catalogClient.send({ role: 'activity', cmd: 'getSingle' }, id).toPromise();
     }
 
-    async getAllActivities(): Promise<RestActivityModel[]> {
+    async getAllActivities(): Promise<RestActivityModel[] | GqlActivityModel[]> {
         return this.catalogClient.send({ role: 'activity', cmd: 'getAll' }, null).toPromise();
     }
 
     async createActivity(
-        createActivityDto: CreateActivityDto
-    ): Promise<RestActivityModel> {
+        createActivityDto: CreateActivityDto | CreateActivityInput
+    ): Promise<RestActivityModel | GqlActivityModel> {
         return this.catalogClient.send({ role: 'activity', cmd: 'create' }, createActivityDto).toPromise();
     }
 
     async updateActivity(
         id: number,
-        updateActivityDto: UpdateActivityDto
-    ): Promise<RestActivityModel> {
+        updateActivityDto: UpdateActivityDto | UpdateActivityInput
+    ): Promise<RestActivityModel | GqlActivityModel> {
         const updateActivityObject = { id, updateActivityDto };
         return this.catalogClient.send({ role: 'activity', cmd: 'update' }, updateActivityObject).toPromise();
     }
 
     async deleteActivity(
         id: number
-    ): Promise<RestTextResponseModel> {
+    ): Promise<RestTextResponseModel | GqlTextResponseModel> {
         return this.catalogClient.send({ role: 'activity', cmd: 'delete' }, id).toPromise();
     }
 }
