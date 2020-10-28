@@ -1,12 +1,12 @@
-import { IsInt, IsString } from "class-validator";
+import { IsInt, IsString } from 'class-validator';
 
 export class RestFlightModel {
-    @IsInt()
-    activity_id: number;
+  @IsInt()
+  activity_id: number;
 
-    @IsString()
-    name: string;
+  @IsString()
+  name: string;
 
-    @IsString()
-    description: string;
+  @IsString()
+  description: string;
 }

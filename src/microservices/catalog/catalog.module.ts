@@ -8,16 +8,8 @@ import { CatalogMutations } from './graphql/mutations';
 import { CatalogQueries } from './graphql/queries';
 
 @Module({
-  imports: [
-    ClientsModule.registerAsync([
-      connectMicroservice('catalog'),
-    ]),
-  ],
+  imports: [ClientsModule.registerAsync([connectMicroservice('catalog')])],
   controllers: [...CatalogControllers],
-  providers: [
-    ...CatalogServices,
-    ...CatalogMutations,
-    ...CatalogQueries
-  ],
+  providers: [...CatalogServices, ...CatalogMutations, ...CatalogQueries],
 })
 export class CatalogModule {}

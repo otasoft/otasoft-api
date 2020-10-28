@@ -8,11 +8,7 @@ describe('CarsService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [
-        ClientsModule.registerAsync([
-          connectMicroservice('catalog'),
-        ]),
-      ],
+      imports: [ClientsModule.registerAsync([connectMicroservice('catalog')])],
       providers: [CarsService],
     }).compile();
 

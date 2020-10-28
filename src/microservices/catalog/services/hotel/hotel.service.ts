@@ -10,38 +10,46 @@ import { RestTextResponseModel } from '../../rest/models/rest-text-response.mode
 
 @Injectable()
 export class HotelService {
-    constructor(
-        @Inject('CATALOG_MICROSERVICE')
-        private readonly catalogClient: ClientProxy,
-    ) {}
+  constructor(
+    @Inject('CATALOG_MICROSERVICE')
+    private readonly catalogClient: ClientProxy,
+  ) {}
 
-    async getSingleHotel(
-        id: number
-    ): Promise<RestHotelModel | GqlHotelModel> {
-        return this.catalogClient.send({ role: 'hotel', cmd: 'getSingle' }, id).toPromise();
-    }
+  async getSingleHotel(id: number): Promise<RestHotelModel | GqlHotelModel> {
+    return this.catalogClient
+      .send({ role: 'hotel', cmd: 'getSingle' }, id)
+      .toPromise();
+  }
 
-    async getAllHotels(): Promise<RestHotelModel[] | GqlHotelModel[]> {
-        return this.catalogClient.send({ role: 'hotel', cmd: 'getAll' }, null).toPromise();
-    }
+  async getAllHotels(): Promise<RestHotelModel[] | GqlHotelModel[]> {
+    return this.catalogClient
+      .send({ role: 'hotel', cmd: 'getAll' }, null)
+      .toPromise();
+  }
 
-    async createHotel(
-        createHotelDto: CreateHotelDto | CreateHotelInput
-    ): Promise<RestHotelModel | GqlHotelModel> {
-        return this.catalogClient.send({ role: 'hotel', cmd: 'create' }, createHotelDto).toPromise();
-    }
+  async createHotel(
+    createHotelDto: CreateHotelDto | CreateHotelInput,
+  ): Promise<RestHotelModel | GqlHotelModel> {
+    return this.catalogClient
+      .send({ role: 'hotel', cmd: 'create' }, createHotelDto)
+      .toPromise();
+  }
 
-    async updateHotel(
-        id: number,
-        updateHotelDto: UpdateHotelDto | UpdateHotelInput
-    ): Promise<RestHotelModel | GqlHotelModel> {
-        const updateHotelObject = { id, updateHotelDto };
-        return this.catalogClient.send({ role: 'hotel', cmd: 'update' }, updateHotelObject).toPromise();
-    }
+  async updateHotel(
+    id: number,
+    updateHotelDto: UpdateHotelDto | UpdateHotelInput,
+  ): Promise<RestHotelModel | GqlHotelModel> {
+    const updateHotelObject = { id, updateHotelDto };
+    return this.catalogClient
+      .send({ role: 'hotel', cmd: 'update' }, updateHotelObject)
+      .toPromise();
+  }
 
-    async deleteHotel(
-        id: number
-    ): Promise<RestTextResponseModel | GqlTextResponseModel> {
-        return this.catalogClient.send({ role: 'hotel', cmd: 'delete' }, id).toPromise();
-    }
+  async deleteHotel(
+    id: number,
+  ): Promise<RestTextResponseModel | GqlTextResponseModel> {
+    return this.catalogClient
+      .send({ role: 'hotel', cmd: 'delete' }, id)
+      .toPromise();
+  }
 }

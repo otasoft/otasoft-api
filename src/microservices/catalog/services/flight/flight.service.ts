@@ -10,38 +10,46 @@ import { RestTextResponseModel } from '../../rest/models/rest-text-response.mode
 
 @Injectable()
 export class FlightService {
-    constructor(
-        @Inject('CATALOG_MICROSERVICE')
-        private readonly catalogClient: ClientProxy,
-    ) {}
+  constructor(
+    @Inject('CATALOG_MICROSERVICE')
+    private readonly catalogClient: ClientProxy,
+  ) {}
 
-    async getSingleFlight(
-        id: number
-    ): Promise<RestFlightModel | GqlFlightModel> {
-        return this.catalogClient.send({ role: 'flight', cmd: 'getSingle' }, id).toPromise();
-    }
+  async getSingleFlight(id: number): Promise<RestFlightModel | GqlFlightModel> {
+    return this.catalogClient
+      .send({ role: 'flight', cmd: 'getSingle' }, id)
+      .toPromise();
+  }
 
-    async getAllFlights(): Promise<RestFlightModel[] | GqlFlightModel[]> {
-        return this.catalogClient.send({ role: 'flight', cmd: 'getAll' }, null).toPromise();
-    }
+  async getAllFlights(): Promise<RestFlightModel[] | GqlFlightModel[]> {
+    return this.catalogClient
+      .send({ role: 'flight', cmd: 'getAll' }, null)
+      .toPromise();
+  }
 
-    async createFlight(
-        createFlightDto: CreateFlightDto | CreateFlightInput
-    ): Promise<RestFlightModel | GqlFlightModel> {
-        return this.catalogClient.send({ role: 'flight', cmd: 'create' }, createFlightDto).toPromise();
-    }
+  async createFlight(
+    createFlightDto: CreateFlightDto | CreateFlightInput,
+  ): Promise<RestFlightModel | GqlFlightModel> {
+    return this.catalogClient
+      .send({ role: 'flight', cmd: 'create' }, createFlightDto)
+      .toPromise();
+  }
 
-    async updateFlight(
-        id: number,
-        updateFlightDto: UpdateFlightDto | UpdateFlightInput
-    ): Promise<RestFlightModel | GqlFlightModel> {
-        const updateFlightObject = { id, updateFlightDto };
-        return this.catalogClient.send({ role: 'flight', cmd: 'update' }, updateFlightObject).toPromise();
-    }
+  async updateFlight(
+    id: number,
+    updateFlightDto: UpdateFlightDto | UpdateFlightInput,
+  ): Promise<RestFlightModel | GqlFlightModel> {
+    const updateFlightObject = { id, updateFlightDto };
+    return this.catalogClient
+      .send({ role: 'flight', cmd: 'update' }, updateFlightObject)
+      .toPromise();
+  }
 
-    async deleteFlight(
-        id: number
-    ): Promise<RestTextResponseModel | GqlTextResponseModel> {
-        return this.catalogClient.send({ role: 'flight', cmd: 'delete' }, id).toPromise();
-    }
+  async deleteFlight(
+    id: number,
+  ): Promise<RestTextResponseModel | GqlTextResponseModel> {
+    return this.catalogClient
+      .send({ role: 'flight', cmd: 'delete' }, id)
+      .toPromise();
+  }
 }

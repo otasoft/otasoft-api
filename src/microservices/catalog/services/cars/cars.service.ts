@@ -10,38 +10,46 @@ import { RestTextResponseModel } from '../../rest/models/rest-text-response.mode
 
 @Injectable()
 export class CarsService {
-    constructor(
-        @Inject('CATALOG_MICROSERVICE')
-        private readonly catalogClient: ClientProxy,
-    ) {}
+  constructor(
+    @Inject('CATALOG_MICROSERVICE')
+    private readonly catalogClient: ClientProxy,
+  ) {}
 
-    async getSingleCars(
-        id: number
-    ): Promise<RestCarsModel | GqlCarsModel> {
-        return this.catalogClient.send({ role: 'cars', cmd: 'getSingle' }, id).toPromise();
-    }
+  async getSingleCars(id: number): Promise<RestCarsModel | GqlCarsModel> {
+    return this.catalogClient
+      .send({ role: 'cars', cmd: 'getSingle' }, id)
+      .toPromise();
+  }
 
-    async getAllCars(): Promise<RestCarsModel[] | GqlCarsModel[]> {
-        return this.catalogClient.send({ role: 'cars', cmd: 'getAll' }, null).toPromise();
-    }
+  async getAllCars(): Promise<RestCarsModel[] | GqlCarsModel[]> {
+    return this.catalogClient
+      .send({ role: 'cars', cmd: 'getAll' }, null)
+      .toPromise();
+  }
 
-    async createCars(
-        createCarsDto: CreateCarsDto | CreateCarsInput
-    ): Promise<RestCarsModel | GqlCarsModel> {
-        return this.catalogClient.send({ role: 'cars', cmd: 'create' }, createCarsDto).toPromise();
-    }
+  async createCars(
+    createCarsDto: CreateCarsDto | CreateCarsInput,
+  ): Promise<RestCarsModel | GqlCarsModel> {
+    return this.catalogClient
+      .send({ role: 'cars', cmd: 'create' }, createCarsDto)
+      .toPromise();
+  }
 
-    async updateCars(
-        id: number,
-        updateCarsDto: UpdateCarsDto | UpdateCarsInput
-    ): Promise<RestCarsModel | GqlCarsModel> {
-        const updateCarsObject = { id, updateCarsDto };
-        return this.catalogClient.send({ role: 'cars', cmd: 'update' }, updateCarsObject).toPromise();
-    }
+  async updateCars(
+    id: number,
+    updateCarsDto: UpdateCarsDto | UpdateCarsInput,
+  ): Promise<RestCarsModel | GqlCarsModel> {
+    const updateCarsObject = { id, updateCarsDto };
+    return this.catalogClient
+      .send({ role: 'cars', cmd: 'update' }, updateCarsObject)
+      .toPromise();
+  }
 
-    async deleteCars(
-        id: number
-    ): Promise<RestTextResponseModel | GqlTextResponseModel> {
-        return this.catalogClient.send({ role: 'cars', cmd: 'delete' }, id).toPromise();
-    }
+  async deleteCars(
+    id: number,
+  ): Promise<RestTextResponseModel | GqlTextResponseModel> {
+    return this.catalogClient
+      .send({ role: 'cars', cmd: 'delete' }, id)
+      .toPromise();
+  }
 }

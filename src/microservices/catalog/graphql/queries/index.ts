@@ -4,8 +4,8 @@ import { FlightQueryResolver } from './flight/flight-query.resolver';
 import { HotelQueryResolver } from './hotel/hotel-query.resolver';
 
 export const CatalogQueries = [
-    ActivityQueryResolver,
-    CarsQueryResolver,
-    FlightQueryResolver,
-    HotelQueryResolver
-]
+  ActivityQueryResolver,
+  CarsQueryResolver,
+  FlightQueryResolver,
+  HotelQueryResolver,
+];

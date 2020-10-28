@@ -10,38 +10,48 @@ import { RestTextResponseModel } from '../../rest/models/rest-text-response.mode
 
 @Injectable()
 export class ActivityService {
-    constructor(
-        @Inject('CATALOG_MICROSERVICE')
-        private readonly catalogClient: ClientProxy,
-    ) {}
+  constructor(
+    @Inject('CATALOG_MICROSERVICE')
+    private readonly catalogClient: ClientProxy,
+  ) {}
 
-    async getSingleActivity(
-        id: number
-    ): Promise<RestActivityModel | GqlActivityModel> {
-        return this.catalogClient.send({ role: 'activity', cmd: 'getSingle' }, id).toPromise();
-    }
+  async getSingleActivity(
+    id: number,
+  ): Promise<RestActivityModel | GqlActivityModel> {
+    return this.catalogClient
+      .send({ role: 'activity', cmd: 'getSingle' }, id)
+      .toPromise();
+  }
 
-    async getAllActivities(): Promise<RestActivityModel[] | GqlActivityModel[]> {
-        return this.catalogClient.send({ role: 'activity', cmd: 'getAll' }, null).toPromise();
-    }
+  async getAllActivities(): Promise<RestActivityModel[] | GqlActivityModel[]> {
+    return this.catalogClient
+      .send({ role: 'activity', cmd: 'getAll' }, null)
+      .toPromise();
+  }
 
-    async createActivity(
-        createActivityDto: CreateActivityDto | CreateActivityInput
-    ): Promise<RestActivityModel | GqlActivityModel> {
-        return this.catalogClient.send({ role: 'activity', cmd: 'create' }, createActivityDto).toPromise();
-    }
+  async createActivity(
+    createActivityDto: CreateActivityDto | CreateActivityInput,
+  ): Promise<RestActivityModel | GqlActivityModel> {
+    return this.catalogClient
+      .send({ role: 'activity', cmd: 'create' }, createActivityDto)
+      .toPromise();
+  }
 
-    async updateActivity(
-        id: number,
-        updateActivityDto: UpdateActivityDto | UpdateActivityInput
-    ): Promise<RestActivityModel | GqlActivityModel> {
-        const updateActivityObject = { id, updateActivityDto };
-        return this.catalogClient.send({ role: 'activity', cmd: 'update' }, updateActivityObject).toPromise();
-    }
+  async updateActivity(
+    id: number,
+    updateActivityDto: UpdateActivityDto | UpdateActivityInput,
+  ): Promise<RestActivityModel | GqlActivityModel> {
+    const updateActivityObject = { id, updateActivityDto };
+    return this.catalogClient
+      .send({ role: 'activity', cmd: 'update' }, updateActivityObject)
+      .toPromise();
+  }
 
-    async deleteActivity(
-        id: number
-    ): Promise<RestTextResponseModel | GqlTextResponseModel> {
-        return this.catalogClient.send({ role: 'activity', cmd: 'delete' }, id).toPromise();
-    }
+  async deleteActivity(
+    id: number,
+  ): Promise<RestTextResponseModel | GqlTextResponseModel> {
+    return this.catalogClient
+      .send({ role: 'activity', cmd: 'delete' }, id)
+      .toPromise();
+  }
 }

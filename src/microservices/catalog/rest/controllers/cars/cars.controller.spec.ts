@@ -9,13 +9,9 @@ describe('CarsController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [
-        ClientsModule.registerAsync([
-          connectMicroservice('catalog'),
-        ]),
-      ],
+      imports: [ClientsModule.registerAsync([connectMicroservice('catalog')])],
       controllers: [CarsController],
-      providers: [CarsService]
+      providers: [CarsService],
     }).compile();
 
     controller = module.get<CarsController>(CarsController);

@@ -9,13 +9,9 @@ describe('FlightController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [
-        ClientsModule.registerAsync([
-          connectMicroservice('catalog'),
-        ]),
-      ],
+      imports: [ClientsModule.registerAsync([connectMicroservice('catalog')])],
       controllers: [FlightController],
-      providers: [FlightService]
+      providers: [FlightService],
     }).compile();
 
     controller = module.get<FlightController>(FlightController);
