@@ -14,7 +14,7 @@ import { MicroservicesModules } from './microservices';
     GraphqlWrapperModule,
     RedisCacheModule,
     HealthModule,
-    ...MicroservicesModules
-  ]
+    ...MicroservicesModules,
+  ],
 })
 export class AppModule {}

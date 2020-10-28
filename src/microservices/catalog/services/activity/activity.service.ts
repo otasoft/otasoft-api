@@ -1,4 +1,11 @@
-import { CacheInterceptor, CacheKey, CacheTTL, Inject, Injectable, UseInterceptors } from '@nestjs/common';
+import {
+  CacheInterceptor,
+  CacheKey,
+  CacheTTL,
+  Inject,
+  Injectable,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { CreateActivityInput } from '../../graphql/input/activity/create-activity.input';
 import { UpdateActivityInput } from '../../graphql/input/activity/update-activity.input';
