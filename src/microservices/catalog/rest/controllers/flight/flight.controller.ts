@@ -15,12 +15,12 @@ export class FlightController {
         return this.flightService.getSingleFlight(id);
     }
 
-    @Get('/all-activities')
+    @Get('/all-flights')
     async getAllFlights(): Promise<RestFlightModel[]> {
         return this.flightService.getAllFlights();
     }
 
-    @Post('create-flight')
+    @Post('/create')
     async createFlight(
         @Body() createFlightDto: CreateFlightDto
     ): Promise<RestFlightModel> {

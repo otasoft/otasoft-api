@@ -15,12 +15,12 @@ export class HotelController {
         return this.hotelService.getSingleHotel(id);
     }
 
-    @Get('/all-activities')
+    @Get('/all-hotels')
     async getAllHotels(): Promise<RestHotelModel[]> {
         return this.hotelService.getAllHotels();
     }
 
-    @Post('create-hotel')
+    @Post('/create')
     async createHotel(
         @Body() createHotelDto: CreateHotelDto
     ): Promise<RestHotelModel> {

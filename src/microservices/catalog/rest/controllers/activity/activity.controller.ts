@@ -20,7 +20,7 @@ export class ActivityController {
         return this.activityService.getAllActivities();
     }
 
-    @Post('create-activity')
+    @Post('/create')
     async createActivity(
         @Body() createActivityDto: CreateActivityDto
     ): Promise<RestActivityModel> {

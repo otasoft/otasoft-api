@@ -15,12 +15,12 @@ export class CarsController {
         return this.carsService.getSingleCars(id);
     }
 
-    @Get('/all-activities')
+    @Get('/all-cars')
     async getAllCars(): Promise<RestCarsModel[]> {
         return this.carsService.getAllCars();
     }
 
-    @Post('create-cars')
+    @Post('/create')
     async createCars(
         @Body() createCarsDto: CreateCarsDto
     ): Promise<RestCarsModel> {
