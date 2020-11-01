@@ -2,6 +2,7 @@ import {
   CacheInterceptor,
   CacheKey,
   CacheTTL,
+  HttpException,
   Inject,
   Injectable,
   UseInterceptors,
@@ -25,26 +26,38 @@ export class ActivityService {
   async getSingleActivity(
     id: number,
   ): Promise<RestActivityModel | GqlActivityModel> {
-    return this.catalogClient
-      .send({ role: 'activity', cmd: 'getSingle' }, id)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'activity', cmd: 'getSingle' }, id)
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   @UseInterceptors(CacheInterceptor)
   @CacheKey('all-activities')
   @CacheTTL(20)
   async getAllActivities(): Promise<RestActivityModel[] | GqlActivityModel[]> {
-    return this.catalogClient
-      .send({ role: 'activity', cmd: 'getAll' }, null)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'activity', cmd: 'getAll' }, {})
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   async createActivity(
     createActivityDto: CreateActivityDto | CreateActivityInput,
   ): Promise<RestActivityModel | GqlActivityModel> {
-    return this.catalogClient
-      .send({ role: 'activity', cmd: 'create' }, createActivityDto)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'activity', cmd: 'create' }, createActivityDto)
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   async updateActivity(
@@ -52,16 +65,24 @@ export class ActivityService {
     updateActivityDto: UpdateActivityDto | UpdateActivityInput,
   ): Promise<RestActivityModel | GqlActivityModel> {
     const updateActivityObject = { id, updateActivityDto };
-    return this.catalogClient
-      .send({ role: 'activity', cmd: 'update' }, updateActivityObject)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'activity', cmd: 'update' }, updateActivityObject)
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   async deleteActivity(
     id: number,
   ): Promise<RestTextResponseModel | GqlTextResponseModel> {
-    return this.catalogClient
-      .send({ role: 'activity', cmd: 'delete' }, id)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'activity', cmd: 'delete' }, id)
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 }

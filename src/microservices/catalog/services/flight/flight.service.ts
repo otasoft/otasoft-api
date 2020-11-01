@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { CreateFlightInput } from '../../graphql/input/flight/create-flight.input';
 import { UpdateFlightInput } from '../../graphql/input/flight/update-flight.input';
@@ -16,23 +16,35 @@ export class FlightService {
   ) {}
 
   async getSingleFlight(id: number): Promise<RestFlightModel | GqlFlightModel> {
-    return this.catalogClient
-      .send({ role: 'flight', cmd: 'getSingle' }, id)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'flight', cmd: 'getSingle' }, id)
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   async getAllFlights(): Promise<RestFlightModel[] | GqlFlightModel[]> {
-    return this.catalogClient
-      .send({ role: 'flight', cmd: 'getAll' }, null)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'flight', cmd: 'getAll' }, {})
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   async createFlight(
     createFlightDto: CreateFlightDto | CreateFlightInput,
   ): Promise<RestFlightModel | GqlFlightModel> {
-    return this.catalogClient
-      .send({ role: 'flight', cmd: 'create' }, createFlightDto)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'flight', cmd: 'create' }, createFlightDto)
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   async updateFlight(
@@ -40,16 +52,25 @@ export class FlightService {
     updateFlightDto: UpdateFlightDto | UpdateFlightInput,
   ): Promise<RestFlightModel | GqlFlightModel> {
     const updateFlightObject = { id, updateFlightDto };
-    return this.catalogClient
-      .send({ role: 'flight', cmd: 'update' }, updateFlightObject)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'flight', cmd: 'update' }, updateFlightObject)
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   async deleteFlight(
     id: number,
   ): Promise<RestTextResponseModel | GqlTextResponseModel> {
-    return this.catalogClient
-      .send({ role: 'flight', cmd: 'delete' }, id)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'flight', cmd: 'delete' }, id)
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
+
   }
 }

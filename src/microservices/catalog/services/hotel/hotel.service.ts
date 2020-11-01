@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { CreateHotelInput } from '../../graphql/input/hotel/create-hotel.input';
 import { UpdateHotelInput } from '../../graphql/input/hotel/update-hotel.input';
@@ -16,23 +16,35 @@ export class HotelService {
   ) {}
 
   async getSingleHotel(id: number): Promise<RestHotelModel | GqlHotelModel> {
-    return this.catalogClient
-      .send({ role: 'hotel', cmd: 'getSingle' }, id)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'hotel', cmd: 'getSingle' }, id)
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   async getAllHotels(): Promise<RestHotelModel[] | GqlHotelModel[]> {
-    return this.catalogClient
-      .send({ role: 'hotel', cmd: 'getAll' }, null)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'hotel', cmd: 'getAll' }, {})
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   async createHotel(
     createHotelDto: CreateHotelDto | CreateHotelInput,
   ): Promise<RestHotelModel | GqlHotelModel> {
-    return this.catalogClient
-      .send({ role: 'hotel', cmd: 'create' }, createHotelDto)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'hotel', cmd: 'create' }, createHotelDto)
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   async updateHotel(
@@ -40,16 +52,24 @@ export class HotelService {
     updateHotelDto: UpdateHotelDto | UpdateHotelInput,
   ): Promise<RestHotelModel | GqlHotelModel> {
     const updateHotelObject = { id, updateHotelDto };
-    return this.catalogClient
-      .send({ role: 'hotel', cmd: 'update' }, updateHotelObject)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'hotel', cmd: 'update' }, updateHotelObject)
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   async deleteHotel(
     id: number,
   ): Promise<RestTextResponseModel | GqlTextResponseModel> {
-    return this.catalogClient
-      .send({ role: 'hotel', cmd: 'delete' }, id)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'hotel', cmd: 'delete' }, id)
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 }

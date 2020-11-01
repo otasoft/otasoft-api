@@ -16,14 +16,14 @@ import { RestTextResponseModel } from '../../models/rest-text-response.model';
 export class FlightController {
   constructor(private readonly flightService: FlightService) {}
 
-  @Get('/:id')
-  async getSingleFlight(@Param('id') id: number): Promise<RestFlightModel> {
-    return this.flightService.getSingleFlight(id);
-  }
-
   @Get('/all-flights')
   async getAllFlights(): Promise<RestFlightModel[]> {
     return this.flightService.getAllFlights();
+  }
+
+  @Get('/:id')
+  async getSingleFlight(@Param('id') id: number): Promise<RestFlightModel> {
+    return this.flightService.getSingleFlight(id);
   }
 
   @Post('/create')

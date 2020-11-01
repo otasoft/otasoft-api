@@ -16,14 +16,14 @@ import { RestTextResponseModel } from '../../models/rest-text-response.model';
 export class CarsController {
   constructor(private readonly carsService: CarsService) {}
 
-  @Get('/:id')
-  async getSingleCars(@Param('id') id: number): Promise<RestCarsModel> {
-    return this.carsService.getSingleCars(id);
-  }
-
   @Get('/all-cars')
   async getAllCars(): Promise<RestCarsModel[]> {
     return this.carsService.getAllCars();
+  }
+
+  @Get('/:id')
+  async getSingleCars(@Param('id') id: number): Promise<RestCarsModel> {
+    return this.carsService.getSingleCars(id);
   }
 
   @Post('/create')

@@ -16,14 +16,14 @@ import { RestTextResponseModel } from '../../models/rest-text-response.model';
 export class ActivityController {
   constructor(private readonly activityService: ActivityService) {}
 
-  @Get('/:id')
-  async getSingleActivity(@Param('id') id: number): Promise<RestActivityModel> {
-    return this.activityService.getSingleActivity(id);
-  }
-
   @Get('/all-activities')
   async getAllActivities(): Promise<RestActivityModel[]> {
     return this.activityService.getAllActivities();
+  }
+
+  @Get('/:id')
+  async getSingleActivity(@Param('id') id: number): Promise<RestActivityModel> {
+    return this.activityService.getSingleActivity(id);
   }
 
   @Post('/create')

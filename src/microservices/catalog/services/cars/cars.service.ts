@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { CreateCarsInput } from '../../graphql/input/cars/create-cars.input';
 import { UpdateCarsInput } from '../../graphql/input/cars/update-cars.input';
@@ -16,23 +16,33 @@ export class CarsService {
   ) {}
 
   async getSingleCars(id: number): Promise<RestCarsModel | GqlCarsModel> {
-    return this.catalogClient
-      .send({ role: 'cars', cmd: 'getSingle' }, id)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'cars', cmd: 'getSingle' }, id)
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   async getAllCars(): Promise<RestCarsModel[] | GqlCarsModel[]> {
-    return this.catalogClient
-      .send({ role: 'cars', cmd: 'getAll' }, null)
-      .toPromise();
+    try {
+      return await this.catalogClient.send({ role: 'cars', cmd: 'getAll' }, {}).toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   async createCars(
     createCarsDto: CreateCarsDto | CreateCarsInput,
   ): Promise<RestCarsModel | GqlCarsModel> {
-    return this.catalogClient
-      .send({ role: 'cars', cmd: 'create' }, createCarsDto)
-      .toPromise();
+    try {
+      return await this.catalogClient
+        .send({ role: 'cars', cmd: 'create' }, createCarsDto)
+        .toPromise();
+    } catch (error) {
+      throw new HttpException(error.errorStatus, error.statusCode);
+    }
   }
 
   async updateCars(

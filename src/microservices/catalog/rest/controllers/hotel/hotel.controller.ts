@@ -16,14 +16,14 @@ import { RestTextResponseModel } from '../../models/rest-text-response.model';
 export class HotelController {
   constructor(private readonly hotelService: HotelService) {}
 
-  @Get('/:id')
-  async getSingleHotel(@Param('id') id: number): Promise<RestHotelModel> {
-    return this.hotelService.getSingleHotel(id);
-  }
-
   @Get('/all-hotels')
   async getAllHotels(): Promise<RestHotelModel[]> {
     return this.hotelService.getAllHotels();
+  }
+
+  @Get('/:id')
+  async getSingleHotel(@Param('id') id: number): Promise<RestHotelModel> {
+    return this.hotelService.getSingleHotel(id);
   }
 
   @Post('/create')
