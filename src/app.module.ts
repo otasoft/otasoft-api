@@ -11,6 +11,7 @@ import { GqlConfigService } from './graphql/gql-config.service';
 import { BookingModule } from './microservices/booking/booking.module';
 import { HealthModule } from './health/health.module';
 import { CacheConfigService } from './cache/cache-config.service';
+import { CatalogModule } from './microservices/catalog/catalog.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CacheConfigService } from './cache/cache-config.service';
     MailModule,
     BookingModule,
     HealthModule,
+    CatalogModule,
   ],
   controllers: [AppController],
   providers: [AppService],
