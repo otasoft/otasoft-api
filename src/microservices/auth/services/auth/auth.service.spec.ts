@@ -1,11 +1,10 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
-import { connectMicroservice } from '../../microservice-connection/microservice-connection';
-import { AuthService } from '../auth.service';
-import { AuthController } from './auth.controller';
+import { connectMicroservice } from '../../../microservice-connection/microservice-connection';
+import { AuthService } from './auth.service';
 
-describe('AuthController', () => {
-  let controller: AuthController;
+describe('AuthService', () => {
+  let service: AuthService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -16,14 +15,13 @@ describe('AuthController', () => {
           connectMicroservice('mail'),
         ]),
       ],
-      controllers: [AuthController],
       providers: [AuthService],
     }).compile();
 
-    controller = module.get<AuthController>(AuthController);
+    service = module.get<AuthService>(AuthService);
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(service).toBeDefined();
   });
 });
