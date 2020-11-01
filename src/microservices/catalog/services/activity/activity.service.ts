@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { CacheInterceptor, CacheKey, CacheTTL, Inject, Injectable, UseInterceptors } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { CreateActivityInput } from '../../graphql/input/activity/create-activity.input';
 import { UpdateActivityInput } from '../../graphql/input/activity/update-activity.input';
@@ -23,6 +23,9 @@ export class ActivityService {
       .toPromise();
   }
 
+  @UseInterceptors(CacheInterceptor)
+  @CacheKey('all-activities')
+  @CacheTTL(20)
   async getAllActivities(): Promise<RestActivityModel[] | GqlActivityModel[]> {
     return this.catalogClient
       .send({ role: 'activity', cmd: 'getAll' }, null)
