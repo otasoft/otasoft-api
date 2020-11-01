@@ -53,10 +53,15 @@ type GqlHotelModel {
   description: String!
 }
 
+type GqlCustomer {
+  id: ID!
+  first_name: String!
+  last_name: String!
+}
+
 type Query {
   getUserId(email: AuthEmailInput!): GqlAuthUserId!
   confirmAccountCreation(token: String!): Boolean!
-  getCustomerProfile(id: Int!): GqlCustomer!
   getSingleActivity(id: Float!): GqlActivityModel!
   getAllActivities: GqlActivityModel!
   getSingleCars(id: Float!): GqlCarsModel!
@@ -65,6 +70,7 @@ type Query {
   getAllFlights: GqlFlightModel!
   getSingleHotel(id: Float!): GqlHotelModel!
   getAllHotels: GqlHotelModel!
+  getCustomerProfile(id: Int!): GqlCustomer!
 }
 
 input AuthEmailInput {
@@ -76,9 +82,6 @@ type Mutation {
   signIn(authCredentials: AuthCredentialsInput!): GqlAuthUserToken!
   changeUserPassword(changePasswordInput: ChangePasswordInput!, id: Float!): GqlAuthChangeResponse!
   deleteUserAccount(id: Float!): GqlAuthChangeResponse!
-  createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
-  removeCustomerProfile(id: Float!): Boolean!
-  updateCustomerProfile(updateCustomerProfileData: UpdateCustomerProfileInput!, id: Float!): GqlCustomer!
   createActivity(createActivityInput: CreateActivityInput!): GqlActivityModel!
   updateActivity(updateActivityInput: UpdateActivityInput!, id: Float!): GqlActivityModel!
   deleteActivity(id: Float!): GqlTextResponseModel!
@@ -91,6 +94,9 @@ type Mutation {
   createHotel(createHotelInput: CreateHotelInput!): GqlHotelModel!
   updateHotel(updateHotelInput: UpdateHotelInput!, id: Float!): GqlHotelModel!
   deleteHotel(id: Float!): GqlTextResponseModel!
+  createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
+  removeCustomerProfile(id: Float!): Boolean!
+  updateCustomerProfile(updateCustomerProfileData: UpdateCustomerProfileInput!, id: Float!): GqlCustomer!
 }
 
 input AuthCredentialsInput {
@@ -101,16 +107,6 @@ input AuthCredentialsInput {
 input ChangePasswordInput {
   old_password: String!
   new_password: String!
-}
-
-input CreateCustomerProfileInput {
-  first_name: String!
-  last_name: String!
-}
-
-input UpdateCustomerProfileInput {
-  first_name: String!
-  last_name: String!
 }
 
 input CreateActivityInput {
@@ -151,4 +147,14 @@ input CreateHotelInput {
 input UpdateHotelInput {
   name: String!
   description: String!
+}
+
+input CreateCustomerProfileInput {
+  first_name: String!
+  last_name: String!
+}
+
+input UpdateCustomerProfileInput {
+  first_name: String!
+  last_name: String!
 }
