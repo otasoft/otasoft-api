@@ -9,7 +9,10 @@ describe('ActivityService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ClientsModule.registerAsync([connectMicroservice('catalog')]), RedisCacheModule],
+      imports: [
+        ClientsModule.registerAsync([connectMicroservice('catalog')]),
+        RedisCacheModule,
+      ],
       providers: [ActivityService],
     }).compile();
 

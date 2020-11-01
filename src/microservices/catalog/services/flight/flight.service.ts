@@ -71,6 +71,5 @@ export class FlightService {
     } catch (error) {
       throw new HttpException(error.errorStatus, error.statusCode);
     }
-
   }
 }

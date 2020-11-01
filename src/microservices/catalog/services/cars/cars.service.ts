@@ -27,7 +27,9 @@ export class CarsService {
 
   async getAllCars(): Promise<RestCarsModel[] | GqlCarsModel[]> {
     try {
-      return await this.catalogClient.send({ role: 'cars', cmd: 'getAll' }, {}).toPromise();
+      return await this.catalogClient
+        .send({ role: 'cars', cmd: 'getAll' }, {})
+        .toPromise();
     } catch (error) {
       throw new HttpException(error.errorStatus, error.statusCode);
     }
