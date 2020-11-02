@@ -1,6 +1,13 @@
 import { Transport, ClientsProviderAsyncOptions } from '@nestjs/microservices';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
+/**
+ * Method that creates a microservice option object used for connecting to another client microservice.
+ *
+ * @param {string} microserviceName - name of a microservice to connect to
+ * 
+ * @return {*}  {ClientsProviderAsyncOptions} - connection options for a microservice client
+ */
 export const connectMicroservice = (
   microserviceName: string,
 ): ClientsProviderAsyncOptions => {
