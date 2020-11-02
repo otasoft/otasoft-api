@@ -19,12 +19,6 @@ type GqlAuthChangeResponse {
   response: String!
 }
 
-type GqlCustomer {
-  id: ID!
-  first_name: String!
-  last_name: String!
-}
-
 type GqlActivityModel {
   activity_id: ID!
   name: String!
