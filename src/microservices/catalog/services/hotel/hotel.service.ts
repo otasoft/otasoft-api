@@ -18,17 +18,29 @@ export class HotelService {
   ) {}
 
   async getSingleHotel(id: number): Promise<RestHotelModel | GqlHotelModel> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'hotel', cmd: 'getSingle' }, id);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'hotel', cmd: 'getSingle' },
+      id,
+    );
   }
 
   async getAllHotels(): Promise<RestHotelModel[] | GqlHotelModel[]> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'hotel', cmd: 'getAll' }, {});
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'hotel', cmd: 'getAll' },
+      {},
+    );
   }
 
   async createHotel(
     createHotelDto: CreateHotelDto | CreateHotelInput,
   ): Promise<RestHotelModel | GqlHotelModel> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'hotel', cmd: 'create' }, createHotelDto);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'hotel', cmd: 'create' },
+      createHotelDto,
+    );
   }
 
   async updateHotel(
@@ -36,12 +48,20 @@ export class HotelService {
     updateHotelDto: UpdateHotelDto | UpdateHotelInput,
   ): Promise<RestHotelModel | GqlHotelModel> {
     const updateHotelObject: IUpdateHotel = { id, updateHotelDto };
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'hotel', cmd: 'update' }, updateHotelObject);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'hotel', cmd: 'update' },
+      updateHotelObject,
+    );
   }
 
   async deleteHotel(
     id: number,
   ): Promise<RestTextResponseModel | GqlTextResponseModel> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'hotel', cmd: 'delete' }, id);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'hotel', cmd: 'delete' },
+      id,
+    );
   }
 }

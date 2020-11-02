@@ -1,7 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { MicroserviceConnectionService } from '../../../../microservices/microservice-connection/microservice-connection.service';
-import { CreateFlightInput, UpdateFlightInput } from '../../graphql/input/flight';
+import {
+  CreateFlightInput,
+  UpdateFlightInput,
+} from '../../graphql/input/flight';
 import { GqlFlightModel } from '../../graphql/models/flight/gql-flight.model';
 import { GqlTextResponseModel } from '../../graphql/models/gql-text-response.model';
 import { IUpdateFlight } from '../../interfaces/flight/update-flight.interface';
@@ -18,17 +21,29 @@ export class FlightService {
   ) {}
 
   async getSingleFlight(id: number): Promise<RestFlightModel | GqlFlightModel> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'flight', cmd: 'getSingle' }, id);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'flight', cmd: 'getSingle' },
+      id,
+    );
   }
 
   async getAllFlights(): Promise<RestFlightModel[] | GqlFlightModel[]> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'flight', cmd: 'getAll' }, {});
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'flight', cmd: 'getAll' },
+      {},
+    );
   }
 
   async createFlight(
     createFlightDto: CreateFlightDto | CreateFlightInput,
   ): Promise<RestFlightModel | GqlFlightModel> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'flight', cmd: 'create' }, createFlightDto);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'flight', cmd: 'create' },
+      createFlightDto,
+    );
   }
 
   async updateFlight(
@@ -36,12 +51,20 @@ export class FlightService {
     updateFlightDto: UpdateFlightDto | UpdateFlightInput,
   ): Promise<RestFlightModel | GqlFlightModel> {
     const updateFlightObject: IUpdateFlight = { id, updateFlightDto };
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'flight', cmd: 'update' }, updateFlightObject);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'flight', cmd: 'update' },
+      updateFlightObject,
+    );
   }
 
   async deleteFlight(
     id: number,
   ): Promise<RestTextResponseModel | GqlTextResponseModel> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'flight', cmd: 'delete' }, id);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'flight', cmd: 'delete' },
+      id,
+    );
   }
 }

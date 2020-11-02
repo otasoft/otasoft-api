@@ -18,17 +18,29 @@ export class CarsService {
   ) {}
 
   async getSingleCars(id: number): Promise<RestCarsModel | GqlCarsModel> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'cars', cmd: 'getSingle' }, id);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'cars', cmd: 'getSingle' },
+      id,
+    );
   }
 
   async getAllCars(): Promise<RestCarsModel[] | GqlCarsModel[]> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'cars', cmd: 'getAll' }, {});
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'cars', cmd: 'getAll' },
+      {},
+    );
   }
 
   async createCars(
     createCarsDto: CreateCarsDto | CreateCarsInput,
   ): Promise<RestCarsModel | GqlCarsModel> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'cars', cmd: 'create' }, createCarsDto);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'cars', cmd: 'create' },
+      createCarsDto,
+    );
   }
 
   async updateCars(
@@ -36,12 +48,20 @@ export class CarsService {
     updateCarsDto: UpdateCarsDto | UpdateCarsInput,
   ): Promise<RestCarsModel | GqlCarsModel> {
     const updateCarsObject: IUpdateCars = { id, updateCarsDto };
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'cars', cmd: 'update' }, updateCarsObject);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'cars', cmd: 'update' },
+      updateCarsObject,
+    );
   }
 
   async deleteCars(
     id: number,
   ): Promise<RestTextResponseModel | GqlTextResponseModel> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'cars', cmd: 'delete' }, id);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'cars', cmd: 'delete' },
+      id,
+    );
   }
 }

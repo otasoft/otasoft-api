@@ -8,7 +8,10 @@ import {
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { MicroserviceConnectionService } from '../../../../microservices/microservice-connection/microservice-connection.service';
-import { CreateActivityInput, UpdateActivityInput } from '../../graphql/input/activity';
+import {
+  CreateActivityInput,
+  UpdateActivityInput,
+} from '../../graphql/input/activity';
 import { GqlActivityModel } from '../../graphql/models/activity/gql-activity.model';
 import { GqlTextResponseModel } from '../../graphql/models/gql-text-response.model';
 import { IUpdateActivity } from '../../interfaces/activity/update-activity.interface';
@@ -27,20 +30,32 @@ export class ActivityService {
   async getSingleActivity(
     id: number,
   ): Promise<RestActivityModel | GqlActivityModel> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'activity', cmd: 'getSingle' }, id);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'activity', cmd: 'getSingle' },
+      id,
+    );
   }
 
   @UseInterceptors(CacheInterceptor)
   @CacheKey('all-activities')
   @CacheTTL(20)
   async getAllActivities(): Promise<RestActivityModel[] | GqlActivityModel[]> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'activity', cmd: 'getAll' }, {});
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'activity', cmd: 'getAll' },
+      {},
+    );
   }
 
   async createActivity(
     createActivityDto: CreateActivityDto | CreateActivityInput,
   ): Promise<RestActivityModel | GqlActivityModel> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'activity', cmd: 'create' }, createActivityDto);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'activity', cmd: 'create' },
+      createActivityDto,
+    );
   }
 
   async updateActivity(
@@ -48,12 +63,20 @@ export class ActivityService {
     updateActivityDto: UpdateActivityDto | UpdateActivityInput,
   ): Promise<RestActivityModel | GqlActivityModel> {
     const updateActivityObject: IUpdateActivity = { id, updateActivityDto };
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'activity', cmd: 'update' }, updateActivityObject)
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'activity', cmd: 'update' },
+      updateActivityObject,
+    );
   }
 
   async deleteActivity(
     id: number,
   ): Promise<RestTextResponseModel | GqlTextResponseModel> {
-    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'activity', cmd: 'delete' }, id);
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'activity', cmd: 'delete' },
+      id,
+    );
   }
 }

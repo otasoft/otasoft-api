@@ -1,13 +1,13 @@
 /**
  * Interface for Microservice pattern
- * 
+ *
  * - @property {string} role
  * - @property {string} cmd
- * - @property {*} metadata? 
- * 
+ * - @property {*} metadata?
+ *
  */
 export interface IMicroservicePattern {
-    role: string,
-    cmd: string,
-    metadata?: any,
+  role: string;
+  cmd: string;
+  metadata?: any;
 }

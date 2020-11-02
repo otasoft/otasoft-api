@@ -11,6 +11,11 @@ import { MicroserviceConnectionService } from '../microservice-connection/micros
 @Module({
   imports: [ClientsModule.registerAsync([connectMicroservice('catalog')])],
   controllers: [...CatalogControllers],
-  providers: [...CatalogServices, ...CatalogMutations, ...CatalogQueries, MicroserviceConnectionService],
+  providers: [
+    ...CatalogServices,
+    ...CatalogMutations,
+    ...CatalogQueries,
+    MicroserviceConnectionService,
+  ],
 })
 export class CatalogModule {}
