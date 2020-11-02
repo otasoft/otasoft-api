@@ -4,6 +4,7 @@ import { ActivityService } from '../../../services/activity/activity.service';
 import { connectMicroservice } from '../../../../microservice-connection/microservice-connection';
 import { ActivityController } from './activity.controller';
 import { RedisCacheModule } from '../../../../../cache/redis-cache.module';
+import { MicroserviceConnectionService } from '../../../../microservice-connection/microservice-connection.service';
 
 describe('ActivityController', () => {
   let controller: ActivityController;
@@ -15,7 +16,7 @@ describe('ActivityController', () => {
         RedisCacheModule,
       ],
       controllers: [ActivityController],
-      providers: [ActivityService],
+      providers: [ActivityService, MicroserviceConnectionService],
     }).compile();
 
     controller = module.get<ActivityController>(ActivityController);
