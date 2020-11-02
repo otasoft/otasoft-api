@@ -1,9 +1,10 @@
-import { HttpException, Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { CreateCarsInput } from '../../graphql/input/cars/create-cars.input';
-import { UpdateCarsInput } from '../../graphql/input/cars/update-cars.input';
+import { MicroserviceConnectionService } from '../../../../microservices/microservice-connection/microservice-connection.service';
+import { CreateCarsInput, UpdateCarsInput } from '../../graphql/input/cars';
 import { GqlCarsModel } from '../../graphql/models/cars/gql-cars.model';
 import { GqlTextResponseModel } from '../../graphql/models/gql-text-response.model';
+import { IUpdateCars } from '../../interfaces/cars/update-cars.interface';
 import { CreateCarsDto, UpdateCarsDto } from '../../rest/dto/cars';
 import { RestCarsModel } from '../../rest/models/cars/rest-cars.model';
 import { RestTextResponseModel } from '../../rest/models/rest-text-response.model';
@@ -13,55 +14,34 @@ export class CarsService {
   constructor(
     @Inject('CATALOG_MICROSERVICE')
     private readonly catalogClient: ClientProxy,
+    private readonly microserviceConnectionService: MicroserviceConnectionService,
   ) {}
 
   async getSingleCars(id: number): Promise<RestCarsModel | GqlCarsModel> {
-    try {
-      return await this.catalogClient
-        .send({ role: 'cars', cmd: 'getSingle' }, id)
-        .toPromise();
-    } catch (error) {
-      throw new HttpException(error.errorStatus, error.statusCode);
-    }
+    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'cars', cmd: 'getSingle' }, id);
   }
 
   async getAllCars(): Promise<RestCarsModel[] | GqlCarsModel[]> {
-    try {
-      return await this.catalogClient
-        .send({ role: 'cars', cmd: 'getAll' }, {})
-        .toPromise();
-    } catch (error) {
-      throw new HttpException(error.errorStatus, error.statusCode);
-    }
+    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'cars', cmd: 'getAll' }, {});
   }
 
   async createCars(
     createCarsDto: CreateCarsDto | CreateCarsInput,
   ): Promise<RestCarsModel | GqlCarsModel> {
-    try {
-      return await this.catalogClient
-        .send({ role: 'cars', cmd: 'create' }, createCarsDto)
-        .toPromise();
-    } catch (error) {
-      throw new HttpException(error.errorStatus, error.statusCode);
-    }
+    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'cars', cmd: 'create' }, createCarsDto);
   }
 
   async updateCars(
     id: number,
     updateCarsDto: UpdateCarsDto | UpdateCarsInput,
   ): Promise<RestCarsModel | GqlCarsModel> {
-    const updateCarsObject = { id, updateCarsDto };
-    return this.catalogClient
-      .send({ role: 'cars', cmd: 'update' }, updateCarsObject)
-      .toPromise();
+    const updateCarsObject: IUpdateCars = { id, updateCarsDto };
+    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'cars', cmd: 'update' }, updateCarsObject);
   }
 
   async deleteCars(
     id: number,
   ): Promise<RestTextResponseModel | GqlTextResponseModel> {
-    return this.catalogClient
-      .send({ role: 'cars', cmd: 'delete' }, id)
-      .toPromise();
+    return this.microserviceConnectionService.sendRequestToClient(this.catalogClient, { role: 'cars', cmd: 'delete' }, id);
   }
 }

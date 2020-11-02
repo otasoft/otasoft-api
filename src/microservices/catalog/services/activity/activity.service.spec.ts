@@ -3,6 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { RedisCacheModule } from '../../../../cache/redis-cache.module';
 import { connectMicroservice } from '../../../microservice-connection/microservice-connection';
 import { ActivityService } from './activity.service';
+import { MicroserviceConnectionService } from '../../../microservice-connection/microservice-connection.service';
 
 describe('ActivityService', () => {
   let service: ActivityService;
@@ -13,7 +14,7 @@ describe('ActivityService', () => {
         ClientsModule.registerAsync([connectMicroservice('catalog')]),
         RedisCacheModule,
       ],
-      providers: [ActivityService],
+      providers: [ActivityService, MicroserviceConnectionService],
     }).compile();
 
     service = module.get<ActivityService>(ActivityService);
