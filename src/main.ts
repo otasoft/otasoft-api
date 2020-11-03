@@ -18,7 +18,6 @@ import { createRedisSession } from './security/configs/redisSessionConfig';
     ? await NestFactory.create(AppModule, { httpsOptions })
     : await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
-  app.useGlobalGuards(new FrontendCookieGuard());
 
   app.use(cookieParser());
   app.use(createRedisSession());
@@ -32,6 +31,7 @@ import { createRedisSession } from './security/configs/redisSessionConfig';
   } else {
     app.use(helmet());
     app.use(rateLimit(rateLimitConfigObject));
+    app.useGlobalGuards(new FrontendCookieGuard());
   }
 
   await app.listen(3000);
