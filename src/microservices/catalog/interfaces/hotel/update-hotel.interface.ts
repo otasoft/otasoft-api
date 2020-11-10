@@ -1,4 +1,4 @@
-import { UpdateHotelDto } from '../../rest/dto/Hotel';
+import { UpdateHotelDto } from "../../rest/dto/hotel";
 /**
  * @interface IUpdateHotel
  *
