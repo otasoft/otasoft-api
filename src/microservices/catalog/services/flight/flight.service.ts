@@ -36,6 +36,16 @@ export class FlightService {
     );
   }
 
+  async getFlightByQuery(
+    query: string,
+  ): Promise<RestFlightModel[] | GqlFlightModel[]> {
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'flight', cmd: 'getFlightByQuery' },
+      query,
+    );
+  }
+
   async createFlight(
     createFlightDto: CreateFlightDto | CreateFlightInput,
   ): Promise<RestFlightModel | GqlFlightModel> {

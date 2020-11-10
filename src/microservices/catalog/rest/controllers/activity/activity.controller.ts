@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { ActivityService } from '../../../services/activity/activity.service';
 import { CreateActivityDto, UpdateActivityDto } from '../../dto/activity';
@@ -19,6 +20,13 @@ export class ActivityController {
   @Get('/all-activities')
   async getAllActivities(): Promise<RestActivityModel[]> {
     return this.activityService.getAllActivities();
+  }
+
+  @Get('/activities-by-query')
+  async getActivitiesByQuery(
+    @Query('query') query: string,
+  ): Promise<RestActivityModel[]> {
+    return this.activityService.getActivitiesByQuery(query);
   }
 
   @Get('/:id')

@@ -33,6 +33,16 @@ export class CarsService {
     );
   }
 
+  async getCarsByQuery(
+    query: string,
+  ): Promise<RestCarsModel[] | GqlCarsModel[]> {
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'cars', cmd: 'getCarsByQuery' },
+      query,
+    );
+  }
+
   async createCars(
     createCarsDto: CreateCarsDto | CreateCarsInput,
   ): Promise<RestCarsModel | GqlCarsModel> {

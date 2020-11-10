@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { HotelService } from '../../../services/hotel/hotel.service';
 import { CreateHotelDto, UpdateHotelDto } from '../../dto/hotel';
@@ -19,6 +20,13 @@ export class HotelController {
   @Get('/all-hotels')
   async getAllHotels(): Promise<RestHotelModel[]> {
     return this.hotelService.getAllHotels();
+  }
+
+  @Get('/hotel-by-query')
+  async getHotelByQuery(
+    @Query('query') query: string,
+  ): Promise<RestHotelModel[]> {
+    return this.hotelService.getHotelByQuery(query);
   }
 
   @Get('/:id')

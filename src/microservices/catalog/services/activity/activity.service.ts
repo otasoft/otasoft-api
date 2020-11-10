@@ -48,6 +48,16 @@ export class ActivityService {
     );
   }
 
+  async getActivitiesByQuery(
+    query: string,
+  ): Promise<RestActivityModel[] | GqlActivityModel[]> {
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'activity', cmd: 'getActivityByQuery' },
+      query,
+    );
+  }
+
   async createActivity(
     createActivityDto: CreateActivityDto | CreateActivityInput,
   ): Promise<RestActivityModel | GqlActivityModel> {

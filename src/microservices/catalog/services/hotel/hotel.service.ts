@@ -33,6 +33,16 @@ export class HotelService {
     );
   }
 
+  async getHotelByQuery(
+    query: string,
+  ): Promise<RestHotelModel[] | GqlHotelModel[]> {
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.catalogClient,
+      { role: 'hotel', cmd: 'getHotelByQuery' },
+      query,
+    );
+  }
+
   async createHotel(
     createHotelDto: CreateHotelDto | CreateHotelInput,
   ): Promise<RestHotelModel | GqlHotelModel> {

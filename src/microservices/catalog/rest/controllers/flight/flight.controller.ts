@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { FlightService } from '../../../services/flight/flight.service';
 import { CreateFlightDto, UpdateFlightDto } from '../../dto/flight';
@@ -19,6 +20,13 @@ export class FlightController {
   @Get('/all-flights')
   async getAllFlights(): Promise<RestFlightModel[]> {
     return this.flightService.getAllFlights();
+  }
+
+  @Get('/flight-by-query')
+  async getFlightByQuery(
+    @Query('query') query: string,
+  ): Promise<RestFlightModel[]> {
+    return this.flightService.getFlightByQuery(query);
   }
 
   @Get('/:id')

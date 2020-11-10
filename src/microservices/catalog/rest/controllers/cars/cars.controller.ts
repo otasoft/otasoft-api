@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { CarsService } from '../../../services/cars/cars.service';
 import { CreateCarsDto, UpdateCarsDto } from '../../dto/cars';
@@ -19,6 +20,11 @@ export class CarsController {
   @Get('/all-cars')
   async getAllCars(): Promise<RestCarsModel[]> {
     return this.carsService.getAllCars();
+  }
+
+  @Get('/cars-by-query')
+  async geCarsByQuery(@Query('query') query: string): Promise<RestCarsModel[]> {
+    return this.carsService.getCarsByQuery(query);
   }
 
   @Get('/:id')
