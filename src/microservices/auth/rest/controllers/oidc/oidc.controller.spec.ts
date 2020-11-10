@@ -8,7 +8,7 @@ describe('OidcController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [OidcController],
-      providers: [OidcService]
+      providers: [OidcService],
     }).compile();
 
     controller = module.get<OidcController>(OidcController);

@@ -1,0 +1,13 @@
+import { AuthModule } from './auth/auth.module';
+import { BookingModule } from './booking/booking.module';
+import { CatalogModule } from './catalog/catalog.module';
+import { CustomerModule } from './customer/customer.module';
+import { MailModule } from './mail/mail.module';
+
+export const MicroservicesModules = [
+  AuthModule,
+  BookingModule,
+  CatalogModule,
+  CustomerModule,
+  MailModule,
+];
