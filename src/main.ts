@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule } from '@nestjs/swagger';
 import * as helmet from 'helmet';
 import * as rateLimit from 'express-rate-limit';
@@ -18,6 +19,7 @@ import { createRedisSession } from './security/configs/redisSessionConfig';
     ? await NestFactory.create(AppModule, { httpsOptions })
     : await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
+  app.useGlobalPipes(new ValidationPipe({ skipMissingProperties: true }));
 
   app.use(cookieParser());
   app.use(createRedisSession());
