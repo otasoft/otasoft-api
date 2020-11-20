@@ -46,7 +46,7 @@
     "graphql": "^15.3.0",
     "graphql-tools": "^6.2.6",
     "helmet": "^4.1.0",
-    "openid-client": "^4.2.0",
+    "openid-client": "^4.2.1",
     "passport": "^0.4.1",
     "redis": "^3.0.2",
     "reflect-metadata": "^0.1.13",
