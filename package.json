@@ -33,7 +33,7 @@
     "@nestjs/terminus": "^7.0.1",
     "amqp-connection-manager": "^3.2.0",
     "amqplib": "^0.6.0",
-    "apollo-server-express": "^2.18.0",
+    "apollo-server-express": "^2.18.2",
     "cache-manager": "^3.4.0",
     "cache-manager-redis-store": "^2.0.0",
     "class-transformer": "^0.3.1",
