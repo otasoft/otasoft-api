@@ -1,4 +1,5 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Context, GraphQLExecutionContext, Mutation, Resolver } from '@nestjs/graphql';
+import { Response } from 'express';
 import { AuthService } from '../services/auth/auth.service';
 import { AuthCredentialsInput } from './input/auth-credentials.input';
 import { GqlAuthUser } from './models/auth-user-gql.model';
@@ -17,8 +18,14 @@ export class AuthMutationResolver {
 
   @Mutation((returns) => GqlAuthUserToken)
   async signIn(
+    @Context() context,
     @Args('authCredentials') authCredentialsInput: AuthCredentialsInput,
   ): Promise<GqlAuthUserToken> {
-    return this.authService.signIn(authCredentialsInput);
+
+    const cookieObject = await this.authService.signIn(authCredentialsInput);
+
+    context.res.setHeader('Set-Cookie', cookieObject.cookie);
+
+    return cookieObject
   }
 }

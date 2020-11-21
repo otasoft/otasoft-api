@@ -12,7 +12,7 @@ type GqlAuthUserId {
 }
 
 type GqlAuthUserToken {
-  accessToken: String!
+  cookie: String!
 }
 
 type GqlAuthChangeResponse {

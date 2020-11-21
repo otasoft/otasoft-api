@@ -7,6 +7,7 @@ export class GqlConfigService implements GqlOptionsFactory {
     return {
       include: [...MicroservicesModules],
       autoSchemaFile: join(process.cwd(), 'src/graphql/schema.gql'),
+      context: ({ req, res }) => ({ req, res })
     };
   }
 }
