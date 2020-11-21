@@ -11,12 +11,40 @@ type GqlAuthUserId {
   auth_id: ID!
 }
 
+type GqlAuthUserToken {
+  accessToken: String!
+}
+
 type GqlAuthChangeResponse {
   response: String!
 }
 
-type GqlAuthUserToken {
-  accessToken: String!
+type GqlActivityModel {
+  activity_id: ID!
+  name: String!
+  description: String!
+}
+
+type GqlTextResponseModel {
+  response: String!
+}
+
+type GqlCarsModel {
+  cars_id: ID!
+  name: String!
+  description: String!
+}
+
+type GqlFlightModel {
+  activity_id: ID!
+  name: String!
+  description: String!
+}
+
+type GqlHotelModel {
+  activity_id: ID!
+  name: String!
+  description: String!
 }
 
 type GqlCustomer {
@@ -34,6 +62,15 @@ type Query {
   getUserId(email: AuthEmailInput!): GqlAuthUserId!
   confirmAccountCreation(token: String!): Boolean!
   getCustomerProfile(id: Int!): GqlBooking!
+  getSingleActivity(id: Float!): GqlActivityModel!
+  getAllActivities: GqlActivityModel!
+  getSingleCars(id: Float!): GqlCarsModel!
+  getAllCars: GqlCarsModel!
+  getSingleFlight(id: Float!): GqlFlightModel!
+  getAllFlights: GqlFlightModel!
+  getSingleHotel(id: Float!): GqlHotelModel!
+  getAllHotels: GqlHotelModel!
+  getCustomerProfile(id: Int!): GqlCustomer!
 }
 
 input AuthEmailInput {
@@ -45,6 +82,18 @@ type Mutation {
   signIn(authCredentials: AuthCredentialsInput!): GqlAuthUserToken!
   changeUserPassword(changePasswordInput: ChangePasswordInput!, id: Float!): GqlAuthChangeResponse!
   deleteUserAccount(id: Float!): GqlAuthChangeResponse!
+  createActivity(createActivityInput: CreateActivityInput!): GqlActivityModel!
+  updateActivity(updateActivityInput: UpdateActivityInput!, id: Float!): GqlActivityModel!
+  deleteActivity(id: Float!): GqlTextResponseModel!
+  createCars(createCarsInput: CreateCarsInput!): GqlCarsModel!
+  updateCars(updateCarsInput: UpdateCarsInput!, id: Float!): GqlCarsModel!
+  deleteCars(id: Float!): GqlTextResponseModel!
+  createFlight(createFlightInput: CreateFlightInput!): GqlFlightModel!
+  updateFlight(updateFlightInput: UpdateFlightInput!, id: Float!): GqlFlightModel!
+  deleteFlight(id: Float!): GqlTextResponseModel!
+  createHotel(createHotelInput: CreateHotelInput!): GqlHotelModel!
+  updateHotel(updateHotelInput: UpdateHotelInput!, id: Float!): GqlHotelModel!
+  deleteHotel(id: Float!): GqlTextResponseModel!
   createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
   removeCustomerProfile(id: Float!): Boolean!
   updateCustomerProfile(updateCustomerProfileData: UpdateCustomerProfileInput!, id: Float!): GqlCustomer!
@@ -61,6 +110,46 @@ input AuthCredentialsInput {
 input ChangePasswordInput {
   old_password: String!
   new_password: String!
+}
+
+input CreateActivityInput {
+  name: String!
+  description: String!
+}
+
+input UpdateActivityInput {
+  name: String!
+  description: String!
+}
+
+input CreateCarsInput {
+  name: String!
+  description: String!
+}
+
+input UpdateCarsInput {
+  name: String!
+  description: String!
+}
+
+input CreateFlightInput {
+  name: String!
+  description: String!
+}
+
+input UpdateFlightInput {
+  name: String!
+  description: String!
+}
+
+input CreateHotelInput {
+  name: String!
+  description: String!
+}
+
+input UpdateHotelInput {
+  name: String!
+  description: String!
 }
 
 input CreateCustomerProfileInput {

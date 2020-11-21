@@ -1,10 +1,6 @@
-import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { AuthService } from '../auth.service';
-import { AccessControlGuard } from '../guards/access-control.guard';
+import { AuthService } from '../services/auth/auth.service';
 import { AuthCredentialsInput } from './input/auth-credentials.input';
-import { ChangePasswordInput } from './input/change-password.input';
-import { GqlAuthChangeResponse } from './models/auth-change-response-gql.model';
 import { GqlAuthUser } from './models/auth-user-gql.model';
 import { GqlAuthUserToken } from './models/auth-user-token-gql.model';
 
@@ -24,22 +20,5 @@ export class AuthMutationResolver {
     @Args('authCredentials') authCredentialsInput: AuthCredentialsInput,
   ): Promise<GqlAuthUserToken> {
     return this.authService.signIn(authCredentialsInput);
-  }
-
-  @UseGuards(AccessControlGuard)
-  @Mutation((returns) => GqlAuthChangeResponse)
-  async changeUserPassword(
-    @Args('id') id: number,
-    @Args('changePasswordInput') changePasswordInput: ChangePasswordInput,
-  ): Promise<GqlAuthChangeResponse> {
-    return this.authService.changeUserPassword(id, changePasswordInput);
-  }
-
-  @UseGuards(AccessControlGuard)
-  @Mutation((returns) => GqlAuthChangeResponse)
-  async deleteUserAccount(
-    @Args('id') id: number,
-  ): Promise<GqlAuthChangeResponse> {
-    return this.authService.deleteUserAccount(id);
   }
 }
