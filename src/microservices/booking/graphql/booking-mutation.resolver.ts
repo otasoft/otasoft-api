@@ -9,6 +9,7 @@ import { BookingService } from '../booking.service';
 export class BookingMutationResolver {
   constructor(private readonly bookingService: BookingService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Mutation((returns) => GqlBooking)
   async createBooking(
     @Args('createBookingData')

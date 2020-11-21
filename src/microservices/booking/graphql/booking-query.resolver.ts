@@ -10,7 +10,7 @@ export class BookingQueryResolver {
 
   @UseGuards(JwtAuthGuard)
   @Query((returns) => GqlBooking)
-  async getCustomerProfile(
+  async getBooking(
     @Args('id', { type: () => Int }) id: number,
   ): Promise<GqlBooking> {
     const booking = await this.bookingService.getBookingById(id);
