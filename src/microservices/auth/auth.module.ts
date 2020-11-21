@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule } from '@nestjs/microservices';
 import { PassportModule } from '@nestjs/passport';
+
 import { AuthController } from './rest/controllers/auth/auth.controller';
 import { AuthService } from './services/auth/auth.service';
 import { connectMicroservice } from '../microservice-connection/microservice-connection';
@@ -13,6 +14,7 @@ import { UserController } from './rest/controllers/user/user.controller';
 import { UserService } from './services/user/user.service';
 import { OidcStrategyFactory } from './oidc/oidc-strategy-factory';
 import { UserMutationResolver } from './graphql/user-mutation.resolver';
+import { MicroserviceConnectionService } from '../microservice-connection/microservice-connection.service';
 
 @Module({
   imports: [
@@ -33,6 +35,7 @@ import { UserMutationResolver } from './graphql/user-mutation.resolver';
     OidcStrategyFactory,
     SessionSerializer,
     UserService,
+    MicroserviceConnectionService,
   ],
 })
 export class AuthModule {}

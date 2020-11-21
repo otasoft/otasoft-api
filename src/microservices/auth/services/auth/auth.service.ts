@@ -1,5 +1,7 @@
-import { Injectable, Inject, HttpException } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+
+import { MicroserviceConnectionService } from '../../../../microservices/microservice-connection/microservice-connection.service';
 import { AuthCredentialsInput } from '../../graphql/input/auth-credentials.input';
 import { GqlAuthUser } from '../../graphql/models/auth-user-gql.model';
 import { GqlAuthUserToken } from '../../graphql/models/auth-user-token-gql.model';
@@ -12,25 +14,26 @@ export class AuthService {
   constructor(
     @Inject('AUTH_MICROSERVICE')
     private readonly authClient: ClientProxy,
+    private readonly microserviceConnectionService: MicroserviceConnectionService,
   ) {}
 
   async signUp(
     authCredentialsData: AuthCredentialsDto | AuthCredentialsInput,
   ): Promise<GqlAuthUser | RestAuthUser> {
-    return await this.authClient
-      .send({ role: 'auth', cmd: 'register' }, authCredentialsData)
-      .toPromise();
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.authClient,
+      { role: 'auth', cmd: 'register' },
+      authCredentialsData,
+    )
   }
 
   async signIn(
     authCredentialsData: AuthCredentialsDto | AuthCredentialsInput,
   ): Promise<GqlAuthUserToken | RestAuthUserToken> {
-    try {
-      return await this.authClient
-        .send({ role: 'auth', cmd: 'login' }, authCredentialsData)
-        .toPromise();
-    } catch (error) {
-      throw new HttpException(error.errorStatus, error.statusCode);
-    }
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.authClient,
+      { role: 'auth', cmd: 'login' },
+      authCredentialsData,
+    )
   }
 }
