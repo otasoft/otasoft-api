@@ -3,6 +3,8 @@ import { BookingController } from './rest/booking.controller';
 import { BookingService } from './booking.service';
 import { ClientsModule } from '@nestjs/microservices';
 import { connectMicroservice } from '../microservice-connection/microservice-connection';
+import { BookingMutationResolver } from './graphql/booking-mutation.resolver';
+import { BookingQueryResolver } from './graphql/booking-query.resolver';
 
 @Module({
   imports: [
@@ -12,6 +14,6 @@ import { connectMicroservice } from '../microservice-connection/microservice-con
     ]),
   ],
   controllers: [BookingController],
-  providers: [BookingService],
+  providers: [BookingService, BookingQueryResolver, BookingMutationResolver],
 })
 export class BookingModule {}

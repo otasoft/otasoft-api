@@ -1,4 +1,4 @@
-import { IsDate, IsInt } from 'class-validator';
+import { IsDate, IsInt, IsNumber } from 'class-validator';
 
 export class RestBooking {
     @IsInt()
@@ -6,4 +6,7 @@ export class RestBooking {
 
     @IsDate()
     date: Date;
+
+    @IsNumber()
+    customer_id: number;
 }

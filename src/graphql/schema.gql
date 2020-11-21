@@ -25,10 +25,15 @@ type GqlCustomer {
   last_name: String!
 }
 
+type GqlBooking {
+  id: ID!
+  customer_id: Float!
+}
+
 type Query {
   getUserId(email: AuthEmailInput!): GqlAuthUserId!
   confirmAccountCreation(token: String!): Boolean!
-  getCustomerProfile(id: Int!): GqlCustomer!
+  getCustomerProfile(id: Int!): GqlBooking!
 }
 
 input AuthEmailInput {
@@ -43,6 +48,9 @@ type Mutation {
   createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
   removeCustomerProfile(id: Float!): Boolean!
   updateCustomerProfile(updateCustomerProfileData: UpdateCustomerProfileInput!, id: Float!): GqlCustomer!
+  createBooking(createBookingData: CreateBookingInput!): GqlBooking!
+  deleteBooking(id: Float!): Boolean!
+  updateBooking(updateBookingData: CreateBookingInput!, id: Float!): GqlBooking!
 }
 
 input AuthCredentialsInput {
@@ -63,4 +71,8 @@ input CreateCustomerProfileInput {
 input UpdateCustomerProfileInput {
   first_name: String!
   last_name: String!
+}
+
+input CreateBookingInput {
+  customer_id: Float!
 }
