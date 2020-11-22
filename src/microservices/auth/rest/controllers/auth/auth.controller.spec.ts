@@ -7,6 +7,7 @@ import { AuthController } from './auth.controller';
 describe('AuthController', () => {
   let controller: AuthController;
 
+  // TODO: fix this test
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [

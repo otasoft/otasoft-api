@@ -6,6 +6,7 @@ import { UserService } from './user.service';
 describe('UserService', () => {
   let service: UserService;
 
+  // TODO: fix this test
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [

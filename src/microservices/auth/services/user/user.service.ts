@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Inject,
-  Injectable,
-} from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
 import { RestAuthChangeResponse, RestAuthUserId } from '../../rest/models';
@@ -26,7 +22,7 @@ export class UserService {
       this.authClient,
       { role: 'auth', cmd: 'getId' },
       authEmailData,
-    )
+    );
   }
 
   async changeUserPassword(
@@ -41,7 +37,7 @@ export class UserService {
       this.authClient,
       { role: 'auth', cmd: 'changePassword' },
       { id, changePasswordData },
-    )
+    );
   }
 
   async deleteUserAccount(
@@ -51,7 +47,7 @@ export class UserService {
       this.authClient,
       { role: 'auth', cmd: 'deleteAccount' },
       id,
-    )
+    );
   }
 
   async confirmAccountCreation(token: string): Promise<boolean> {
@@ -59,6 +55,6 @@ export class UserService {
       this.authClient,
       { role: 'auth', cmd: 'confirm' },
       token,
-    )
+    );
   }
 }

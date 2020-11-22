@@ -9,6 +9,7 @@ import { RestAuthUserToken, RestAuthUser } from '../../models';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  // TODO: change to also accept cookie response
   @Post('/signup')
   async signUp(
     @Body() authCredentialsDto: AuthCredentialsDto,
@@ -19,7 +20,7 @@ export class AuthController {
   @Post('/signin')
   async signIn(
     @Body() authCredentialsDto: AuthCredentialsDto,
-    @Res() response: Response
+    @Res() response: Response,
   ): Promise<Response<RestAuthUserToken>> {
     const cookieObject = await this.authService.signIn(authCredentialsDto);
 
@@ -27,4 +28,6 @@ export class AuthController {
 
     return response.send(cookieObject);
   }
+
+  // TODO: add logout functionality
 }

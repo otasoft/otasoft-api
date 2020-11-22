@@ -1,5 +1,3 @@
-import { AuthQueryResolver } from "./auth-query.resolver";
+import { AuthQueryResolver } from './auth-query.resolver';
 
-export const AuthQueries = [
-    AuthQueryResolver,
-];
+export const AuthQueries = [AuthQueryResolver];

@@ -16,6 +16,7 @@ export class AccessControlGuard implements CanActivate {
     private readonly authClient: ClientProxy,
   ) {}
 
+  // TODO: change to check cookies instead of authorization
   async canActivate(context: ExecutionContext): Promise<boolean> {
     let req: Request;
     req = context.getArgs()[context.getArgs().length - 2].req;

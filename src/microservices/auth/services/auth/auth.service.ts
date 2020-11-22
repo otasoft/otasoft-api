@@ -22,7 +22,7 @@ export class AuthService {
       this.authClient,
       { role: 'auth', cmd: 'register' },
       authCredentialsData,
-    )
+    );
   }
 
   async signIn(
@@ -32,6 +32,6 @@ export class AuthService {
       this.authClient,
       { role: 'auth', cmd: 'login' },
       authCredentialsData,
-    )
+    );
   }
 }

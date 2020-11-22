@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 describe('AuthService', () => {
   let service: AuthService;
 
+  // TODO: fix this test
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [

@@ -12,6 +12,7 @@ export class JwtAuthGuard implements CanActivate {
     private readonly client: ClientProxy,
   ) {}
 
+  // TODO: change to check cookies instead of authorization
   async canActivate(context: ExecutionContext): Promise<boolean> {
     let req: Request;
     req = context.getArgs()[context.getArgs().length - 2].req;

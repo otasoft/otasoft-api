@@ -8,6 +8,7 @@ import { GqlAuthUser, GqlAuthUserToken } from '../models';
 export class AuthMutationResolver {
   constructor(private readonly authService: AuthService) {}
 
+  // TODO: change to also accept cookie response
   @Mutation((returns) => GqlAuthUser)
   async signUp(
     @Args('authCredentials') authCredentialsInput: AuthCredentialsInput,
@@ -20,11 +21,12 @@ export class AuthMutationResolver {
     @Context() context,
     @Args('authCredentials') authCredentialsInput: AuthCredentialsInput,
   ): Promise<GqlAuthUserToken> {
-
     const cookieObject = await this.authService.signIn(authCredentialsInput);
 
     context.res.setHeader('Set-Cookie', cookieObject.cookie);
 
-    return cookieObject
+    return cookieObject;
   }
+
+  // TODO: add logout functionality
 }
