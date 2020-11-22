@@ -19,6 +19,11 @@ type GqlAuthChangeResponse {
   response: String!
 }
 
+type GqlBooking {
+  id: ID!
+  customer_id: Float!
+}
+
 type GqlActivityModel {
   activity_id: ID!
   name: String!
@@ -56,6 +61,7 @@ type GqlCustomer {
 type Query {
   getUserId(email: AuthEmailInput!): GqlAuthUserId!
   confirmAccountCreation(token: String!): Boolean!
+  getBooking(id: Int!): GqlBooking!
   getSingleActivity(id: Float!): GqlActivityModel!
   getAllActivities: GqlActivityModel!
   getSingleCars(id: Float!): GqlCarsModel!
@@ -76,6 +82,9 @@ type Mutation {
   signIn(authCredentials: AuthCredentialsInput!): GqlAuthUserToken!
   changeUserPassword(changePasswordInput: ChangePasswordInput!, id: Float!): GqlAuthChangeResponse!
   deleteUserAccount(id: Float!): GqlAuthChangeResponse!
+  createBooking(createBookingData: CreateBookingInput!): GqlBooking!
+  deleteBooking(id: Float!): Boolean!
+  updateBooking(updateBookingData: CreateBookingInput!, id: Float!): GqlBooking!
   createActivity(createActivityInput: CreateActivityInput!): GqlActivityModel!
   updateActivity(updateActivityInput: UpdateActivityInput!, id: Float!): GqlActivityModel!
   deleteActivity(id: Float!): GqlTextResponseModel!
@@ -101,6 +110,10 @@ input AuthCredentialsInput {
 input ChangePasswordInput {
   old_password: String!
   new_password: String!
+}
+
+input CreateBookingInput {
+  customer_id: Float!
 }
 
 input CreateActivityInput {

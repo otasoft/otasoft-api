@@ -31,6 +31,7 @@
     "@nestjs/schedule": "^0.4.1",
     "@nestjs/swagger": "^4.6.0",
     "@nestjs/terminus": "^7.0.1",
+    "@types/cookie-parser": "^1.4.2",
     "amqp-connection-manager": "^3.2.0",
     "amqplib": "^0.6.0",
     "apollo-server-express": "^2.18.2",
