@@ -19,7 +19,7 @@ import { RestAuthChangeResponse, RestAuthUserId } from '../../models';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AccessControlGuard)
   @Get('/get-user-id')
   async getUserId(
     @Query('email') email: AuthEmailDto,
