@@ -20,12 +20,12 @@ export class AuthMutationResolver {
   async signIn(
     @Context() context,
     @Args('authCredentials') authCredentialsInput: AuthCredentialsInput,
-  ): Promise<GqlAuthUserToken> {
-    const cookieObject = await this.authService.signIn(authCredentialsInput);
+  ): Promise<string[]> {
+    const cookies = await this.authService.signIn(authCredentialsInput);
 
-    context.res.setHeader('Set-Cookie', cookieObject.cookie);
+    context.res.setHeader('Set-Cookie', [...cookies]);
 
-    return cookieObject;
+    return [...cookies];
   }
 
   @Mutation((returns) => GqlAuthResponseStatus)

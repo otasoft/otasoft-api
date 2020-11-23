@@ -21,12 +21,12 @@ export class AuthController {
   async signIn(
     @Body() authCredentialsDto: AuthCredentialsDto,
     @Res() response: Response,
-  ): Promise<Response<RestAuthUserCookie>> {
-    const cookieObject = await this.authService.signIn(authCredentialsDto);
+  ): Promise<Response<string[]>> {
+    const cookies = await this.authService.signIn(authCredentialsDto);
 
-    response.setHeader('Set-Cookie', cookieObject.cookie);
+    response.setHeader('Set-Cookie', [...cookies]);
 
-    return response.send(cookieObject);
+    return response.send([...cookies]);
   }
 
   @Post('/signout')
