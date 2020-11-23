@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-export class RestAuthUserToken {
+export class RestAuthUserCookie {
   @IsString()
   cookie: string;
 }

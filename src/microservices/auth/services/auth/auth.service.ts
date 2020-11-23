@@ -5,7 +5,7 @@ import { MicroserviceConnectionService } from '../../../../microservices/microse
 import { AuthCredentialsInput } from '../../graphql/input';
 import { GqlAuthUser, GqlAuthUserToken } from '../../graphql/models';
 import { AuthCredentialsDto } from '../../rest/dto/auth-credentials.dto';
-import { RestAuthChangeResponse, RestAuthUser, RestAuthUserToken } from '../../rest/models';
+import { RestAuthChangeResponse, RestAuthUser, RestAuthUserCookie } from '../../rest/models';
 
 @Injectable()
 export class AuthService {
@@ -27,7 +27,7 @@ export class AuthService {
 
   async signIn(
     authCredentialsData: AuthCredentialsDto | AuthCredentialsInput,
-  ): Promise<GqlAuthUserToken | RestAuthUserToken> {
+  ): Promise<GqlAuthUserToken | RestAuthUserCookie> {
     return this.microserviceConnectionService.sendRequestToClient(
       this.authClient,
       { role: 'auth', cmd: 'login' },

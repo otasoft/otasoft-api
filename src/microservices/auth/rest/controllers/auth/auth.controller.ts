@@ -3,7 +3,7 @@ import { Response } from 'express';
 
 import { AuthService } from '../../../services/auth/auth.service';
 import { AuthCredentialsDto } from '../../dto';
-import { RestAuthUserToken, RestAuthUser } from '../../models';
+import { RestAuthUserCookie, RestAuthUser } from '../../models';
 
 @Controller('auth')
 export class AuthController {
@@ -21,7 +21,7 @@ export class AuthController {
   async signIn(
     @Body() authCredentialsDto: AuthCredentialsDto,
     @Res() response: Response,
-  ): Promise<Response<RestAuthUserToken>> {
+  ): Promise<Response<RestAuthUserCookie>> {
     const cookieObject = await this.authService.signIn(authCredentialsDto);
 
     response.setHeader('Set-Cookie', cookieObject.cookie);
