@@ -20,7 +20,7 @@ export class UserService {
   ): Promise<GqlAuthUserId | RestAuthUserId> {
     return this.microserviceConnectionService.sendRequestToClient(
       this.authClient,
-      { role: 'auth', cmd: 'getId' },
+      { role: 'user', cmd: 'getId' },
       authEmailData,
     );
   }
@@ -35,7 +35,7 @@ export class UserService {
       );
     return this.microserviceConnectionService.sendRequestToClient(
       this.authClient,
-      { role: 'auth', cmd: 'changePassword' },
+      { role: 'user', cmd: 'changePassword' },
       { id, changePasswordData },
     );
   }
@@ -45,7 +45,7 @@ export class UserService {
   ): Promise<GqlAuthChangeResponse | RestAuthChangeResponse> {
     return this.microserviceConnectionService.sendRequestToClient(
       this.authClient,
-      { role: 'auth', cmd: 'deleteAccount' },
+      { role: 'user', cmd: 'deleteAccount' },
       id,
     );
   }
@@ -53,7 +53,7 @@ export class UserService {
   async confirmAccountCreation(token: string): Promise<boolean> {
     return this.microserviceConnectionService.sendRequestToClient(
       this.authClient,
-      { role: 'auth', cmd: 'confirm' },
+      { role: 'user', cmd: 'confirmAccount' },
       token,
     );
   }

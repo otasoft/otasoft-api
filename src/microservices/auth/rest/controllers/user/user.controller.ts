@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 
 import { AccessControlGuard } from '../../../guards/access-control.guard';
-import { JwtAuthGuard } from '../../../guards/jwt-auth.guard';
 import { UserService } from '../../../services/user/user.service';
 import { AuthEmailDto, ChangePasswordDto } from '../../dto';
 import { RestAuthChangeResponse, RestAuthUserId } from '../../models';
