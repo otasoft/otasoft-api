@@ -68,4 +68,12 @@ export class UserService {
       token,
     );
   }
+
+  async removeRefreshToken(userId: number): Promise<boolean> {
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.authClient,
+      { role: 'user', cmd: 'removeRefreshToken' },
+      userId,
+    );
+  }
 }

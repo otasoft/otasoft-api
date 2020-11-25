@@ -42,7 +42,7 @@ export class AccessControlGuard implements CanActivate {
 
     return this.microserviceConnectionService.sendRequestToClient(
       this.authClient,
-      { role: 'auth', cmd: 'checkAccess' },
+      { role: 'authorization', cmd: 'checkAccess' },
       accessControlObject
     );
   }

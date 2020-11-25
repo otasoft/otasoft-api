@@ -27,7 +27,7 @@ export class JwtAuthGuard implements CanActivate {
 
     return this.microserviceConnectionService.sendRequestToClient(
       this.authClient,
-      { role: 'auth', cmd: 'checkJwt' },
+      { role: 'authorization', cmd: 'checkJwt' },
       { jwt: req.cookies['Authentication'] }
     );
   }

@@ -32,9 +32,9 @@ export class AuthMutationResolver {
   async signOut(
     @Context() context,
   ): Promise<GqlAuthResponseStatus> {
-    const signOutCookie = await this.authService.signOut();
+    const signOutCookies = await this.authService.signOut();
 
-    context.res.setHeader('Set-Cookie', signOutCookie.response);
+    context.res.setHeader('Set-Cookie', [...signOutCookies]);
 
     return { status: 'Signed Out' }
   }

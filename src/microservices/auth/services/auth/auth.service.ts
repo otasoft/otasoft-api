@@ -3,9 +3,9 @@ import { ClientProxy } from '@nestjs/microservices';
 
 import { MicroserviceConnectionService } from '../../../../microservices/microservice-connection/microservice-connection.service';
 import { AuthCredentialsInput } from '../../graphql/input';
-import { GqlAuthUser, GqlAuthUserToken } from '../../graphql/models';
+import { GqlAuthUser } from '../../graphql/models';
 import { AuthCredentialsDto } from '../../rest/dto/auth-credentials.dto';
-import { RestAuthChangeResponse, RestAuthUser, RestAuthUserCookie } from '../../rest/models';
+import { RestAuthUser } from '../../rest/models';
 
 @Injectable()
 export class AuthService {
@@ -35,11 +35,21 @@ export class AuthService {
     );
   }
 
-  async signOut(): Promise<RestAuthChangeResponse> {
+  async signOut(): Promise<string[]> {
     return this.microserviceConnectionService.sendRequestToClient(
       this.authClient,
       { role: 'auth', cmd: 'logout' },
       {},
+    );
+  }
+
+  async getCookieWithJwtAccessToken(
+    id: number,
+  ) {
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.authClient,
+      { role: 'authorization', cmd: 'getCookieWithJwtAccessToken' },
+      id,
     );
   }
 }

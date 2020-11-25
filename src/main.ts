@@ -24,7 +24,7 @@ import { ErrorsInterceptor, ExcludeNullInterceptor, TimeoutInterceptor } from '.
   app.useGlobalInterceptors(
     new ExcludeNullInterceptor(),
     new TimeoutInterceptor(),
-    new ErrorsInterceptor(),
+    // new ErrorsInterceptor(),
   );
 
   app.use(cookieParser());
