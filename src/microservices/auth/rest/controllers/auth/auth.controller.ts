@@ -12,12 +12,12 @@ import {
 
 import { JwtAuthGuard, LocalAuthGuard } from '../../../guards';
 import { RequestWithUser } from '../../../../../decorators';
-import { JwtRefreshGuard } from '../../../guards/jwt-refresh.guard';
+import { JwtRefreshGuard } from '../../../guards';
 import { AuthService } from '../../../services/auth/auth.service';
 import { AuthCredentialsDto } from '../../dto';
 import { RestAuthUser } from '../../models';
 import { IRequestWithUser } from '../../../interfaces';
-import { UserModel } from 'src/microservices/auth/models';
+import { UserModel } from '../../../models';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')
