@@ -26,7 +26,7 @@ export class AccessControlGuard implements CanActivate {
       req = context.switchToHttp().getRequest();
     }
 
-    const jwt: string = req.cookies['Authentication']
+    const jwt: string = req.cookies['Authentication'];
 
     if (!jwt) throw new UnauthorizedException('User not authenticated');
 
@@ -43,7 +43,7 @@ export class AccessControlGuard implements CanActivate {
     return this.microserviceConnectionService.sendRequestToClient(
       this.authClient,
       { role: 'authorization', cmd: 'checkAccess' },
-      accessControlObject
+      accessControlObject,
     );
   }
 }
