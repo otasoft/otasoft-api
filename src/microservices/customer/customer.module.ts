@@ -15,6 +15,11 @@ import { MicroserviceConnectionService } from '../microservice-connection/micros
     ]),
   ],
   controllers: [CustomerController],
-  providers: [CustomerService, CustomerQueryResolver, CustomerMutationResolver, MicroserviceConnectionService],
+  providers: [
+    CustomerService,
+    CustomerQueryResolver,
+    CustomerMutationResolver,
+    MicroserviceConnectionService,
+  ],
 })
 export class CustomerModule {}

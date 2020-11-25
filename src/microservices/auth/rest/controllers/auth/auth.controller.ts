@@ -1,16 +1,34 @@
-import { Controller, Post, Body, Res, UseGuards, Get, HttpCode, Req } from '@nestjs/common';
-import { Request, Response } from 'express';
-import { request } from 'https';
+import {
+  Controller,
+  Post,
+  Body,
+  UseGuards,
+  Get,
+  HttpCode,
+  Req,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 
+import { JwtAuthGuard, LocalAuthGuard } from '../../../guards';
 import { RequestWithUser } from '../../../../../decorators';
 import { JwtRefreshGuard } from '../../../guards/jwt-refresh.guard';
 import { AuthService } from '../../../services/auth/auth.service';
 import { AuthCredentialsDto } from '../../dto';
 import { RestAuthUser } from '../../models';
+import { IRequestWithUser } from '../../../interfaces';
+import { UserModel } from 'src/microservices/auth/models';
 
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  authenticate(@RequestWithUser() user: UserModel) {
+    return user;
+  }
 
   @Post('/signup')
   async signUp(
@@ -20,40 +38,36 @@ export class AuthController {
   }
 
   @HttpCode(200)
+  @UseGuards(LocalAuthGuard)
   @Post('/signin')
   async signIn(
     @Body() authCredentialsDto: AuthCredentialsDto,
-    @Res() response: Response,
-    @Req() request: Request
-  ): Promise<Response<number>> {
+    @Req() request: IRequestWithUser,
+  ): Promise<UserModel> {
     const cookies = await this.authService.signIn(authCredentialsDto);
 
     request.res.setHeader('Set-Cookie', [...cookies]);
 
-    return request.res.sendStatus(200);
+    return request.user;
   }
 
+  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @Post('/signout')
-  async signOut(
-    @Res() response: Response,
-  ): Promise<Response<number>> {
-    const signOutCookies = await this.authService.signOut();
+  async signOut(@Req() req: IRequestWithUser): Promise<void> {
+    const signOutCookies = await this.authService.signOut(req.user.id);
 
-    response.setHeader('Set-Cookie', [...signOutCookies]);
-
-    return response.sendStatus(200)
+    req.res.setHeader('Set-Cookie', [...signOutCookies]);
   }
 
   @UseGuards(JwtRefreshGuard)
   @Get('refresh')
-  async refresh(
-    @RequestWithUser() user,
-    @Res() response: Response
-  ) {
-    const accessTokenCookie = await this.authService.getCookieWithJwtAccessToken(user.id);
- 
-    response.setHeader('Set-Cookie', accessTokenCookie);
-    return user;
+  async refresh(@Req() req: IRequestWithUser) {
+    const accessTokenCookie = await this.authService.getCookieWithJwtAccessToken(
+      req.user.id,
+    );
+
+    req.res.setHeader('Set-Cookie', accessTokenCookie);
+    return req.user;
   }
 }

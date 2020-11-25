@@ -2,7 +2,11 @@ import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { AuthCredentialsInput } from '../input';
-import { GqlAuthResponseStatus, GqlAuthUser, GqlAuthUserToken } from '../models';
+import {
+  GqlAuthResponseStatus,
+  GqlAuthUser,
+  GqlAuthUserToken,
+} from '../models';
 
 @Resolver((of) => GqlAuthUser)
 export class AuthMutationResolver {
@@ -29,13 +33,11 @@ export class AuthMutationResolver {
   }
 
   @Mutation((returns) => GqlAuthResponseStatus)
-  async signOut(
-    @Context() context,
-  ): Promise<GqlAuthResponseStatus> {
-    const signOutCookies = await this.authService.signOut();
+  async signOut(@Context() context): Promise<GqlAuthResponseStatus> {
+    const signOutCookies = await this.authService.signOut(context.user.id);
 
     context.res.setHeader('Set-Cookie', [...signOutCookies]);
 
-    return { status: 'Signed Out' }
+    return { status: 'Signed Out' };
   }
 }

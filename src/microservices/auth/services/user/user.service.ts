@@ -6,7 +6,7 @@ import { GqlAuthChangeResponse, GqlAuthUserId } from '../../graphql/models';
 import { AuthEmailDto, ChangePasswordDto } from '../../rest/dto';
 import { AuthEmailInput, ChangePasswordInput } from '../../graphql/input';
 import { MicroserviceConnectionService } from '../../../../microservices/microservice-connection/microservice-connection.service';
-import { GetRefreshUserIdDto } from '../../rest/dto/ger-refresh-user-id.dto';
+import { GetRefreshUserDto } from '../../rest/dto';
 
 @Injectable()
 export class UserService {
@@ -26,13 +26,21 @@ export class UserService {
     );
   }
 
+  async getUserById(id: number) {
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.authClient,
+      { role: 'user', cmd: 'getUserById' },
+      id,
+    );
+  }
+
   async getUserIfRefreshTokenMatches(
-    getRefreshUserIdData: GetRefreshUserIdDto,
+    getRefreshUserData: GetRefreshUserDto,
   ): Promise<GqlAuthUserId | RestAuthUserId> {
     return this.microserviceConnectionService.sendRequestToClient(
       this.authClient,
-      { role: 'user', cmd: 'getRefreshUserId' },
-      getRefreshUserIdData,
+      { role: 'user', cmd: 'getUserIfRefreshTokenMatches' },
+      getRefreshUserData,
     );
   }
 
