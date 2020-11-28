@@ -4,15 +4,13 @@ import { Args, Resolver, Query } from '@nestjs/graphql';
 import { GqlAuthUser, GqlAuthUserId, GqlUserModel } from '../models';
 import { AuthEmailInput } from '../input';
 import { AccessControlGuard } from '../../guards';
-import { GqlJwtAuthGuard } from '../guards'
+import { GqlJwtAuthGuard } from '../guards';
 import { GqlCurrentUser } from '../decorators';
 import { UserService } from '../../services/user/user.service';
 
 @Resolver((of) => GqlAuthUser)
 export class AuthQueryResolver {
-  constructor(
-    private readonly userService: UserService,
-  ) {}
+  constructor(private readonly userService: UserService) {}
 
   @UseGuards(AccessControlGuard)
   @Query((returns) => GqlAuthUserId)
@@ -28,7 +26,7 @@ export class AuthQueryResolver {
   }
 
   @UseGuards(GqlJwtAuthGuard)
-  @Query(returns => GqlUserModel)
+  @Query((returns) => GqlUserModel)
   authenticate(@GqlCurrentUser() user: GqlUserModel) {
     return user;
   }

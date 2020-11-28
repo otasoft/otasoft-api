@@ -26,9 +26,7 @@ export class AuthService {
     );
   }
 
-  async signIn(
-    authCredentialsData: AuthCredentialsDto | AuthCredentialsInput,
-  ) {
+  async signIn(authCredentialsData: AuthCredentialsDto | AuthCredentialsInput) {
     return this.microserviceConnectionService.sendRequestToClient(
       this.authClient,
       { role: 'auth', cmd: 'login' },

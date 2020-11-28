@@ -10,10 +10,7 @@ import { AuthServices } from './services';
 import { AuthControllers } from './rest/controllers';
 import { AuthMutations } from './graphql/mutations';
 import { AuthQueries } from './graphql/queries';
-import {
-  JwtRefreshTokenStrategy,
-  JwtStrategy,
-} from './strategies';
+import { JwtRefreshTokenStrategy, JwtStrategy } from './strategies';
 
 @Module({
   imports: [

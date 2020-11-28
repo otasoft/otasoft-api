@@ -57,7 +57,7 @@ export class AuthController {
 
     req.res.setHeader('Set-Cookie', [...signOutCookies]);
 
-    return { response: 'Signed Out' }
+    return { response: 'Signed Out' };
   }
 
   @UseGuards(RestJwtRefreshGuard)

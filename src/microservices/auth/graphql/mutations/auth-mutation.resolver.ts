@@ -1,15 +1,16 @@
-import { ClassSerializerInterceptor, HttpCode, UseGuards, UseInterceptors } from '@nestjs/common';
+import {
+  ClassSerializerInterceptor,
+  HttpCode,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 
 import { GqlJwtAuthGuard, GqlJwtRefreshGuard } from '../guards';
 import { UserModel } from '../../models';
 import { AuthCredentialsInput } from '../input';
 import { GqlCurrentUser } from '../decorators';
-import {
-  GqlAuthResponseStatus,
-  GqlAuthUser,
-  GqlUserModel
-} from '../models';
+import { GqlAuthResponseStatus, GqlAuthUser, GqlUserModel } from '../models';
 import { AuthService } from '../../services/auth/auth.service';
 
 @UseInterceptors(ClassSerializerInterceptor)
@@ -41,7 +42,7 @@ export class AuthMutationResolver {
   @Mutation((returns) => GqlAuthResponseStatus)
   async signOut(
     @GqlCurrentUser() user: UserModel,
-    @Context() context: any
+    @Context() context: any,
   ): Promise<GqlAuthResponseStatus> {
     const signOutCookies = await this.authService.signOut(user.id);
 
@@ -52,10 +53,7 @@ export class AuthMutationResolver {
 
   @UseGuards(GqlJwtRefreshGuard)
   @Mutation((returns) => GqlUserModel)
-  async refresh(
-    @GqlCurrentUser() user: UserModel,
-    @Context() context: any
-  ) {
+  async refresh(@GqlCurrentUser() user: UserModel, @Context() context: any) {
     const accessTokenCookie = await this.authService.getCookieWithJwtAccessToken(
       user.id,
     );
