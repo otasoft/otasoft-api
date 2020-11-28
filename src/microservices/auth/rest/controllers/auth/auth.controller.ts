@@ -10,14 +10,14 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 
-import { JwtAuthGuard, LocalAuthGuard } from '../../../guards';
-import { RequestWithUser } from '../../../../../decorators';
+import { JwtAuthGuard } from '../../../guards';
+import { CurrentUser } from '../../../../../decorators';
 import { JwtRefreshGuard } from '../../../guards';
-import { AuthService } from '../../../services/auth/auth.service';
 import { AuthCredentialsDto } from '../../dto';
-import { RestAuthUser } from '../../models';
-import { IRequestWithUser } from '../../../interfaces';
+import { RestAuthChangeResponse, RestAuthUser } from '../../models';
+import { IRequestWithUser } from '../../interfaces';
 import { UserModel } from '../../../models';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')
@@ -26,7 +26,7 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  authenticate(@RequestWithUser() user: UserModel) {
+  authenticate(@CurrentUser() user: UserModel) {
     return user;
   }
 
@@ -38,36 +38,38 @@ export class AuthController {
   }
 
   @HttpCode(200)
-  @UseGuards(LocalAuthGuard)
   @Post('/signin')
   async signIn(
     @Body() authCredentialsDto: AuthCredentialsDto,
     @Req() request: IRequestWithUser,
   ): Promise<UserModel> {
-    const cookies = await this.authService.signIn(authCredentialsDto);
+    const response = await this.authService.signIn(authCredentialsDto);
 
-    request.res.setHeader('Set-Cookie', [...cookies]);
+    request.res.setHeader('Set-Cookie', [...response.cookies]);
 
-    return request.user;
+    return response.user;
   }
 
   @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @Post('/signout')
-  async signOut(@Req() req: IRequestWithUser): Promise<void> {
+  async signOut(@Req() req: IRequestWithUser): Promise<RestAuthChangeResponse> {
     const signOutCookies = await this.authService.signOut(req.user.id);
 
     req.res.setHeader('Set-Cookie', [...signOutCookies]);
+
+    return { response: 'Signed Out' }
   }
 
   @UseGuards(JwtRefreshGuard)
   @Get('refresh')
-  async refresh(@Req() req: IRequestWithUser) {
+  async refresh(@Req() req: IRequestWithUser): Promise<UserModel> {
     const accessTokenCookie = await this.authService.getCookieWithJwtAccessToken(
       req.user.id,
     );
 
     req.res.setHeader('Set-Cookie', accessTokenCookie);
+
     return req.user;
   }
 }

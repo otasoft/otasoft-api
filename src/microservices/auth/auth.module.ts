@@ -13,7 +13,6 @@ import { AuthQueries } from './graphql/queries';
 import {
   JwtRefreshTokenStrategy,
   JwtStrategy,
-  LocalStrategy,
 } from './strategies';
 
 @Module({
@@ -36,7 +35,6 @@ import {
     ...AuthQueries,
     JwtStrategy,
     JwtRefreshTokenStrategy,
-    LocalStrategy,
   ],
 })
 export class AuthModule {}

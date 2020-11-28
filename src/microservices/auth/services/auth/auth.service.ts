@@ -28,7 +28,7 @@ export class AuthService {
 
   async signIn(
     authCredentialsData: AuthCredentialsDto | AuthCredentialsInput,
-  ): Promise<string[]> {
+  ) {
     return this.microserviceConnectionService.sendRequestToClient(
       this.authClient,
       { role: 'auth', cmd: 'login' },

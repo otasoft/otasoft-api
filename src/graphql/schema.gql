@@ -15,10 +15,6 @@ type GqlAuthUserId {
   auth_id: ID!
 }
 
-type GqlAuthUserToken {
-  cookie: String!
-}
-
 type GqlAuthResponseStatus {
   status: String!
 }
@@ -26,6 +22,11 @@ type GqlAuthResponseStatus {
 type GqlBooking {
   id: ID!
   customer_id: Float!
+}
+
+type GqlUserModel {
+  id: Float!
+  email: String!
 }
 
 type GqlActivityModel {
@@ -66,6 +67,7 @@ type Query {
   getUserId(email: AuthEmailInput!): GqlAuthUserId!
   confirmAccountCreation(token: String!): Boolean!
   getBooking(id: Int!): GqlBooking!
+  authenticate: GqlUserModel!
   getSingleActivity(id: Float!): GqlActivityModel!
   getAllActivities: GqlActivityModel!
   getSingleCars(id: Float!): GqlCarsModel!
@@ -83,8 +85,9 @@ input AuthEmailInput {
 
 type Mutation {
   signUp(authCredentials: AuthCredentialsInput!): GqlAuthUser!
-  signIn(authCredentials: AuthCredentialsInput!): GqlAuthUserToken!
+  signIn(authCredentials: AuthCredentialsInput!): GqlUserModel!
   signOut: GqlAuthResponseStatus!
+  refresh: GqlUserModel!
   changeUserPassword(changePasswordInput: ChangePasswordInput!, id: Float!): GqlAuthChangeResponse!
   deleteUserAccount(id: Float!): GqlAuthChangeResponse!
   createBooking(createBookingData: CreateBookingInput!): GqlBooking!

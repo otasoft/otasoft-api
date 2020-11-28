@@ -1,16 +1,15 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Resolver, Query } from '@nestjs/graphql';
 
-import { AuthService } from '../../services/auth/auth.service';
-import { GqlAuthUser, GqlAuthUserId } from '../models';
+import { GqlAuthUser, GqlAuthUserId, GqlUserModel } from '../models';
 import { AuthEmailInput } from '../input';
-import { AccessControlGuard } from '../../guards/access-control.guard';
+import { AccessControlGuard, GqlJwtAuthGuard } from '../../guards';
+import { GqlCurrentUser } from '../../../../decorators/';
 import { UserService } from '../../services/user/user.service';
 
 @Resolver((of) => GqlAuthUser)
 export class AuthQueryResolver {
   constructor(
-    private readonly authService: AuthService,
     private readonly userService: UserService,
   ) {}
 
@@ -25,5 +24,11 @@ export class AuthQueryResolver {
   @Query((returns) => Boolean)
   async confirmAccountCreation(@Args('token') token: string): Promise<boolean> {
     return this.userService.confirmAccountCreation(token);
+  }
+
+  @UseGuards(GqlJwtAuthGuard)
+  @Query(returns => GqlUserModel)
+  authenticate(@GqlCurrentUser() user: GqlUserModel) {
+    return user;
   }
 }

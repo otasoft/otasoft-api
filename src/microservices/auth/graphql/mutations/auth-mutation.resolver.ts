@@ -1,18 +1,22 @@
+import { ClassSerializerInterceptor, HttpCode, UseGuards, UseInterceptors } from '@nestjs/common';
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
+import { GqlCurrentUser } from 'src/decorators';
 
+import { GqlJwtAuthGuard, GqlJwtRefreshGuard } from '../../guards';
+import { UserModel } from '../../models';
 import { AuthService } from '../../services/auth/auth.service';
 import { AuthCredentialsInput } from '../input';
 import {
   GqlAuthResponseStatus,
   GqlAuthUser,
-  GqlAuthUserToken,
+  GqlUserModel
 } from '../models';
 
+@UseInterceptors(ClassSerializerInterceptor)
 @Resolver((of) => GqlAuthUser)
 export class AuthMutationResolver {
   constructor(private readonly authService: AuthService) {}
 
-  // TODO: change to also accept cookie response
   @Mutation((returns) => GqlAuthUser)
   async signUp(
     @Args('authCredentials') authCredentialsInput: AuthCredentialsInput,
@@ -20,24 +24,44 @@ export class AuthMutationResolver {
     return this.authService.signUp(authCredentialsInput);
   }
 
-  @Mutation((returns) => GqlAuthUserToken)
+  @HttpCode(200)
+  @Mutation((returns) => GqlUserModel)
   async signIn(
     @Context() context,
     @Args('authCredentials') authCredentialsInput: AuthCredentialsInput,
-  ): Promise<string[]> {
-    const cookies = await this.authService.signIn(authCredentialsInput);
+  ): Promise<GqlUserModel> {
+    const response = await this.authService.signIn(authCredentialsInput);
 
-    context.res.setHeader('Set-Cookie', [...cookies]);
+    context.res.setHeader('Set-Cookie', [...response.cookies]);
 
-    return [...cookies];
+    return response.user;
   }
 
+  @UseGuards(GqlJwtAuthGuard)
   @Mutation((returns) => GqlAuthResponseStatus)
-  async signOut(@Context() context): Promise<GqlAuthResponseStatus> {
-    const signOutCookies = await this.authService.signOut(context.user.id);
+  async signOut(
+    @GqlCurrentUser() user: UserModel,
+    @Context() context: any
+  ): Promise<GqlAuthResponseStatus> {
+    const signOutCookies = await this.authService.signOut(user.id);
 
     context.res.setHeader('Set-Cookie', [...signOutCookies]);
 
     return { status: 'Signed Out' };
+  }
+
+  @UseGuards(GqlJwtRefreshGuard)
+  @Mutation((returns) => GqlUserModel)
+  async refresh(
+    @GqlCurrentUser() user: UserModel,
+    @Context() context: any
+  ) {
+    const accessTokenCookie = await this.authService.getCookieWithJwtAccessToken(
+      user.id,
+    );
+
+    context.res.setHeader('Set-Cookie', accessTokenCookie);
+
+    return user;
   }
 }
