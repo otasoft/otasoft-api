@@ -10,9 +10,8 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 
-import { JwtAuthGuard } from '../../../guards';
+import { RestJwtAuthGuard, RestJwtRefreshGuard } from '../../guards';
 import { RestCurrentUser } from '../../decorators';
-import { JwtRefreshGuard } from '../../../guards';
 import { AuthCredentialsDto } from '../../dto';
 import { RestAuthChangeResponse, RestAuthUser } from '../../models';
 import { IRequestWithUser } from '../../interfaces';
@@ -24,7 +23,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(RestJwtAuthGuard)
   @Get()
   authenticate(@RestCurrentUser() user: UserModel) {
     return user;
@@ -50,7 +49,7 @@ export class AuthController {
     return response.user;
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(RestJwtAuthGuard)
   @HttpCode(200)
   @Post('/signout')
   async signOut(@Req() req: IRequestWithUser): Promise<RestAuthChangeResponse> {
@@ -61,7 +60,7 @@ export class AuthController {
     return { response: 'Signed Out' }
   }
 
-  @UseGuards(JwtRefreshGuard)
+  @UseGuards(RestJwtRefreshGuard)
   @Get('refresh')
   async refresh(@Req() req: IRequestWithUser): Promise<UserModel> {
     const accessTokenCookie = await this.authService.getCookieWithJwtAccessToken(

@@ -1,7 +1,7 @@
 import { ClassSerializerInterceptor, HttpCode, UseGuards, UseInterceptors } from '@nestjs/common';
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 
-import { GqlJwtAuthGuard, GqlJwtRefreshGuard } from '../../guards';
+import { GqlJwtAuthGuard, GqlJwtRefreshGuard } from '../guards';
 import { UserModel } from '../../models';
 import { AuthCredentialsInput } from '../input';
 import { GqlCurrentUser } from '../decorators';

@@ -9,7 +9,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { CustomerService } from '../customer.service';
-import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { RestJwtAuthGuard } from '../../auth/rest/guards';
 import { CreateCustomerProfileDto } from './dto/create-customer-profile.dto';
 import { RestCustomer } from './models/customer-rest.model';
 import { UpdateCustomerProfileDto } from './dto/update-customer-profile.dto';
@@ -18,8 +18,7 @@ import { UpdateCustomerProfileDto } from './dto/update-customer-profile.dto';
 export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}
 
-  // Auth microservice must be working to check whether the customer is signed in, in development of just customer microservice, comment following line.
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(RestJwtAuthGuard)
   @Get('/profile/:id')
   async getCustomerProfile(@Param('id') id: number): Promise<RestCustomer> {
     return this.customerService.getCustomerProfile(id);
@@ -32,13 +31,13 @@ export class CustomerController {
     return this.customerService.createCustomerProfile(createCustomerProfileDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(RestJwtAuthGuard)
   @Delete('/delete/:id')
   async removeCustomerProfile(@Param('id') id: number): Promise<Boolean> {
     return this.customerService.removeCustomerProfile(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(RestJwtAuthGuard)
   @Put('/update/:id')
   async updateCustomerProfile(
     @Param('id') id: number,

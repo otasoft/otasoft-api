@@ -3,7 +3,8 @@ import { Args, Resolver, Query } from '@nestjs/graphql';
 
 import { GqlAuthUser, GqlAuthUserId, GqlUserModel } from '../models';
 import { AuthEmailInput } from '../input';
-import { AccessControlGuard, GqlJwtAuthGuard } from '../../guards';
+import { AccessControlGuard } from '../../guards';
+import { GqlJwtAuthGuard } from '../guards'
 import { GqlCurrentUser } from '../decorators';
 import { UserService } from '../../services/user/user.service';
 

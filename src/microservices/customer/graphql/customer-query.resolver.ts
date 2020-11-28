@@ -2,13 +2,13 @@ import { NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Resolver, Int, Query } from '@nestjs/graphql';
 import { GqlCustomer } from './models/customer-gql.model';
 import { CustomerService } from '../customer.service';
-import { JwtAuthGuard } from 'src/microservices/auth/guards/jwt-auth.guard';
+import { GqlJwtAuthGuard } from '../../auth/graphql/guards';
 
 @Resolver((of) => GqlCustomer)
 export class CustomerQueryResolver {
   constructor(private readonly customerService: CustomerService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(GqlJwtAuthGuard)
   @Query((returns) => GqlCustomer)
   async getCustomerProfile(
     @Args('id', { type: () => Int }) id: number,
