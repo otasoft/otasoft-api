@@ -19,6 +19,10 @@ type GqlAuthUserToken {
   cookie: String!
 }
 
+type GqlAuthResponseStatus {
+  status: String!
+}
+
 type GqlBooking {
   id: ID!
   customer_id: Float!
@@ -80,6 +84,7 @@ input AuthEmailInput {
 type Mutation {
   signUp(authCredentials: AuthCredentialsInput!): GqlAuthUser!
   signIn(authCredentials: AuthCredentialsInput!): GqlAuthUserToken!
+  signOut: GqlAuthResponseStatus!
   changeUserPassword(changePasswordInput: ChangePasswordInput!, id: Float!): GqlAuthChangeResponse!
   deleteUserAccount(id: Float!): GqlAuthChangeResponse!
   createBooking(createBookingData: CreateBookingInput!): GqlBooking!

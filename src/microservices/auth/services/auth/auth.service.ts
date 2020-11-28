@@ -5,7 +5,7 @@ import { MicroserviceConnectionService } from '../../../../microservices/microse
 import { AuthCredentialsInput } from '../../graphql/input';
 import { GqlAuthUser, GqlAuthUserToken } from '../../graphql/models';
 import { AuthCredentialsDto } from '../../rest/dto/auth-credentials.dto';
-import { RestAuthUser, RestAuthUserToken } from '../../rest/models';
+import { RestAuthChangeResponse, RestAuthUser, RestAuthUserToken } from '../../rest/models';
 
 @Injectable()
 export class AuthService {
@@ -32,6 +32,14 @@ export class AuthService {
       this.authClient,
       { role: 'auth', cmd: 'login' },
       authCredentialsData,
+    );
+  }
+
+  async signOut(): Promise<RestAuthChangeResponse> {
+    return this.microserviceConnectionService.sendRequestToClient(
+      this.authClient,
+      { role: 'auth', cmd: 'logout' },
+      {},
     );
   }
 }

@@ -29,5 +29,14 @@ export class AuthController {
     return response.send(cookieObject);
   }
 
-  // TODO: add logout functionality
+  @Post('/signout')
+  async signOut(
+    @Res() response: Response,
+  ): Promise<Response<number>> {
+    const signOutCookie = await this.authService.signOut();
+
+    response.setHeader('Set-Cookie', signOutCookie.response);
+
+    return response.sendStatus(200)
+  }
 }
