@@ -1,12 +1,12 @@
 import { IsDate, IsInt, IsNumber } from 'class-validator';
 
 export class RestBooking {
-    @IsInt()
-    id: number;
+  @IsInt()
+  id: number;
 
-    @IsDate()
-    date: Date;
+  @IsDate()
+  date: Date;
 
-    @IsNumber()
-    customer_id: number;
+  @IsNumber()
+  customer_id: number;
 }

@@ -5,6 +5,7 @@ import { ClientsModule } from '@nestjs/microservices';
 import { connectMicroservice } from '../microservice-connection/microservice-connection';
 import { BookingMutationResolver } from './graphql/booking-mutation.resolver';
 import { BookingQueryResolver } from './graphql/booking-query.resolver';
+import { MicroserviceConnectionService } from '../microservice-connection/microservice-connection.service';
 
 @Module({
   imports: [
@@ -14,6 +15,11 @@ import { BookingQueryResolver } from './graphql/booking-query.resolver';
     ]),
   ],
   controllers: [BookingController],
-  providers: [BookingService, BookingQueryResolver, BookingMutationResolver],
+  providers: [
+    BookingService,
+    BookingQueryResolver,
+    BookingMutationResolver,
+    MicroserviceConnectionService,
+  ],
 })
 export class BookingModule {}

@@ -19,14 +19,14 @@ type GqlAuthResponseStatus {
   status: String!
 }
 
-type GqlBooking {
-  id: ID!
-  customer_id: Float!
-}
-
 type GqlUserModel {
   id: Float!
   email: String!
+}
+
+type GqlBooking {
+  id: ID!
+  customer_id: Float!
 }
 
 type GqlActivityModel {
@@ -66,8 +66,8 @@ type GqlCustomer {
 type Query {
   getUserId(email: AuthEmailInput!): GqlAuthUserId!
   confirmAccountCreation(token: String!): Boolean!
-  getBooking(id: Int!): GqlBooking!
   authenticate: GqlUserModel!
+  getBooking(id: Int!): GqlBooking!
   getSingleActivity(id: Float!): GqlActivityModel!
   getAllActivities: GqlActivityModel!
   getSingleCars(id: Float!): GqlCarsModel!

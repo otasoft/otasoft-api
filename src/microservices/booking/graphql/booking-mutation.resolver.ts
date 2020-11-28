@@ -2,14 +2,14 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { GqlBooking } from './models/booking-gql.model';
 import { CreateBookingInput } from './input/create-booking.input';
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/microservices/auth/guards/jwt-auth.guard';
+import { GqlJwtAuthGuard } from '../../auth/graphql/guards';
 import { BookingService } from '../booking.service';
 
 @Resolver((of) => GqlBooking)
 export class BookingMutationResolver {
   constructor(private readonly bookingService: BookingService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(GqlJwtAuthGuard)
   @Mutation((returns) => GqlBooking)
   async createBooking(
     @Args('createBookingData')
@@ -22,13 +22,13 @@ export class BookingMutationResolver {
     return newBooking;
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(GqlJwtAuthGuard)
   @Mutation(() => Boolean)
   async deleteBooking(@Args('id') id: number): Promise<GqlBooking> {
     return this.bookingService.deleteBookingById(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(GqlJwtAuthGuard)
   @Mutation((returns) => GqlBooking)
   async updateBooking(
     @Args('id') id: number,
