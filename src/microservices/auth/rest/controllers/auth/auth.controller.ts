@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 
 import { JwtAuthGuard } from '../../../guards';
-import { CurrentUser } from '../../../../../decorators';
+import { RestCurrentUser } from '../../decorators';
 import { JwtRefreshGuard } from '../../../guards';
 import { AuthCredentialsDto } from '../../dto';
 import { RestAuthChangeResponse, RestAuthUser } from '../../models';
@@ -26,7 +26,7 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  authenticate(@CurrentUser() user: UserModel) {
+  authenticate(@RestCurrentUser() user: UserModel) {
     return user;
   }
 
