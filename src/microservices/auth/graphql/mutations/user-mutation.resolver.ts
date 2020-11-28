@@ -1,10 +1,10 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { AccessControlGuard } from '../guards/access-control.guard';
-import { ChangePasswordInput } from './input/change-password.input';
-import { GqlAuthChangeResponse } from './models/auth-change-response-gql.model';
-import { GqlAuthUser } from './models/auth-user-gql.model';
-import { UserService } from '../services/user/user.service';
+
+import { AccessControlGuard } from '../../guards/access-control.guard';
+import { ChangePasswordInput } from '../input';
+import { GqlAuthChangeResponse, GqlAuthUser } from '../models';
+import { UserService } from '../../services/user/user.service';
 
 @Resolver((of) => GqlAuthUser)
 export class UserMutationResolver {

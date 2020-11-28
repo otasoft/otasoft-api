@@ -1,11 +1,11 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Resolver, Query } from '@nestjs/graphql';
-import { AuthService } from '../services/auth/auth.service';
-import { GqlAuthUser } from './models/auth-user-gql.model';
-import { GqlAuthUserId } from './models/auth-user-id-gql.model';
-import { AuthEmailInput } from './input/auth-email.input';
-import { AccessControlGuard } from '../guards/access-control.guard';
-import { UserService } from '../services/user/user.service';
+
+import { AuthService } from '../../services/auth/auth.service';
+import { GqlAuthUser, GqlAuthUserId } from '../models';
+import { AuthEmailInput } from '../input';
+import { AccessControlGuard } from '../../guards/access-control.guard';
+import { UserService } from '../../services/user/user.service';
 
 @Resolver((of) => GqlAuthUser)
 export class AuthQueryResolver {

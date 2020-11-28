@@ -1,9 +1,8 @@
-import { Args, Context, GraphQLExecutionContext, Mutation, Resolver } from '@nestjs/graphql';
-import { Response } from 'express';
-import { AuthService } from '../services/auth/auth.service';
-import { AuthCredentialsInput } from './input/auth-credentials.input';
-import { GqlAuthUser } from './models/auth-user-gql.model';
-import { GqlAuthUserToken } from './models/auth-user-token-gql.model';
+import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
+
+import { AuthService } from '../../services/auth/auth.service';
+import { AuthCredentialsInput } from '../input';
+import { GqlAuthUser, GqlAuthUserToken } from '../models';
 
 @Resolver((of) => GqlAuthUser)
 export class AuthMutationResolver {

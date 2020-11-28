@@ -2,6 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type GqlAuthChangeResponse {
+  response: String!
+}
+
 type GqlAuthUser {
   auth_id: ID!
   token: String!
@@ -13,10 +17,6 @@ type GqlAuthUserId {
 
 type GqlAuthUserToken {
   cookie: String!
-}
-
-type GqlAuthChangeResponse {
-  response: String!
 }
 
 type GqlBooking {

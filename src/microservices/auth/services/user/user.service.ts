@@ -5,15 +5,11 @@ import {
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
-import { RestAuthChangeResponse } from '../../rest/models/auth-change-response-rest.model';
-import { GqlAuthChangeResponse } from '../../graphql/models/auth-change-response-gql.model';
-import { AuthEmailDto } from '../../rest/dto/auth-email.dto';
-import { ChangePasswordDto } from '../../rest/dto/change-password.dto';
-import { RestAuthUserId } from '../../rest/models/auth-user-id-rest.model';
-import { GqlAuthUserId } from '../../graphql/models/auth-user-id-gql.model';
-import { AuthEmailInput } from '../../graphql/input/auth-email.input';
+import { RestAuthChangeResponse, RestAuthUserId } from '../../rest/models';
+import { GqlAuthChangeResponse, GqlAuthUserId } from '../../graphql/models';
+import { AuthEmailDto, ChangePasswordDto } from '../../rest/dto';
+import { AuthEmailInput, ChangePasswordInput } from '../../graphql/input';
 import { MicroserviceConnectionService } from '../../../../microservices/microservice-connection/microservice-connection.service';
-import { ChangePasswordInput } from '../../graphql/input/change-password.input';
 
 @Injectable()
 export class UserService {

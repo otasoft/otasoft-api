@@ -1,9 +1,9 @@
 import { Controller, Post, Body, Res } from '@nestjs/common';
-import { AuthService } from '../../../services/auth/auth.service';
-import { AuthCredentialsDto } from '../../dto/auth-credentials.dto';
-import { RestAuthUserToken } from '../../models/auth-user-token-rest.model';
-import { RestAuthUser } from '../../models/auth-user-rest.model';
 import { Response } from 'express';
+
+import { AuthService } from '../../../services/auth/auth.service';
+import { AuthCredentialsDto } from '../../dto';
+import { RestAuthUserToken, RestAuthUser } from '../../models';
 
 @Controller('auth')
 export class AuthController {

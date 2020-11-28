@@ -8,13 +8,12 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
+
 import { AccessControlGuard } from '../../../guards/access-control.guard';
 import { JwtAuthGuard } from '../../../guards/jwt-auth.guard';
 import { UserService } from '../../../services/user/user.service';
-import { AuthEmailDto } from '../../dto/auth-email.dto';
-import { ChangePasswordDto } from '../../dto/change-password.dto';
-import { RestAuthChangeResponse } from '../../models/auth-change-response-rest.model';
-import { RestAuthUserId } from '../../models/auth-user-id-rest.model';
+import { AuthEmailDto, ChangePasswordDto } from '../../dto';
+import { RestAuthChangeResponse, RestAuthUserId } from '../../models';
 
 @Controller('user')
 export class UserController {
