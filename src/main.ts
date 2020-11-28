@@ -13,6 +13,7 @@ import { rateLimitConfigObject } from './security/configs/rateLimitConfig';
 import { httpsOptions } from './security/configs/httpsOptions';
 import { FrontendCookieGuard } from './security/guards/frontend-cookie.guard';
 import { createRedisSession } from './security/configs/redisSessionConfig';
+import { ExcludeNullInterceptor, TimeoutInterceptor } from './interceptors';
 
 (async function bootstrap() {
   const app = process.env.SERVE_LOCAL_SSL
@@ -20,6 +21,10 @@ import { createRedisSession } from './security/configs/redisSessionConfig';
     : await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe({ skipMissingProperties: true }));
+  app.useGlobalInterceptors(
+    new ExcludeNullInterceptor(),
+    new TimeoutInterceptor(),
+  );
 
   app.use(cookieParser());
   app.use(createRedisSession());

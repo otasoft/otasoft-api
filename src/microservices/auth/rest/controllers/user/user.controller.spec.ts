@@ -1,5 +1,7 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
+
+import { MicroserviceConnectionService } from '../../../../microservice-connection/microservice-connection.service';
 import { UserService } from '../../../services/user/user.service';
 import { connectMicroservice } from '../../../../microservice-connection/microservice-connection';
 import { UserController } from './user.controller';
@@ -17,7 +19,7 @@ describe('UserController', () => {
         ]),
       ],
       controllers: [UserController],
-      providers: [UserService],
+      providers: [UserService, MicroserviceConnectionService],
     }).compile();
 
     controller = module.get<UserController>(UserController);

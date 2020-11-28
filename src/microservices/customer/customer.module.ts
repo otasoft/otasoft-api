@@ -5,6 +5,7 @@ import { connectMicroservice } from 'src/microservices/microservice-connection/m
 import { CustomerService } from './customer.service';
 import { CustomerQueryResolver } from './graphql/customer-query.resolver';
 import { CustomerMutationResolver } from './graphql/customer-mutation.resolver';
+import { MicroserviceConnectionService } from '../microservice-connection/microservice-connection.service';
 
 @Module({
   imports: [
@@ -14,6 +15,11 @@ import { CustomerMutationResolver } from './graphql/customer-mutation.resolver';
     ]),
   ],
   controllers: [CustomerController],
-  providers: [CustomerService, CustomerQueryResolver, CustomerMutationResolver],
+  providers: [
+    CustomerService,
+    CustomerQueryResolver,
+    CustomerMutationResolver,
+    MicroserviceConnectionService,
+  ],
 })
 export class CustomerModule {}

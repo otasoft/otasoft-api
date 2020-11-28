@@ -1,5 +1,7 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
+
+import { MicroserviceConnectionService } from '../../../../microservice-connection/microservice-connection.service';
 import { connectMicroservice } from '../../../../microservice-connection/microservice-connection';
 import { AuthService } from '../../../services/auth/auth.service';
 import { AuthController } from './auth.controller';
@@ -17,7 +19,7 @@ describe('AuthController', () => {
         ]),
       ],
       controllers: [AuthController],
-      providers: [AuthService],
+      providers: [AuthService, MicroserviceConnectionService],
     }).compile();
 
     controller = module.get<AuthController>(AuthController);

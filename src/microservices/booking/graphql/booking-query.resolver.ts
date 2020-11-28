@@ -1,6 +1,6 @@
 import { NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Resolver, Int, Query } from '@nestjs/graphql';
-import { JwtAuthGuard } from 'src/microservices/auth/guards/jwt-auth.guard';
+import { GqlJwtAuthGuard } from '../../auth/graphql/guards';
 import { BookingService } from '../booking.service';
 import { GqlBooking } from './models/booking-gql.model';
 
@@ -8,7 +8,7 @@ import { GqlBooking } from './models/booking-gql.model';
 export class BookingQueryResolver {
   constructor(private readonly bookingService: BookingService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(GqlJwtAuthGuard)
   @Query((returns) => GqlBooking)
   async getBooking(
     @Args('id', { type: () => Int }) id: number,

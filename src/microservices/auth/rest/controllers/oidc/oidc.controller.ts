@@ -1,5 +1,6 @@
 import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
+
 import { OpenIDGuard } from '../../../guards/openid.guard';
 import { OidcService } from '../../../services/oidc/oidc.service';
 

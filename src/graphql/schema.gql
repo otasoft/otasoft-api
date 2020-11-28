@@ -2,6 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type GqlAuthChangeResponse {
+  response: String!
+}
+
 type GqlAuthUser {
   auth_id: ID!
   token: String!
@@ -11,12 +15,13 @@ type GqlAuthUserId {
   auth_id: ID!
 }
 
-type GqlAuthUserToken {
-  accessToken: String!
+type GqlAuthResponseStatus {
+  status: String!
 }
 
-type GqlAuthChangeResponse {
-  response: String!
+type GqlUserModel {
+  id: Float!
+  email: String!
 }
 
 type GqlBooking {
@@ -61,6 +66,7 @@ type GqlCustomer {
 type Query {
   getUserId(email: AuthEmailInput!): GqlAuthUserId!
   confirmAccountCreation(token: String!): Boolean!
+  authenticate: GqlUserModel!
   getBooking(id: Int!): GqlBooking!
   getSingleActivity(id: Float!): GqlActivityModel!
   getAllActivities: GqlActivityModel!
@@ -79,7 +85,9 @@ input AuthEmailInput {
 
 type Mutation {
   signUp(authCredentials: AuthCredentialsInput!): GqlAuthUser!
-  signIn(authCredentials: AuthCredentialsInput!): GqlAuthUserToken!
+  signIn(authCredentials: AuthCredentialsInput!): GqlUserModel!
+  signOut: GqlAuthResponseStatus!
+  refresh: GqlUserModel!
   changeUserPassword(changePasswordInput: ChangePasswordInput!, id: Float!): GqlAuthChangeResponse!
   deleteUserAccount(id: Float!): GqlAuthChangeResponse!
   createBooking(createBookingData: CreateBookingInput!): GqlBooking!

@@ -4,7 +4,7 @@ import { CustomerService } from '../customer.service';
 import { CreateCustomerProfileInput } from './input/create-customer-profile.input';
 import { UpdateCustomerProfileInput } from './input/update-customer-profile.input';
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/microservices/auth/guards/jwt-auth.guard';
+import { GqlJwtAuthGuard } from '../../auth/graphql/guards';
 
 @Resolver((of) => GqlCustomer)
 export class CustomerMutationResolver {
@@ -22,13 +22,13 @@ export class CustomerMutationResolver {
     return newCustomerProfile;
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(GqlJwtAuthGuard)
   @Mutation((returns) => Boolean)
   async removeCustomerProfile(@Args('id') id: number): Promise<Boolean> {
     return this.customerService.removeCustomerProfile(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(GqlJwtAuthGuard)
   @Mutation((returns) => GqlCustomer)
   async updateCustomerProfile(
     @Args('id') id: number,

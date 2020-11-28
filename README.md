@@ -33,7 +33,6 @@ Otasoft projects are and always will be open source (MIT Licence). Anyone can us
 ## Table of Contents
 
 * [Getting Started](#getting-started)
-* [Usage](#usage)
 * [Architecture](#architecture)
 * [Layers](#layers)
 * [Core Team](#core-team)
@@ -74,6 +73,8 @@ docker-compose up
 yarn start:dev
 ```
 
+When running graphql playground remember to add `"request.credentials": "same-origin"` line to your playground settings. This way, you will be able to use cookie based authentication in GQL playground.
+
 ## Architecture
  
 The Otasoft API acts as a gateway/proxy for the different microservices it exposes. The GraphQL resolvers and REST controllers make calls to the RabbitMQ microservices through client-server communication. All elements of the Otasoft Core system are packed into docker images and can be run as containers.
@@ -107,13 +108,7 @@ PostgreSQL and MySQL are used as the databases and [TypeOrm](https://typeorm.io/
 <!-- CORE TEAM -->
 ## Core Team
 
-[Jakub Andrzejewski](https://github.com/Baroshem) -> Founder, Developer
-
-[Adam Oleszko](https://github.com/AdamOleszko) -> Core Team Member, Developer
-
-[Tomasz Anioł](https://github.com/tom-aniol) -> Core Team Member, Marketing
-
-[Kamil Wanzek](https://www.linkedin.com/in/kamil-wanzek/) -> Core Team Member, UX/UI Designer
+Founder -> [Jakub Andrzejewski](https://www.linkedin.com/in/jakub-andrzejewski/)
 
 <!-- ROADMAP -->
 ## Roadmap
