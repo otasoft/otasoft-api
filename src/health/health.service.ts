@@ -21,18 +21,22 @@ export class HealthService {
     private readonly configService: ConfigService,
   ) {}
 
-  @Cron(CronExpression.EVERY_30_MINUTES)
+  checkPing(): string {
+    return 'API Gateway is working correctly';
+  }
+
   checkDns() {
     return this.healthCheckService.check([
       () =>
         this.dnsHealthIndicator.pingCheck(
           'otasoft-api',
           this.configService.get<string>('CORE_URL'),
-          { timeout: 1000 },
+          { timeout: 3000, proxy: { host: '127.0.0.1', port: 443 } },
         ),
     ]);
   }
 
+  @Cron(CronExpression.EVERY_30_MINUTES)
   checkDisk() {
     return this.healthCheckService.check([
       () =>
