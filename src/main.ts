@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { SwaggerModule } from '@nestjs/swagger';
 import * as helmet from 'helmet';
 import * as rateLimit from 'express-rate-limit';
@@ -9,16 +9,12 @@ import * as passport from 'passport';
 
 import { AppModule } from './app.module';
 import { swaggerOptions } from './doc/swagger-options';
-import { rateLimitConfigObject } from './security/configs/rateLimitConfig';
-import { httpsOptions } from './security/configs/httpsOptions';
+import { rateLimitConfigObject, createRedisSession } from './security/configs';
 import { FrontendCookieGuard } from './security/guards/frontend-cookie.guard';
-import { createRedisSession } from './security/configs/redisSessionConfig';
 import { ExcludeNullInterceptor, TimeoutInterceptor } from './interceptors';
 
 (async function bootstrap() {
-  const app = process.env.SERVE_LOCAL_SSL
-    ? await NestFactory.create(AppModule, { httpsOptions })
-    : await NestFactory.create(AppModule);
+  const app: INestApplication = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe({ skipMissingProperties: true }));
   app.useGlobalInterceptors(
