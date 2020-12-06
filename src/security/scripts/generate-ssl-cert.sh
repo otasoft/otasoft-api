@@ -1,1 +1,0 @@
-openssl req -x509 -newkey rsa:4096 -sha256 -keyout ../secrets/private-key.pem -out ../secrets/public-cert.pem -days 365 -subj '/CN=localhost' -nodes

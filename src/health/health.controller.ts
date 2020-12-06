@@ -6,6 +6,11 @@ import { HealthService } from './health.service';
 export class HealthController {
   constructor(private readonly healthService: HealthService) {}
 
+  @Get()
+  checkPing(): string {
+    return this.healthService.checkPing();
+  }
+
   @Get('/check-dns')
   @HealthCheck()
   checkDns() {
