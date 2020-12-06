@@ -40,3 +40,5 @@ lerna-debug.log*
 # Public Certificate and Private Key
 /src/security/secrets/private-key.pem
 /src/security/secrets/public-cert.pem
+/src/security/secrets/private-key.key
+/src/security/secrets/public-cert.crt
