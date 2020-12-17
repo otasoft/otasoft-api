@@ -46,7 +46,7 @@
     "express-rate-limit": "^5.2.3",
     "express-session": "^1.17.1",
     "graphql": "^15.4.0",
-    "graphql-tools": "^7.0.1",
+    "graphql-tools": "^7.0.2",
     "helmet": "^4.2.0",
     "openid-client": "^4.2.1",
     "passport": "^0.4.1",
