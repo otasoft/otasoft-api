@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^7.6.5",
+    "@nestjs/bull": "^0.3.1",
     "@nestjs/config": "^0.6.1",
     "@nestjs/core": "^7.6.4",
     "@nestjs/graphql": "^7.9.0",
@@ -36,6 +37,7 @@
     "amqp-connection-manager": "^3.2.0",
     "amqplib": "^0.6.0",
     "apollo-server-express": "^2.19.1",
+    "bull": "^3.20.0",
     "cache-manager": "^3.4.0",
     "cache-manager-redis-store": "^2.0.0",
     "class-transformer": "^0.3.1",
@@ -63,6 +65,7 @@
     "@nestjs/cli": "^7.5.4",
     "@nestjs/schematics": "^7.2.5",
     "@nestjs/testing": "^7.6.4",
+    "@types/bull": "^3.14.4",
     "@types/express": "^4.17.9",
     "@types/jest": "26.0.19",
     "@types/node": "^14.14.16",
