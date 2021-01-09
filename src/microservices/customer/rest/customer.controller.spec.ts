@@ -1,6 +1,7 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
-import { connectMicroservice } from '../../microservice-connection/microservice-connection';
+
+import { createClientAsyncOptions } from '../../../utils/client';
 import { CustomerService } from '../customer.service';
 import { CustomerController } from './customer.controller';
 
@@ -11,8 +12,8 @@ describe('CustomerController', () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
         ClientsModule.registerAsync([
-          connectMicroservice('auth'),
-          connectMicroservice('customer'),
+          createClientAsyncOptions('auth'),
+          createClientAsyncOptions('customer'),
         ]),
       ],
       controllers: [CustomerController],

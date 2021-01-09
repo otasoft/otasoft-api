@@ -1,12 +1,12 @@
 /**
- * Interface for Microservice pattern
+ * Interface for message pattern used to send request to microservice
  *
  * - @property {string} role
  * - @property {string} cmd
  * - @property {*} metadata?
  *
  */
-export interface IMicroservicePattern {
+export interface IMessagePattern {
   role: string;
   cmd: string;
   metadata?: any;

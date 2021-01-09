@@ -1,10 +1,10 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { MicroserviceConnectionService } from '../../../../microservice-connection/microservice-connection.service';
 import { UserService } from '../../../services/user/user.service';
-import { connectMicroservice } from '../../../../microservice-connection/microservice-connection';
 import { UserController } from './user.controller';
+import { createClientAsyncOptions } from '../../../../../utils/client';
+import { UtilsModule } from '../../../../../utils/utils.module';
 
 describe('UserController', () => {
   let controller: UserController;
@@ -13,13 +13,14 @@ describe('UserController', () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
         ClientsModule.registerAsync([
-          connectMicroservice('auth'),
-          connectMicroservice('customer'),
-          connectMicroservice('mail'),
+          createClientAsyncOptions('auth'),
+          createClientAsyncOptions('customer'),
+          createClientAsyncOptions('mail'),
         ]),
+        UtilsModule,
       ],
       controllers: [UserController],
-      providers: [UserService, MicroserviceConnectionService],
+      providers: [UserService],
     }).compile();
 
     controller = module.get<UserController>(UserController);

@@ -7,7 +7,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { MicroserviceConnectionService } from '../../../../microservices/microservice-connection/microservice-connection.service';
+
 import {
   CreateActivityInput,
   UpdateActivityInput,
@@ -18,19 +18,20 @@ import { IUpdateActivity } from '../../interfaces/activity/update-activity.inter
 import { CreateActivityDto, UpdateActivityDto } from '../../rest/dto/activity';
 import { RestActivityModel } from '../../rest/models/activity/rest-activity.model';
 import { RestTextResponseModel } from '../../rest/models/rest-text-response.model';
+import { ClientService } from '../../../../utils/client';
 
 @Injectable()
 export class ActivityService {
   constructor(
     @Inject('CATALOG_MICROSERVICE')
     private readonly catalogClient: ClientProxy,
-    private readonly microserviceConnectionService: MicroserviceConnectionService,
+    private readonly clientService: ClientService,
   ) {}
 
   async getSingleActivity(
     id: number,
   ): Promise<RestActivityModel | GqlActivityModel> {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.catalogClient,
       { role: 'activity', cmd: 'getSingle' },
       id,
@@ -41,7 +42,7 @@ export class ActivityService {
   @CacheKey('all-activities')
   @CacheTTL(20)
   async getAllActivities(): Promise<RestActivityModel[] | GqlActivityModel[]> {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.catalogClient,
       { role: 'activity', cmd: 'getAll' },
       {},
@@ -51,7 +52,7 @@ export class ActivityService {
   async getActivitiesByQuery(
     query: string,
   ): Promise<RestActivityModel[] | GqlActivityModel[]> {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.catalogClient,
       { role: 'activity', cmd: 'getActivityByQuery' },
       query,
@@ -61,7 +62,7 @@ export class ActivityService {
   async createActivity(
     createActivityDto: CreateActivityDto | CreateActivityInput,
   ): Promise<RestActivityModel | GqlActivityModel> {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.catalogClient,
       { role: 'activity', cmd: 'create' },
       createActivityDto,
@@ -73,7 +74,7 @@ export class ActivityService {
     updateActivityDto: UpdateActivityDto | UpdateActivityInput,
   ): Promise<RestActivityModel | GqlActivityModel> {
     const updateActivityObject: IUpdateActivity = { id, updateActivityDto };
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.catalogClient,
       { role: 'activity', cmd: 'update' },
       updateActivityObject,
@@ -83,7 +84,7 @@ export class ActivityService {
   async deleteActivity(
     id: number,
   ): Promise<RestTextResponseModel | GqlTextResponseModel> {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.catalogClient,
       { role: 'activity', cmd: 'delete' },
       id,

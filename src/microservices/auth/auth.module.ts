@@ -3,21 +3,20 @@ import { ClientsModule } from '@nestjs/microservices';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 
-import { connectMicroservice } from '../microservice-connection/microservice-connection';
 import { SessionSerializer, OidcStrategyFactory } from './oidc';
-import { MicroserviceConnectionService } from '../microservice-connection/microservice-connection.service';
 import { AuthServices } from './services';
 import { AuthControllers } from './rest/controllers';
 import { AuthMutations } from './graphql/mutations';
 import { AuthQueries } from './graphql/queries';
 import { JwtRefreshTokenStrategy, JwtStrategy } from './strategies';
+import { createClientAsyncOptions } from '../../utils/client';
 
 @Module({
   imports: [
     ClientsModule.registerAsync([
-      connectMicroservice('auth'),
-      connectMicroservice('customer'),
-      connectMicroservice('mail'),
+      createClientAsyncOptions('auth'),
+      createClientAsyncOptions('customer'),
+      createClientAsyncOptions('mail'),
     ]),
     PassportModule,
     JwtModule.register({}),
@@ -26,12 +25,11 @@ import { JwtRefreshTokenStrategy, JwtStrategy } from './strategies';
   providers: [
     OidcStrategyFactory,
     SessionSerializer,
-    MicroserviceConnectionService,
+    JwtStrategy,
+    JwtRefreshTokenStrategy,
     ...AuthServices,
     ...AuthMutations,
     ...AuthQueries,
-    JwtStrategy,
-    JwtRefreshTokenStrategy,
   ],
 })
 export class AuthModule {}

@@ -8,12 +8,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
  *
  * @return {*}  {ClientsProviderAsyncOptions} - connection options for a microservice client
  */
-export const connectMicroservice = (
+export const createClientAsyncOptions = (
   microserviceName: string,
 ): ClientsProviderAsyncOptions => {
   const upperCaseMicroserviceName = microserviceName.toUpperCase();
 
-  const microserviceOptions: ClientsProviderAsyncOptions = {
+  const clientAsyncOptions: ClientsProviderAsyncOptions = {
     name: `${upperCaseMicroserviceName}_MICROSERVICE`,
     imports: [ConfigModule],
     inject: [ConfigService],
@@ -37,5 +37,5 @@ export const connectMicroservice = (
     }),
   };
 
-  return microserviceOptions;
+  return clientAsyncOptions;
 };

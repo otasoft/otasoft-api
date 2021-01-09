@@ -1,16 +1,20 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
-import { MicroserviceConnectionService } from '../../../../microservices/microservice-connection/microservice-connection.service';
-import { connectMicroservice } from '../../../microservice-connection/microservice-connection';
+
 import { FlightService } from './flight.service';
+import { createClientAsyncOptions } from '../../../../utils/client';
+import { UtilsModule } from '../../../../utils/utils.module';
 
 describe('FlightService', () => {
   let service: FlightService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ClientsModule.registerAsync([connectMicroservice('catalog')])],
-      providers: [FlightService, MicroserviceConnectionService],
+      imports: [
+        ClientsModule.registerAsync([createClientAsyncOptions('catalog')]),
+        UtilsModule,
+      ],
+      providers: [FlightService],
     }).compile();
 
     service = module.get<FlightService>(FlightService);

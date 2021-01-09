@@ -7,6 +7,7 @@ import { RedisCacheModule } from './cache/redis-cache.module';
 import { HealthModule } from './health/health.module';
 import { MicroservicesModules } from './microservices';
 import { BullQueueModule } from './queues/bull-queue.module';
+import { UtilsModule } from './utils/utils.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { BullQueueModule } from './queues/bull-queue.module';
     RedisCacheModule,
     BullQueueModule,
     HealthModule,
+    UtilsModule,
     ...MicroservicesModules,
   ],
 })
