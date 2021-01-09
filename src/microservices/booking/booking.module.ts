@@ -1,17 +1,18 @@
 import { Module } from '@nestjs/common';
-import { BookingController } from './rest/booking.controller';
-import { BookingService } from './booking.service';
 import { ClientsModule } from '@nestjs/microservices';
-import { connectMicroservice } from '../../utils/microservice-connection/microservice-connection';
+
+import { BookingService } from './booking.service';
+import { BookingController } from './rest/booking.controller';
 import { BookingMutationResolver } from './graphql/booking-mutation.resolver';
 import { BookingQueryResolver } from './graphql/booking-query.resolver';
 import { MicroserviceConnectionService } from '../../utils/microservice-connection/microservice-connection.service';
+import { createClientAsyncOptions } from '../../utils/client';
 
 @Module({
   imports: [
     ClientsModule.registerAsync([
-      connectMicroservice('auth'),
-      connectMicroservice('booking'),
+      createClientAsyncOptions('auth'),
+      createClientAsyncOptions('booking'),
     ]),
   ],
   controllers: [BookingController],
