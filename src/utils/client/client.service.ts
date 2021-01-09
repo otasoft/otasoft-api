@@ -13,7 +13,7 @@ export class ClientService {
    *
    * @return {*}  {Promise<any>} - returned response from a microservice or an adequate HTTP exception
   */
-  async sendRequest(
+  async sendMessageWithPayload(
     client: ClientProxy,
     messagePattern: IMessagePattern,
     payload: any,

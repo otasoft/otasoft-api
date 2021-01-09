@@ -1,4 +1,10 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 
-@Module({})
+import { ClientService } from './client';
+
+@Global()
+@Module({
+    providers: [ClientService],
+    exports: [ClientService],
+})
 export class UtilsModule {}
