@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { SendgridController } from './sendgrid.controller';
+import { ClientsModule } from '@nestjs/microservices';
+
+import { createClientAsyncOptions } from '../../../utils/client';
 import { SendgridService } from './services/sendgrid.service';
 
 @Module({
-  controllers: [SendgridController],
+  imports: [ClientsModule.registerAsync([createClientAsyncOptions('mail')])],
   providers: [SendgridService],
 })
 export class SendgridModule {}
