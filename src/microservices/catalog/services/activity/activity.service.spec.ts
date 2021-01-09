@@ -1,9 +1,9 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 import { RedisCacheModule } from '../../../../cache/redis-cache.module';
-import { connectMicroservice } from '../../../microservice-connection/microservice-connection';
+import { connectMicroservice } from '../../../../utils/microservice-connection/microservice-connection';
 import { ActivityService } from './activity.service';
-import { MicroserviceConnectionService } from '../../../microservice-connection/microservice-connection.service';
+import { MicroserviceConnectionService } from '../../../../utils/microservice-connection/microservice-connection.service';
 
 describe('ActivityService', () => {
   let service: ActivityService;

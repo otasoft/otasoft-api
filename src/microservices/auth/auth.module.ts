@@ -3,9 +3,9 @@ import { ClientsModule } from '@nestjs/microservices';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 
-import { connectMicroservice } from '../microservice-connection/microservice-connection';
+import { connectMicroservice } from '../../utils/microservice-connection/microservice-connection';
 import { SessionSerializer, OidcStrategyFactory } from './oidc';
-import { MicroserviceConnectionService } from '../microservice-connection/microservice-connection.service';
+import { MicroserviceConnectionService } from '../../utils/microservice-connection/microservice-connection.service';
 import { AuthServices } from './services';
 import { AuthControllers } from './rest/controllers';
 import { AuthMutations } from './graphql/mutations';

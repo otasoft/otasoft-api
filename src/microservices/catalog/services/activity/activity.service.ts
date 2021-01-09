@@ -7,7 +7,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { MicroserviceConnectionService } from '../../../../microservices/microservice-connection/microservice-connection.service';
+import { MicroserviceConnectionService } from '../../../../utils/microservice-connection/microservice-connection.service';
 import {
   CreateActivityInput,
   UpdateActivityInput,

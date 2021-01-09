@@ -1,9 +1,9 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CarsService } from '../../../services/cars/cars.service';
-import { connectMicroservice } from '../../../../microservice-connection/microservice-connection';
+import { connectMicroservice } from '../../../../../utils/microservice-connection/microservice-connection';
 import { CarsController } from './cars.controller';
-import { MicroserviceConnectionService } from '../../../../microservice-connection/microservice-connection.service';
+import { MicroserviceConnectionService } from '../../../../../utils/microservice-connection/microservice-connection.service';
 
 describe('CarsController', () => {
   let controller: CarsController;

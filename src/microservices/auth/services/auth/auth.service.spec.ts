@@ -1,8 +1,8 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { MicroserviceConnectionService } from '../../../microservice-connection/microservice-connection.service';
-import { connectMicroservice } from '../../../microservice-connection/microservice-connection';
+import { MicroserviceConnectionService } from '../../../../utils/microservice-connection/microservice-connection.service';
+import { connectMicroservice } from '../../../../utils/microservice-connection/microservice-connection';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {

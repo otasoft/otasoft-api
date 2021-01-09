@@ -9,7 +9,7 @@ import {
 import { ClientProxy } from '@nestjs/microservices';
 import { Request } from 'express';
 
-import { MicroserviceConnectionService } from '../../microservice-connection/microservice-connection.service';
+import { MicroserviceConnectionService } from '../../../utils/microservice-connection/microservice-connection.service';
 import { IAccessControl } from '../interfaces/access-control.interface';
 
 export class AccessControlGuard implements CanActivate {

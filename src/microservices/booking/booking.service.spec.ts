@@ -1,6 +1,6 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
-import { connectMicroservice } from '../microservice-connection/microservice-connection';
+import { connectMicroservice } from '../../utils/microservice-connection/microservice-connection';
 import { BookingService } from './booking.service';
 
 describe('BookingService', () => {

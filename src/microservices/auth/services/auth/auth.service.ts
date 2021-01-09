@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
-import { MicroserviceConnectionService } from '../../../../microservices/microservice-connection/microservice-connection.service';
+import { MicroserviceConnectionService } from '../../../../utils/microservice-connection/microservice-connection.service';
 import { AuthCredentialsInput } from '../../graphql/input';
 import { GqlAuthUser } from '../../graphql/models';
 import { UserModel } from '../../models';

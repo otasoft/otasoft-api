@@ -1,9 +1,9 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { MicroserviceConnectionService } from '../../../../microservice-connection/microservice-connection.service';
+import { MicroserviceConnectionService } from '../../../../../utils/microservice-connection/microservice-connection.service';
 import { UserService } from '../../../services/user/user.service';
-import { connectMicroservice } from '../../../../microservice-connection/microservice-connection';
+import { connectMicroservice } from '../../../../../utils/microservice-connection/microservice-connection';
 import { UserController } from './user.controller';
 
 describe('UserController', () => {

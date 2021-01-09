@@ -6,7 +6,7 @@ import { GqlTextResponseModel } from '../../graphql/models/gql-text-response.mod
 import { CreateHotelDto, UpdateHotelDto } from '../../rest/dto/hotel';
 import { RestHotelModel } from '../../rest/models/hotel/rest-hotel.model';
 import { RestTextResponseModel } from '../../rest/models/rest-text-response.model';
-import { MicroserviceConnectionService } from '../../../../microservices/microservice-connection/microservice-connection.service';
+import { MicroserviceConnectionService } from '../../../../utils/microservice-connection/microservice-connection.service';
 import { IUpdateHotel } from '../../interfaces/hotel/update-hotel.interface';
 
 @Injectable()

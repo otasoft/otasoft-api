@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { MicroserviceConnectionService } from '../../../../microservices/microservice-connection/microservice-connection.service';
+import { MicroserviceConnectionService } from '../../../../utils/microservice-connection/microservice-connection.service';
 import { CreateCarsInput, UpdateCarsInput } from '../../graphql/input/cars';
 import { GqlCarsModel } from '../../graphql/models/cars/gql-cars.model';
 import { GqlTextResponseModel } from '../../graphql/models/gql-text-response.model';

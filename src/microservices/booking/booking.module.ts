@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { BookingController } from './rest/booking.controller';
 import { BookingService } from './booking.service';
 import { ClientsModule } from '@nestjs/microservices';
-import { connectMicroservice } from '../microservice-connection/microservice-connection';
+import { connectMicroservice } from '../../utils/microservice-connection/microservice-connection';
 import { BookingMutationResolver } from './graphql/booking-mutation.resolver';
 import { BookingQueryResolver } from './graphql/booking-query.resolver';
-import { MicroserviceConnectionService } from '../microservice-connection/microservice-connection.service';
+import { MicroserviceConnectionService } from '../../utils/microservice-connection/microservice-connection.service';
 
 @Module({
   imports: [
