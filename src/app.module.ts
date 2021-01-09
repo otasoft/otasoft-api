@@ -17,8 +17,8 @@ import { UtilsModule } from './utils/utils.module';
     RedisCacheModule,
     BullQueueModule,
     HealthModule,
-    ...MicroservicesModules,
     UtilsModule,
+    ...MicroservicesModules,
   ],
 })
 export class AppModule {}

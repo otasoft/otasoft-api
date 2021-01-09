@@ -15,10 +15,6 @@ import { createClientAsyncOptions } from '../../utils/client';
     ]),
   ],
   controllers: [CustomerController],
-  providers: [
-    CustomerService,
-    CustomerQueryResolver,
-    CustomerMutationResolver,
-  ],
+  providers: [CustomerService, CustomerQueryResolver, CustomerMutationResolver],
 })
 export class CustomerModule {}

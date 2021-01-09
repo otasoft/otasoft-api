@@ -17,7 +17,7 @@ describe('AuthController', () => {
           createClientAsyncOptions('customer'),
           createClientAsyncOptions('mail'),
         ]),
-        UtilsModule
+        UtilsModule,
       ],
       controllers: [AuthController],
       providers: [AuthService],

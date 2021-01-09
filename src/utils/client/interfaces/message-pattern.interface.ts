@@ -7,8 +7,7 @@
  *
  */
 export interface IMessagePattern {
-    role: string;
-    cmd: string;
-    metadata?: any;
-  }
-  
+  role: string;
+  cmd: string;
+  metadata?: any;
+}

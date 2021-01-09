@@ -16,7 +16,7 @@ describe('BookingController', () => {
           createClientAsyncOptions('auth'),
           createClientAsyncOptions('booking'),
         ]),
-        UtilsModule
+        UtilsModule,
       ],
       controllers: [BookingController],
       providers: [BookingService],

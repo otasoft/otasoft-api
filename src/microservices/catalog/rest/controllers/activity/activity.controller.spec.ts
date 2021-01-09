@@ -15,7 +15,7 @@ describe('ActivityController', () => {
       imports: [
         ClientsModule.registerAsync([createClientAsyncOptions('catalog')]),
         RedisCacheModule,
-        UtilsModule
+        UtilsModule,
       ],
       controllers: [ActivityController],
       providers: [ActivityService],

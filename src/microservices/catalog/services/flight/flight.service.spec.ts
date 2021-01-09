@@ -10,7 +10,10 @@ describe('FlightService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ClientsModule.registerAsync([createClientAsyncOptions('catalog')]), UtilsModule],
+      imports: [
+        ClientsModule.registerAsync([createClientAsyncOptions('catalog')]),
+        UtilsModule,
+      ],
       providers: [FlightService],
     }).compile();
 

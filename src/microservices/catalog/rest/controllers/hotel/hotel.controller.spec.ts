@@ -11,7 +11,10 @@ describe('HotelController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ClientsModule.registerAsync([createClientAsyncOptions('catalog')]), UtilsModule],
+      imports: [
+        ClientsModule.registerAsync([createClientAsyncOptions('catalog')]),
+        UtilsModule,
+      ],
       controllers: [HotelController],
       providers: [HotelService],
     }).compile();

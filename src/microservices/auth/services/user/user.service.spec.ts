@@ -16,7 +16,7 @@ describe('UserService', () => {
           createClientAsyncOptions('customer'),
           createClientAsyncOptions('mail'),
         ]),
-        UtilsModule
+        UtilsModule,
       ],
       providers: [UserService],
     }).compile();

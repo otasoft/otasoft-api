@@ -14,7 +14,7 @@ describe('ActivityService', () => {
       imports: [
         ClientsModule.registerAsync([createClientAsyncOptions('catalog')]),
         RedisCacheModule,
-        UtilsModule
+        UtilsModule,
       ],
       providers: [ActivityService],
     }).compile();

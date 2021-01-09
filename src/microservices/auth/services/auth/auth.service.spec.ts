@@ -16,7 +16,7 @@ describe('AuthService', () => {
           createClientAsyncOptions('customer'),
           createClientAsyncOptions('mail'),
         ]),
-        UtilsModule
+        UtilsModule,
       ],
       providers: [AuthService],
     }).compile();

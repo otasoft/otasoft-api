@@ -10,10 +10,6 @@ import { createClientAsyncOptions } from '../../utils/client';
 @Module({
   imports: [ClientsModule.registerAsync([createClientAsyncOptions('catalog')])],
   controllers: [...CatalogControllers],
-  providers: [
-    ...CatalogServices,
-    ...CatalogMutations,
-    ...CatalogQueries,
-  ],
+  providers: [...CatalogServices, ...CatalogMutations, ...CatalogQueries],
 })
 export class CatalogModule {}

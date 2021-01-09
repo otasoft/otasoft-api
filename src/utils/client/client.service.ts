@@ -1,7 +1,7 @@
-import { HttpException, Injectable } from "@nestjs/common";
-import { ClientProxy } from "@nestjs/microservices";
+import { HttpException, Injectable } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
 
-import { IMessagePattern } from "./interfaces";
+import { IMessagePattern } from './interfaces';
 
 @Injectable()
 export class ClientService {
@@ -13,7 +13,7 @@ export class ClientService {
    * - @param {*} payload - data to send to the microservice client
    *
    * @return {*}  {Promise<any>} - returned response from a microservice or an adequate HTTP exception
-  */
+   */
   async sendMessageWithPayload(
     client: ClientProxy,
     messagePattern: IMessagePattern,

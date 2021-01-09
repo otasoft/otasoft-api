@@ -15,10 +15,6 @@ import { createClientAsyncOptions } from '../../utils/client';
     ]),
   ],
   controllers: [BookingController],
-  providers: [
-    BookingService,
-    BookingQueryResolver,
-    BookingMutationResolver,
-  ],
+  providers: [BookingService, BookingQueryResolver, BookingMutationResolver],
 })
 export class BookingModule {}

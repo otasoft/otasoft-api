@@ -17,7 +17,7 @@ describe('UserController', () => {
           createClientAsyncOptions('customer'),
           createClientAsyncOptions('mail'),
         ]),
-        UtilsModule
+        UtilsModule,
       ],
       controllers: [UserController],
       providers: [UserService],

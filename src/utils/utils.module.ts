@@ -4,7 +4,7 @@ import { ClientService } from './client';
 
 @Global()
 @Module({
-    providers: [ClientService],
-    exports: [ClientService],
+  providers: [ClientService],
+  exports: [ClientService],
 })
 export class UtilsModule {}
