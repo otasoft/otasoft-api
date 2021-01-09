@@ -10,4 +10,5 @@ export interface IMessagePattern {
   role: string;
   cmd: string;
   metadata?: any;
+  type?: string;
 }
