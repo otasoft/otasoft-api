@@ -1,25 +1,24 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
-import { MicroserviceConnectionService } from '../../../../utils/microservice-connection/microservice-connection.service';
 import { AuthCredentialsInput } from '../../graphql/input';
 import { GqlAuthUser } from '../../graphql/models';
-import { UserModel } from '../../models';
-import { AuthCredentialsDto } from '../../rest/dto/auth-credentials.dto';
+import { AuthCredentialsDto } from '../../rest/dto';
 import { RestAuthUser } from '../../rest/models';
+import { ClientService } from '../../../../utils/client';
 
 @Injectable()
 export class AuthService {
   constructor(
     @Inject('AUTH_MICROSERVICE')
     private readonly authClient: ClientProxy,
-    private readonly microserviceConnectionService: MicroserviceConnectionService,
+    private readonly clientService: ClientService,
   ) {}
 
   async signUp(
     authCredentialsData: AuthCredentialsDto | AuthCredentialsInput,
   ): Promise<GqlAuthUser | RestAuthUser> {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'auth', cmd: 'register' },
       authCredentialsData,
@@ -27,7 +26,7 @@ export class AuthService {
   }
 
   async signIn(authCredentialsData: AuthCredentialsDto | AuthCredentialsInput) {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'auth', cmd: 'login' },
       authCredentialsData,
@@ -35,7 +34,7 @@ export class AuthService {
   }
 
   async signOut(id: number): Promise<string[]> {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'auth', cmd: 'logout' },
       id,
@@ -43,7 +42,7 @@ export class AuthService {
   }
 
   async getCookieWithJwtAccessToken(id: number) {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'authorization', cmd: 'getCookieWithJwtAccessToken' },
       id,
@@ -51,7 +50,7 @@ export class AuthService {
   }
 
   async getAuthenticatedUser(email: string, password: string) {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'authorization', cmd: 'getAuthenticatedUser' },
       { email, password },

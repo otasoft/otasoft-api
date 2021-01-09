@@ -5,21 +5,21 @@ import { RestAuthChangeResponse, RestAuthUserId } from '../../rest/models';
 import { GqlAuthChangeResponse, GqlAuthUserId } from '../../graphql/models';
 import { AuthEmailDto, ChangePasswordDto } from '../../rest/dto';
 import { AuthEmailInput, ChangePasswordInput } from '../../graphql/input';
-import { MicroserviceConnectionService } from '../../../../utils/microservice-connection/microservice-connection.service';
 import { GetRefreshUserDto } from '../../rest/dto';
+import { ClientService } from '../../../../utils/client';
 
 @Injectable()
 export class UserService {
   constructor(
     @Inject('AUTH_MICROSERVICE')
     private readonly authClient: ClientProxy,
-    private readonly microserviceConnectionService: MicroserviceConnectionService,
+    private readonly clientService: ClientService,
   ) {}
 
   async getUserId(
     authEmailData: AuthEmailDto | AuthEmailInput,
   ): Promise<GqlAuthUserId | RestAuthUserId> {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'user', cmd: 'getId' },
       authEmailData,
@@ -27,7 +27,7 @@ export class UserService {
   }
 
   async getUserById(id: number) {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'user', cmd: 'getUserById' },
       id,
@@ -37,7 +37,7 @@ export class UserService {
   async getUserIfRefreshTokenMatches(
     getRefreshUserData: GetRefreshUserDto,
   ): Promise<GqlAuthUserId | RestAuthUserId> {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'user', cmd: 'getUserIfRefreshTokenMatches' },
       getRefreshUserData,
@@ -52,7 +52,7 @@ export class UserService {
       throw new BadRequestException(
         'New password cannot be the same as the old password',
       );
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'user', cmd: 'changePassword' },
       { id, changePasswordData },
@@ -62,7 +62,7 @@ export class UserService {
   async deleteUserAccount(
     id: number,
   ): Promise<GqlAuthChangeResponse | RestAuthChangeResponse> {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'user', cmd: 'deleteAccount' },
       id,
@@ -70,7 +70,7 @@ export class UserService {
   }
 
   async confirmAccountCreation(token: string): Promise<boolean> {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'user', cmd: 'confirmAccount' },
       token,
@@ -78,7 +78,7 @@ export class UserService {
   }
 
   async removeRefreshToken(userId: number): Promise<boolean> {
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'user', cmd: 'removeRefreshToken' },
       userId,

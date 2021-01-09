@@ -2,21 +2,20 @@ import {
   BadRequestException,
   CanActivate,
   ExecutionContext,
-  HttpException,
   Inject,
   UnauthorizedException,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { Request } from 'express';
 
-import { MicroserviceConnectionService } from '../../../utils/microservice-connection/microservice-connection.service';
+import { ClientService } from '../../../utils/client';
 import { IAccessControl } from '../interfaces/access-control.interface';
 
 export class AccessControlGuard implements CanActivate {
   constructor(
     @Inject('AUTH_MICROSERVICE')
     private readonly authClient: ClientProxy,
-    private readonly microserviceConnectionService: MicroserviceConnectionService,
+    private readonly clientService: ClientService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -40,7 +39,7 @@ export class AccessControlGuard implements CanActivate {
       id,
     };
 
-    return this.microserviceConnectionService.sendRequestToClient(
+    return this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'authorization', cmd: 'checkAccess' },
       accessControlObject,
