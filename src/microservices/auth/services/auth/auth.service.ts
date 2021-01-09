@@ -31,7 +31,7 @@ export class AuthService {
 
     this.sendgridService.sendConfirmCreateAccountEmail({
       customer_email: authCredentialsData.email,
-      token: '1234',
+      token: (await authUser).token,
     });
 
     return authUser;
