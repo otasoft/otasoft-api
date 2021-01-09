@@ -6,6 +6,8 @@ import { GqlAuthUser } from '../../graphql/models';
 import { AuthCredentialsDto } from '../../rest/dto';
 import { RestAuthUser } from '../../rest/models';
 import { ClientService } from '../../../../utils/client';
+import { SendgridService } from '../../../mail/sendgrid/services/sendgrid.service';
+import { SendEmailDto } from 'src/microservices/mail/sendgrid/dto';
 
 @Injectable()
 export class AuthService {
@@ -13,16 +15,21 @@ export class AuthService {
     @Inject('AUTH_MICROSERVICE')
     private readonly authClient: ClientProxy,
     private readonly clientService: ClientService,
+    private readonly sendgridService: SendgridService,
   ) {}
 
   async signUp(
     authCredentialsData: AuthCredentialsDto | AuthCredentialsInput,
   ): Promise<GqlAuthUser | RestAuthUser> {
-    return this.clientService.sendMessageWithPayload(
+    const authUser: Promise<GqlAuthUser | RestAuthUser> = this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'auth', cmd: 'register' },
       authCredentialsData,
     );
+
+    this.sendgridService.sendConfirmCreateAccountEmail({ customer_email: authCredentialsData.email, token: '1234' });
+
+    return authUser;
   }
 
   async signIn(authCredentialsData: AuthCredentialsDto | AuthCredentialsInput) {

@@ -10,16 +10,14 @@ import { AuthMutations } from './graphql/mutations';
 import { AuthQueries } from './graphql/queries';
 import { JwtRefreshTokenStrategy, JwtStrategy } from './strategies';
 import { createClientAsyncOptions } from '../../utils/client';
+import { MailModule } from '../mail/mail.module';
 
 @Module({
   imports: [
-    ClientsModule.registerAsync([
-      createClientAsyncOptions('auth'),
-      createClientAsyncOptions('customer'),
-      createClientAsyncOptions('mail'),
-    ]),
+    ClientsModule.registerAsync([createClientAsyncOptions('auth')]),
     PassportModule,
     JwtModule.register({}),
+    MailModule,
   ],
   controllers: [...AuthControllers],
   providers: [

@@ -7,5 +7,6 @@ import { SendgridService } from './services/sendgrid.service';
 @Module({
   imports: [ClientsModule.registerAsync([createClientAsyncOptions('mail')])],
   providers: [SendgridService],
+  exports: [SendgridService],
 })
 export class SendgridModule {}

@@ -8,5 +8,6 @@ import { SendgridModule } from './sendgrid/sendgrid.module';
     SendgridModule,
     UtilsModule
   ],
+  exports: [SendgridModule]
 })
 export class MailModule {}
