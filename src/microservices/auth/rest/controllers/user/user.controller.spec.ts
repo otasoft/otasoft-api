@@ -1,10 +1,10 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { MicroserviceConnectionService } from '../../../../../utils/microservice-connection/microservice-connection.service';
 import { UserService } from '../../../services/user/user.service';
 import { UserController } from './user.controller';
 import { createClientAsyncOptions } from '../../../../../utils/client';
+import { UtilsModule } from '../../../../../utils/utils.module';
 
 describe('UserController', () => {
   let controller: UserController;
@@ -17,9 +17,10 @@ describe('UserController', () => {
           createClientAsyncOptions('customer'),
           createClientAsyncOptions('mail'),
         ]),
+        UtilsModule
       ],
       controllers: [UserController],
-      providers: [UserService, MicroserviceConnectionService],
+      providers: [UserService],
     }).compile();
 
     controller = module.get<UserController>(UserController);

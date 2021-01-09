@@ -3,17 +3,17 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { CarsService } from '../../../services/cars/cars.service';
 import { CarsController } from './cars.controller';
-import { MicroserviceConnectionService } from '../../../../../utils/microservice-connection/microservice-connection.service';
 import { createClientAsyncOptions } from '../../../../../utils/client';
+import { UtilsModule } from '../../../../../utils/utils.module';
 
 describe('CarsController', () => {
   let controller: CarsController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ClientsModule.registerAsync([createClientAsyncOptions('catalog')])],
+      imports: [ClientsModule.registerAsync([createClientAsyncOptions('catalog')]), UtilsModule],
       controllers: [CarsController],
-      providers: [CarsService, MicroserviceConnectionService],
+      providers: [CarsService],
     }).compile();
 
     controller = module.get<CarsController>(CarsController);

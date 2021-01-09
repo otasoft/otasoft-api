@@ -5,7 +5,6 @@ import { BookingService } from './booking.service';
 import { BookingController } from './rest/booking.controller';
 import { BookingMutationResolver } from './graphql/booking-mutation.resolver';
 import { BookingQueryResolver } from './graphql/booking-query.resolver';
-import { MicroserviceConnectionService } from '../../utils/microservice-connection/microservice-connection.service';
 import { createClientAsyncOptions } from '../../utils/client';
 
 @Module({
@@ -20,7 +19,6 @@ import { createClientAsyncOptions } from '../../utils/client';
     BookingService,
     BookingQueryResolver,
     BookingMutationResolver,
-    MicroserviceConnectionService,
   ],
 })
 export class BookingModule {}

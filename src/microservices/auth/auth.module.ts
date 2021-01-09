@@ -4,7 +4,6 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 
 import { SessionSerializer, OidcStrategyFactory } from './oidc';
-import { MicroserviceConnectionService } from '../../utils/microservice-connection/microservice-connection.service';
 import { AuthServices } from './services';
 import { AuthControllers } from './rest/controllers';
 import { AuthMutations } from './graphql/mutations';
@@ -26,12 +25,11 @@ import { createClientAsyncOptions } from '../../utils/client';
   providers: [
     OidcStrategyFactory,
     SessionSerializer,
-    MicroserviceConnectionService,
+    JwtStrategy,
+    JwtRefreshTokenStrategy,
     ...AuthServices,
     ...AuthMutations,
     ...AuthQueries,
-    JwtStrategy,
-    JwtRefreshTokenStrategy,
   ],
 })
 export class AuthModule {}

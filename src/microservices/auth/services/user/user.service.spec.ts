@@ -1,9 +1,9 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { MicroserviceConnectionService } from '../../../../utils/microservice-connection/microservice-connection.service';
 import { UserService } from './user.service';
 import { createClientAsyncOptions } from '../../../../utils/client';
+import { UtilsModule } from '../../../../utils/utils.module';
 
 describe('UserService', () => {
   let service: UserService;
@@ -16,8 +16,9 @@ describe('UserService', () => {
           createClientAsyncOptions('customer'),
           createClientAsyncOptions('mail'),
         ]),
+        UtilsModule
       ],
-      providers: [UserService, MicroserviceConnectionService],
+      providers: [UserService],
     }).compile();
 
     service = module.get<UserService>(UserService);
