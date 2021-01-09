@@ -4,6 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { createClientAsyncOptions } from '../../../../utils/client';
 import { UtilsModule } from '../../../../utils/utils.module';
+import { MailModule } from '../../../mail/mail.module';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -11,12 +12,9 @@ describe('AuthService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
-        ClientsModule.registerAsync([
-          createClientAsyncOptions('auth'),
-          createClientAsyncOptions('customer'),
-          createClientAsyncOptions('mail'),
-        ]),
+        ClientsModule.registerAsync([createClientAsyncOptions('auth')]),
         UtilsModule,
+        MailModule,
       ],
       providers: [AuthService],
     }).compile();

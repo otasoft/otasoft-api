@@ -21,13 +21,18 @@ export class AuthService {
   async signUp(
     authCredentialsData: AuthCredentialsDto | AuthCredentialsInput,
   ): Promise<GqlAuthUser | RestAuthUser> {
-    const authUser: Promise<GqlAuthUser | RestAuthUser> = this.clientService.sendMessageWithPayload(
+    const authUser: Promise<
+      GqlAuthUser | RestAuthUser
+    > = this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'auth', cmd: 'register' },
       authCredentialsData,
     );
 
-    this.sendgridService.sendConfirmCreateAccountEmail({ customer_email: authCredentialsData.email, token: '1234' });
+    this.sendgridService.sendConfirmCreateAccountEmail({
+      customer_email: authCredentialsData.email,
+      token: '1234',
+    });
 
     return authUser;
   }
