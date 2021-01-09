@@ -32,4 +32,24 @@ export class SendgridService {
             sendEmailDto
         )
     }
+
+    async sendConfirmBookingEmail(
+        sendEmailDto: SendEmailDto
+    ): Promise<SuccessResponseModel> {
+        return this.clientService.sendMessageWithPayload(
+            this.mailClient,
+            { role: 'mail', cmd: 'send', type: 'confirm-booking' },
+            sendEmailDto
+        )
+    }
+
+    async sendDeleteAccountMail(
+        sendEmailDto: SendEmailDto
+    ): Promise<SuccessResponseModel> {
+        return this.clientService.sendMessageWithPayload(
+            this.mailClient,
+            { role: 'mail', cmd: 'send', type: 'delete-account' },
+            sendEmailDto
+        )
+    }
 }
