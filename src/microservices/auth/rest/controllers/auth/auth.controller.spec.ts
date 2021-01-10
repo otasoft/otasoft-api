@@ -5,6 +5,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { AuthController } from './auth.controller';
 import { createClientAsyncOptions } from '../../../../../utils/client';
 import { UtilsModule } from '../../../../../utils/utils.module';
+import { MailModule } from '../../../../mail/mail.module';
 
 describe('AuthController', () => {
   let controller: AuthController;
@@ -12,12 +13,9 @@ describe('AuthController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
-        ClientsModule.registerAsync([
-          createClientAsyncOptions('auth'),
-          createClientAsyncOptions('customer'),
-          createClientAsyncOptions('mail'),
-        ]),
+        ClientsModule.registerAsync([createClientAsyncOptions('auth')]),
         UtilsModule,
+        MailModule,
       ],
       controllers: [AuthController],
       providers: [AuthService],
