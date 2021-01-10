@@ -7,6 +7,7 @@ import { AuthEmailDto, ChangePasswordDto } from '../../rest/dto';
 import { AuthEmailInput, ChangePasswordInput } from '../../graphql/input';
 import { GetRefreshUserDto } from '../../rest/dto';
 import { ClientService } from '../../../../utils/client';
+import { SendgridService } from '../../../mail/sendgrid/services/sendgrid.service';
 
 @Injectable()
 export class UserService {
@@ -14,6 +15,7 @@ export class UserService {
     @Inject('AUTH_MICROSERVICE')
     private readonly authClient: ClientProxy,
     private readonly clientService: ClientService,
+    private readonly sendgridService: SendgridService,
   ) {}
 
   async getUserId(
@@ -83,5 +85,23 @@ export class UserService {
       { role: 'user', cmd: 'removeRefreshToken' },
       userId,
     );
+  }
+
+  async forgotPassword(
+    authEmailData: AuthEmailDto | AuthEmailInput
+  ): Promise<GqlAuthChangeResponse | RestAuthChangeResponse> {
+
+    const forgotPasswordToken: Promise<string> = this.clientService.sendMessageWithPayload(
+      this.authClient,
+      { role: 'user', cmd: 'forgot-password' },
+      authEmailData,
+    );
+
+    const response = this.sendgridService.sendForgotPasswordEmail({
+      customer_email: authEmailData.email,
+      token: await forgotPasswordToken,
+    });
+
+    return response;
   }
 }

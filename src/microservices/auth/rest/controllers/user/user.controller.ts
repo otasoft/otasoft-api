@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Post,
   Put,
   Query,
   UseGuards,
@@ -48,5 +49,12 @@ export class UserController {
     @Param('token') token: string,
   ): Promise<boolean> {
     return this.userService.confirmAccountCreation(token);
+  }
+
+  @Post('/forgot-password')
+  async forgotPassword(
+    @Body() authEmailDto: AuthEmailDto,
+  ): Promise<RestAuthChangeResponse> {
+    return this.userService.forgotPassword(authEmailDto);
   }
 }

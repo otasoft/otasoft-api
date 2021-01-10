@@ -2,7 +2,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import { AccessControlGuard } from '../../guards/access-control.guard';
-import { ChangePasswordInput } from '../input';
+import { AuthEmailInput, ChangePasswordInput } from '../input';
 import { GqlAuthChangeResponse, GqlAuthUser } from '../models';
 import { UserService } from '../../services/user/user.service';
 
@@ -25,5 +25,12 @@ export class UserMutationResolver {
     @Args('id') id: number,
   ): Promise<GqlAuthChangeResponse> {
     return this.userService.deleteUserAccount(id);
+  }
+
+  @Mutation((returns) => GqlAuthChangeResponse)
+  async forgotPassword(
+    @Args('email') authEmailInput: AuthEmailInput,
+  ): Promise<GqlAuthChangeResponse> {
+    return this.userService.forgotPassword(authEmailInput);
   }
 }
