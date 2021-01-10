@@ -90,6 +90,7 @@ type Mutation {
   refresh: GqlUserModel!
   changeUserPassword(changePasswordInput: ChangePasswordInput!, id: Float!): GqlAuthChangeResponse!
   deleteUserAccount(id: Float!): GqlAuthChangeResponse!
+  forgotPassword(email: AuthEmailInput!): GqlAuthChangeResponse!
   createBooking(createBookingData: CreateBookingInput!): GqlBooking!
   deleteBooking(id: Float!): Boolean!
   updateBooking(updateBookingData: CreateBookingInput!, id: Float!): GqlBooking!
