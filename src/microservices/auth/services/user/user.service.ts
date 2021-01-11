@@ -3,8 +3,8 @@ import { ClientProxy } from '@nestjs/microservices';
 
 import { RestAuthChangeResponse, RestAuthUserId } from '../../rest/models';
 import { GqlAuthChangeResponse, GqlAuthUserId } from '../../graphql/models';
-import { AuthEmailDto, ChangePasswordDto } from '../../rest/dto';
-import { AuthEmailInput, ChangePasswordInput } from '../../graphql/input';
+import { AuthEmailDto, ChangePasswordDto, SetNewPasswordDto } from '../../rest/dto';
+import { AuthEmailInput, ChangePasswordInput, SetNewPasswordInput } from '../../graphql/input';
 import { GetRefreshUserDto } from '../../rest/dto';
 import { ClientService } from '../../../../utils/client';
 import { SendgridService } from '../../../mail/sendgrid/services/sendgrid.service';
@@ -100,6 +100,21 @@ export class UserService {
       customer_email: authEmailData.email,
       token: await forgotPasswordToken,
     });
+
+    return response;
+  }
+
+  async setNewPassword(
+    token: string,
+    setNewPasswordData: SetNewPasswordDto | SetNewPasswordInput
+  ): Promise<GqlAuthChangeResponse | RestAuthChangeResponse> {
+    const user_email = this.clientService.sendMessageWithPayload(
+      this.authClient,
+      { role: 'user', cmd: 'set-new-password' },
+      { forgotPasswordToken: token, newPassword: setNewPasswordData.new_password }
+    );
+    
+    const response = this.sendgridService.sendSetNewPasswordEmail({ customer_email: await user_email });
 
     return response;
   }
