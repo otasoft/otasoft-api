@@ -33,6 +33,16 @@ export class SendgridService {
     );
   }
 
+  async sendSetNewPasswordEmail(
+    sendEmailDto: SendEmailDto,
+  ): Promise<SuccessResponseModel> {
+    return this.clientService.sendMessageWithPayload(
+      this.mailClient,
+      { role: 'mail', cmd: 'send', type: 'set-new-password' },
+      sendEmailDto,
+    );
+  }
+
   async sendConfirmBookingEmail(
     sendEmailDto: SendEmailDto,
   ): Promise<SuccessResponseModel> {
