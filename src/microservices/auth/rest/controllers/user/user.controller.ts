@@ -13,6 +13,7 @@ import {
 import { AccessControlGuard } from '../../../guards/access-control.guard';
 import { UserService } from '../../../services/user/user.service';
 import { AuthEmailDto, ChangePasswordDto } from '../../dto';
+import { SetNewPasswordDto } from '../../dto/set-new-password.dto';
 import { RestAuthChangeResponse, RestAuthUserId } from '../../models';
 
 @Controller('user')
@@ -56,5 +57,13 @@ export class UserController {
     @Body() authEmailDto: AuthEmailDto,
   ): Promise<RestAuthChangeResponse> {
     return this.userService.forgotPassword(authEmailDto);
+  }
+
+  @Post('/set-new-password/:token')
+  async setNewPassword(
+    @Param('token') token: string,
+    @Body() setNewPasswordDto: SetNewPasswordDto,
+  ): Promise<RestAuthChangeResponse> {
+    return this.userService.setNewPassword(token, setNewPasswordDto);
   }
 }
