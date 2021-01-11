@@ -88,9 +88,8 @@ export class UserService {
   }
 
   async forgotPassword(
-    authEmailData: AuthEmailDto | AuthEmailInput
+    authEmailData: AuthEmailDto | AuthEmailInput,
   ): Promise<GqlAuthChangeResponse | RestAuthChangeResponse> {
-
     const forgotPasswordToken: Promise<string> = this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'user', cmd: 'forgot-password' },

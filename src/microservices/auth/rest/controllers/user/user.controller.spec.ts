@@ -5,6 +5,7 @@ import { UserService } from '../../../services/user/user.service';
 import { UserController } from './user.controller';
 import { createClientAsyncOptions } from '../../../../../utils/client';
 import { UtilsModule } from '../../../../../utils/utils.module';
+import { MailModule } from '../../../../mail/mail.module';
 
 describe('UserController', () => {
   let controller: UserController;
@@ -18,6 +19,7 @@ describe('UserController', () => {
           createClientAsyncOptions('mail'),
         ]),
         UtilsModule,
+        MailModule,
       ],
       controllers: [UserController],
       providers: [UserService],
