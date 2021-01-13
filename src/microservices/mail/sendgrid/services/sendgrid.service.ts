@@ -23,12 +23,22 @@ export class SendgridService {
     );
   }
 
-  async sendResetPasswordEmail(
+  async sendForgotPasswordEmail(
     sendEmailDto: SendEmailDto,
   ): Promise<SuccessResponseModel> {
     return this.clientService.sendMessageWithPayload(
       this.mailClient,
-      { role: 'mail', cmd: 'send', type: 'reset-password' },
+      { role: 'mail', cmd: 'send', type: 'forgot-password' },
+      sendEmailDto,
+    );
+  }
+
+  async sendSetNewPasswordEmail(
+    sendEmailDto: SendEmailDto,
+  ): Promise<SuccessResponseModel> {
+    return this.clientService.sendMessageWithPayload(
+      this.mailClient,
+      { role: 'mail', cmd: 'send', type: 'set-new-password' },
       sendEmailDto,
     );
   }

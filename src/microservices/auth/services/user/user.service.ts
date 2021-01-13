@@ -3,10 +3,11 @@ import { ClientProxy } from '@nestjs/microservices';
 
 import { RestAuthChangeResponse, RestAuthUserId } from '../../rest/models';
 import { GqlAuthChangeResponse, GqlAuthUserId } from '../../graphql/models';
-import { AuthEmailDto, ChangePasswordDto } from '../../rest/dto';
-import { AuthEmailInput, ChangePasswordInput } from '../../graphql/input';
+import { AuthEmailDto, ChangePasswordDto, SetNewPasswordDto } from '../../rest/dto';
+import { AuthEmailInput, ChangePasswordInput, SetNewPasswordInput } from '../../graphql/input';
 import { GetRefreshUserDto } from '../../rest/dto';
 import { ClientService } from '../../../../utils/client';
+import { SendgridService } from '../../../mail/sendgrid/services/sendgrid.service';
 
 @Injectable()
 export class UserService {
@@ -14,6 +15,7 @@ export class UserService {
     @Inject('AUTH_MICROSERVICE')
     private readonly authClient: ClientProxy,
     private readonly clientService: ClientService,
+    private readonly sendgridService: SendgridService,
   ) {}
 
   async getUserId(
@@ -83,5 +85,37 @@ export class UserService {
       { role: 'user', cmd: 'removeRefreshToken' },
       userId,
     );
+  }
+
+  async forgotPassword(
+    authEmailData: AuthEmailDto | AuthEmailInput,
+  ): Promise<GqlAuthChangeResponse | RestAuthChangeResponse> {
+    const forgotPasswordToken: Promise<string> = this.clientService.sendMessageWithPayload(
+      this.authClient,
+      { role: 'user', cmd: 'forgot-password' },
+      authEmailData,
+    );
+
+    const response = this.sendgridService.sendForgotPasswordEmail({
+      customer_email: authEmailData.email,
+      token: await forgotPasswordToken,
+    });
+
+    return response;
+  }
+
+  async setNewPassword(
+    token: string,
+    setNewPasswordData: SetNewPasswordDto | SetNewPasswordInput
+  ): Promise<GqlAuthChangeResponse | RestAuthChangeResponse> {
+    const user_email = this.clientService.sendMessageWithPayload(
+      this.authClient,
+      { role: 'user', cmd: 'set-new-password' },
+      { forgotPasswordToken: token, newPassword: setNewPasswordData.new_password }
+    );
+    
+    const response = this.sendgridService.sendSetNewPasswordEmail({ customer_email: await user_email });
+
+    return response;
   }
 }

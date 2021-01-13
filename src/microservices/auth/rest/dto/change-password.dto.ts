@@ -3,7 +3,6 @@ import {
   MinLength,
   MaxLength,
   Matches,
-  IsEmail,
 } from 'class-validator';
 
 export class ChangePasswordDto {
