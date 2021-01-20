@@ -1331,11 +1331,6 @@
     "@types/jsonwebtoken" "8.5.0"
     jsonwebtoken "8.5.1"
 
-"@nestjs/mapped-types@0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/mapped-types/-/mapped-types-0.1.1.tgz#2fa9ff0f1ddbe66d5d1c80ae59df21c0ed0d1361"
-  integrity sha512-FROYmmZ2F+tLJP/aHasPMX40iUHQPtEAzOAcfAp21baebN5iLUrdyTuphoXjIqubfPFSwtnAGpVm9kLJjQ//ig==
-
 "@nestjs/mapped-types@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@nestjs/mapped-types/-/mapped-types-0.2.0.tgz#f4a688a40bcd2a51dcc6309b55e7278c7d166d35"
@@ -10321,7 +10316,7 @@ webidl-conversions@^6.1.0:
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-6.1.0.tgz#9111b4d7ea80acd40f5270d666621afa78b69514"
   integrity sha512-qBIvFLGiBpLjfwmYAaHPXsn+ho5xZnGvyGvsarywGNc8VyQJUMHJ8OBKGGrPER0okBeMDaan4mNBlgBROxuI8w==
 
-webpack-node-externals@2.5.2:
+webpack-node-externals@2.5.2, webpack-node-externals@^2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/webpack-node-externals/-/webpack-node-externals-2.5.2.tgz#178e017a24fec6015bc9e672c77958a6afac861d"
   integrity sha512-aHdl/y2N7PW2Sx7K+r3AxpJO+aDMcYzMQd60Qxefq3+EwhewSbTBqNumOsCE1JsCUNoyfGj5465N0sSf6hc/5w==

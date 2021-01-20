@@ -13,6 +13,8 @@ import { rateLimitConfigObject, createRedisSession } from './security/configs';
 import { FrontendCookieGuard } from './security/guards/frontend-cookie.guard';
 import { ExcludeNullInterceptor, TimeoutInterceptor } from './interceptors';
 
+declare const module: any;
+
 (async function bootstrap() {
   const app: INestApplication = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
@@ -38,4 +40,9 @@ import { ExcludeNullInterceptor, TimeoutInterceptor } from './interceptors';
   }
 
   await app.listen(3000);
+
+  if(module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+  }
 })();
