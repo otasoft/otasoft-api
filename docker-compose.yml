@@ -36,8 +36,8 @@ services:
         - 443:443
     volumes:
         - ${PWD}/nginx/dev:/etc/nginx/conf.d/
-        - ./src/security/secrets/public-cert.crt:/etc/ssl/public-cert.crt
-        - ./src/security/secrets/private-key.key:/etc/ssl/private-key.key
+        - ./config/public-cert.crt:/etc/ssl/public-cert.crt
+        - ./config/private-key.key:/etc/ssl/private-key.key
     ulimits:
       nproc: 65535
     networks:
