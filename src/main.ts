@@ -8,7 +8,7 @@ import * as cookieParser from 'cookie-parser';
 import * as passport from 'passport';
 
 import { AppModule } from './app.module';
-import { swaggerOptions } from './doc/swagger-options';
+import { swaggerOptions } from './doc/config';
 import { rateLimitConfigObject, createRedisSession } from './security/configs';
 import { FrontendCookieGuard } from './security/guards/frontend-cookie.guard';
 import { ExcludeNullInterceptor, TimeoutInterceptor } from './interceptors';
