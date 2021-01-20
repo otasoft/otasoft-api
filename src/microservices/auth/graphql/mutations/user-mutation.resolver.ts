@@ -2,7 +2,11 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import { AccessControlGuard } from '../../guards/access-control.guard';
-import { AuthEmailInput, ChangePasswordInput, SetNewPasswordInput } from '../input';
+import {
+  AuthEmailInput,
+  ChangePasswordInput,
+  SetNewPasswordInput,
+} from '../input';
 import { GqlAuthChangeResponse, GqlAuthUser } from '../models';
 import { UserService } from '../../services/user/user.service';
 

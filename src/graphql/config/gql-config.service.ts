@@ -1,6 +1,7 @@
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
 import { join } from 'path';
-import { MicroservicesModules } from 'src/microservices';
+
+import { MicroservicesModules } from '../../microservices';
 
 export class GqlConfigService implements GqlOptionsFactory {
   createGqlOptions(): GqlModuleOptions {

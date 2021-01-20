@@ -3,7 +3,6 @@ import { IsString, Matches, MaxLength, MinLength } from 'class-validator';
 
 @InputType()
 export class SetNewPasswordInput {
-
   @Field()
   @IsString()
   @MinLength(8)
