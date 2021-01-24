@@ -29,7 +29,7 @@ declare const module: any;
   app.use(createRedisSession());
   app.use(passport.initialize());
   app.use(passport.session());
-  app.useLogger(csurf());
+  app.use(csurf());
 
   if (process.env.ENVIRONMENT === 'development') {
     const document = SwaggerModule.createDocument(app, swaggerOptions);
