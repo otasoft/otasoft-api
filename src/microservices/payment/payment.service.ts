@@ -14,41 +14,29 @@ export class PaymentService {
   ) {}
 
   async getPaymentById(id: number): Promise<RestPayment> {
-    try {
-      return this.clientService.sendMessageWithPayload(
-        this.paymentClient,
-        { role: 'payment', cmd: 'get' },
-        id,
-      );
-    } catch (error) {
-      throw new HttpException(error.errorStatus, error.statusCode);
-    }
+    return this.clientService.sendMessageWithPayload(
+      this.paymentClient,
+      { role: 'payment', cmd: 'get' },
+      id,
+    );
   }
 
   async createPayment(newPayment: CreatePaymentDto): Promise<RestPayment> {
-    try {
-      return this.clientService.sendMessageWithPayload(
-        this.paymentClient,
-        { role: 'payment', cmd: 'create' },
-        newPayment,
-      );
-    } catch (error) {
-      throw new HttpException(error.errorStatus, error.statusCode);
-    }
+    return this.clientService.sendMessageWithPayload(
+      this.paymentClient,
+      { role: 'payment', cmd: 'create' },
+      newPayment,
+    );
   }
 
   async updatePayment(
     id: number,
     updatedPayment: CreatePaymentDto,
   ): Promise<RestPayment> {
-    try {
-      return this.clientService.sendMessageWithPayload(
-        this.paymentClient,
-        { role: 'payment', cmd: 'update' },
-        { id, updatedPayment },
-      );
-    } catch (error) {
-      throw new HttpException(error.errorStatus, error.statusCode);
-    }
+    return this.clientService.sendMessageWithPayload(
+      this.paymentClient,
+      { role: 'payment', cmd: 'update' },
+      { id, updatedPayment },
+    );
   }
 }
