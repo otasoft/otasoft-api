@@ -10,9 +10,15 @@ import * as csurf from 'csurf';
 
 import { AppModule } from './app.module';
 import { swaggerOptions } from './doc/config';
-import { rateLimitConfigObject, createRedisSession } from './security/configs';
-import { FrontendCookieGuard } from './security/guards/frontend-cookie.guard';
+import {
+  rateLimitConfigObject,
+  createRedisSession,
+  csurfConfigOptions,
+} from './security/configs';
+import { FrontendCookieGuard } from './security/guards';
 import { ExcludeNullInterceptor, TimeoutInterceptor } from './interceptors';
+import { csrfMiddleware } from './security/middlewares';
+import { ErrorFilter } from './filters';
 
 declare const module: any;
 
@@ -24,12 +30,17 @@ declare const module: any;
     new ExcludeNullInterceptor(),
     new TimeoutInterceptor(),
   );
+  app.useGlobalFilters(new ErrorFilter());
 
-  app.use(cookieParser());
+  app.use(cookieParser(process.env.COOKIE_SECRET));
   app.use(createRedisSession());
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(csurf());
+
+  const csrf = csurf(csurfConfigOptions);
+  app.use((req, res, next) => {
+    csrfMiddleware(req, res, next, csrf);
+  });
 
   if (process.env.ENVIRONMENT === 'development') {
     const document = SwaggerModule.createDocument(app, swaggerOptions);
@@ -43,7 +54,7 @@ declare const module: any;
 
   await app.listen(3000);
 
-  if(module.hot) {
+  if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => app.close());
   }
