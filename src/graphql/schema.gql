@@ -66,6 +66,7 @@ type GqlCustomer {
 type GqlPayment {
   id: ID!
   customer_id: Float!
+  booking_id: Float!
 }
 
 type Query {
@@ -96,9 +97,9 @@ type Mutation {
   refresh: GqlUserModel!
   changeUserPassword(changePasswordInput: ChangePasswordInput!, id: Float!): GqlAuthChangeResponse!
   deleteUserAccount(id: Float!): GqlAuthChangeResponse!
-  createBooking(createPaymentData: CreatePaymentInput!): GqlPayment!
+  createBooking(createBookingData: CreateBookingInput!): GqlBooking!
   deleteBooking(id: Float!): Boolean!
-  updateBooking(updatePaymentData: CreatePaymentInput!, id: Float!): GqlPayment!
+  updateBooking(updateBookingData: CreateBookingInput!, id: Float!): GqlBooking!
   createActivity(createActivityInput: CreateActivityInput!): GqlActivityModel!
   updateActivity(updateActivityInput: UpdateActivityInput!, id: Float!): GqlActivityModel!
   deleteActivity(id: Float!): GqlTextResponseModel!
@@ -114,7 +115,8 @@ type Mutation {
   createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
   removeCustomerProfile(id: Float!): Boolean!
   updateCustomerProfile(updateCustomerProfileData: UpdateCustomerProfileInput!, id: Float!): GqlCustomer!
-  deletePayment(id: Float!): Boolean!
+  createPayment(createPaymentData: CreatePaymentInput!): GqlPayment!
+  updatePayment(updatePaymentData: CreatePaymentInput!, id: Float!): GqlPayment!
 }
 
 input AuthCredentialsInput {
@@ -127,7 +129,7 @@ input ChangePasswordInput {
   new_password: String!
 }
 
-input CreatePaymentInput {
+input CreateBookingInput {
   customer_id: Float!
 }
 
@@ -179,4 +181,9 @@ input CreateCustomerProfileInput {
 input UpdateCustomerProfileInput {
   first_name: String!
   last_name: String!
+}
+
+input CreatePaymentInput {
+  customer_id: Float!
+  booking_id: Float!
 }
