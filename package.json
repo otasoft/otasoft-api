@@ -22,8 +22,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs/common": "^7.6.5",
     "@nestjs/bull": "^0.3.1",
+    "@nestjs/common": "^7.6.5",
     "@nestjs/config": "^0.6.1",
     "@nestjs/core": "^7.6.5",
     "@nestjs/graphql": "^7.9.2",
@@ -46,6 +46,7 @@
     "compression": "^1.7.4",
     "connect-redis": "^5.0.0",
     "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
     "express-rate-limit": "^5.2.3",
     "express-session": "^1.17.1",
     "graphql": "^15.4.0",
