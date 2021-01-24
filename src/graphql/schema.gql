@@ -91,21 +91,22 @@ type Mutation {
   changeUserPassword(changePasswordInput: ChangePasswordInput!, id: Float!): GqlAuthChangeResponse!
   deleteUserAccount(id: Float!): GqlAuthChangeResponse!
   forgotPassword(email: AuthEmailInput!): GqlAuthChangeResponse!
+  setNewPassword(setNewPasswordInput: SetNewPasswordInput!, token: String!): GqlAuthChangeResponse!
   createBooking(createBookingData: CreateBookingInput!): GqlBooking!
   deleteBooking(id: Float!): Boolean!
   updateBooking(updateBookingData: CreateBookingInput!, id: Float!): GqlBooking!
   createActivity(createActivityInput: CreateActivityInput!): GqlActivityModel!
   updateActivity(updateActivityInput: UpdateActivityInput!, id: Float!): GqlActivityModel!
   deleteActivity(id: Float!): GqlTextResponseModel!
+  createHotel(createHotelInput: CreateHotelInput!): GqlHotelModel!
+  updateHotel(updateHotelInput: UpdateHotelInput!, id: Float!): GqlHotelModel!
+  deleteHotel(id: Float!): GqlTextResponseModel!
   createCars(createCarsInput: CreateCarsInput!): GqlCarsModel!
   updateCars(updateCarsInput: UpdateCarsInput!, id: Float!): GqlCarsModel!
   deleteCars(id: Float!): GqlTextResponseModel!
   createFlight(createFlightInput: CreateFlightInput!): GqlFlightModel!
   updateFlight(updateFlightInput: UpdateFlightInput!, id: Float!): GqlFlightModel!
   deleteFlight(id: Float!): GqlTextResponseModel!
-  createHotel(createHotelInput: CreateHotelInput!): GqlHotelModel!
-  updateHotel(updateHotelInput: UpdateHotelInput!, id: Float!): GqlHotelModel!
-  deleteHotel(id: Float!): GqlTextResponseModel!
   createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
   removeCustomerProfile(id: Float!): Boolean!
   updateCustomerProfile(updateCustomerProfileData: UpdateCustomerProfileInput!, id: Float!): GqlCustomer!
@@ -121,6 +122,10 @@ input ChangePasswordInput {
   new_password: String!
 }
 
+input SetNewPasswordInput {
+  new_password: String!
+}
+
 input CreateBookingInput {
   customer_id: Float!
 }
@@ -131,6 +136,16 @@ input CreateActivityInput {
 }
 
 input UpdateActivityInput {
+  name: String!
+  description: String!
+}
+
+input CreateHotelInput {
+  name: String!
+  description: String!
+}
+
+input UpdateHotelInput {
   name: String!
   description: String!
 }
@@ -151,16 +166,6 @@ input CreateFlightInput {
 }
 
 input UpdateFlightInput {
-  name: String!
-  description: String!
-}
-
-input CreateHotelInput {
-  name: String!
-  description: String!
-}
-
-input UpdateHotelInput {
   name: String!
   description: String!
 }
