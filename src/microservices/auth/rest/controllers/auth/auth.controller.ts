@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 
 import { RestJwtAuthGuard, RestJwtRefreshGuard } from '../../guards';
-import { RestCurrentUser } from '../../decorators';
+import { RestCurrentUser, RestCsrfToken } from '../../decorators';
 import { AuthCredentialsDto } from '../../dto';
 import { RestAuthChangeResponse, RestAuthUser } from '../../models';
 import { IRequestWithUser } from '../../interfaces';
@@ -25,8 +25,11 @@ export class AuthController {
 
   @UseGuards(RestJwtAuthGuard)
   @Get()
-  authenticate(@RestCurrentUser() user: UserModel) {
-    return user;
+  authenticate(@RestCurrentUser() user: UserModel, @RestCsrfToken() csrfToken) {
+    return {
+      user,
+      csrfToken,
+    };
   }
 
   @Post('/signup')
