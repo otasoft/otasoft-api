@@ -1,7 +1,7 @@
 import { Inject, Injectable, HttpException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
-import { ClientService } from 'src/utils/client';
+import { ClientService } from '../../utils/client';
 import { CreatePaymentDto } from './rest/dto';
 import { RestPayment } from './rest/models/payment-rest';
 
