@@ -6,6 +6,7 @@ import * as rateLimit from 'express-rate-limit';
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import * as passport from 'passport';
+import * as csurf from 'csurf';
 
 import { AppModule } from './app.module';
 import { swaggerOptions } from './doc/config';
@@ -28,6 +29,7 @@ declare const module: any;
   app.use(createRedisSession());
   app.use(passport.initialize());
   app.use(passport.session());
+  app.useLogger(csurf());
 
   if (process.env.ENVIRONMENT === 'development') {
     const document = SwaggerModule.createDocument(app, swaggerOptions);
