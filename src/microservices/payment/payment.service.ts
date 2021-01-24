@@ -2,6 +2,8 @@ import { Inject, Injectable, HttpException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
 import { ClientService } from '../../utils/client';
+import { CreatePaymentInput } from './graphql/input';
+import { GqlPayment } from './graphql/models';
 import { CreatePaymentDto } from './rest/dto';
 import { RestPayment } from './rest/models/payment-rest';
 
@@ -13,7 +15,7 @@ export class PaymentService {
     private readonly clientService: ClientService,
   ) {}
 
-  async getPaymentById(id: number): Promise<RestPayment> {
+  async getPaymentById(id: number): Promise<RestPayment | GqlPayment> {
     return this.clientService.sendMessageWithPayload(
       this.paymentClient,
       { role: 'payment', cmd: 'get' },
@@ -21,7 +23,9 @@ export class PaymentService {
     );
   }
 
-  async createPayment(newPayment: CreatePaymentDto): Promise<RestPayment> {
+  async createPayment(
+    newPayment: CreatePaymentDto | CreatePaymentInput,
+  ): Promise<RestPayment | GqlPayment> {
     return this.clientService.sendMessageWithPayload(
       this.paymentClient,
       { role: 'payment', cmd: 'create' },
@@ -31,8 +35,8 @@ export class PaymentService {
 
   async updatePayment(
     id: number,
-    updatedPayment: CreatePaymentDto,
-  ): Promise<RestPayment> {
+    updatedPayment: CreatePaymentDto | CreatePaymentInput,
+  ): Promise<RestPayment | GqlPayment> {
     return this.clientService.sendMessageWithPayload(
       this.paymentClient,
       { role: 'payment', cmd: 'update' },
