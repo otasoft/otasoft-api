@@ -14,12 +14,6 @@ export class PaymentQueryResolver {
   async getPayment(
     @Args('id', { type: () => Int }) id: number,
   ): Promise<GqlPayment> {
-    const payment = await this.paymentService.getPaymentById(id);
-
-    if (!payment) {
-      throw new NotFoundException('Payment with that id does not exist');
-    }
-
-    return payment;
+    return this.paymentService.getPaymentById(id);
   }
 }
