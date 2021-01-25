@@ -1,3 +1,3 @@
 export enum ErrorCodeEnum {
-    InvalidCsrfToken = 'EBADCSRFTOKEN',
+  InvalidCsrfToken = 'EBADCSRFTOKEN',
 }
