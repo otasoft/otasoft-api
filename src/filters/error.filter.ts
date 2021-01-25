@@ -6,6 +6,11 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 
+import { validateServerError } from './helpers';
+
+/**
+ * A Nest.js filter that catches errors throws appriopriate exceptions
+ */
 @Catch()
 export class ErrorFilter implements ExceptionFilter {
   catch(error, host: ArgumentsHost) {
@@ -16,14 +21,9 @@ export class ErrorFilter implements ExceptionFilter {
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
     if (status === HttpStatus.INTERNAL_SERVER_ERROR) {
-      let message = error.stack;
-      if (error.code === 'EBADCSRFTOKEN') {
-        return response.status(403).send({
-          errorStatus: 'Invalid CSRF token',
-          statusCode: 403,
-        });
-      }
-      return response.status(status).send(message);
+      const { code, message } = validateServerError(error.code);
+
+      return response.status(code).send(message);
     }
   }
 }

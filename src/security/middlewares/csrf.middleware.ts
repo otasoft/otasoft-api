@@ -4,6 +4,11 @@ import { NextFunction, Request, Response } from 'express';
 //(i.e. creating new content, changing password)
 const includedRoutes = ['change-user-password'];
 
+/**
+ * A middleware wrapper for CSRF (csurf) middleware.
+ * Checks if a current route should be validated with CSRF Token or handled normally.
+ * Uses `includedRoutes` array to check the routes
+ */
 export const csrfMiddleware = (
   req: Request,
   res: Response,
