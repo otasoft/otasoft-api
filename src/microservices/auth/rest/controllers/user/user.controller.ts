@@ -12,9 +12,9 @@ import {
 
 import { AccessControlGuard } from '../../../guards/access-control.guard';
 import { UserService } from '../../../services/user/user.service';
-import { AuthEmailDto, ChangePasswordDto } from '../../dto';
+import { AuthCredentialsDto, AuthEmailDto, ChangePasswordDto } from '../../dto';
 import { SetNewPasswordDto } from '../../dto/set-new-password.dto';
-import { RestAuthChangeResponse, RestAuthUserId } from '../../models';
+import { RestAuthChangeResponse, RestAuthUser, RestAuthUserId } from '../../models';
 
 @Controller('user')
 export class UserController {
@@ -26,6 +26,11 @@ export class UserController {
     @Query('email') email: AuthEmailDto,
   ): Promise<RestAuthUserId> {
     return this.userService.getUserId(email);
+  }
+
+  @Get('/get-authenticated-user')
+  async getAuthenticatedUser(authCredentialsDto: AuthCredentialsDto): Promise<RestAuthUser> {
+    return this.userService.getAuthenticatedUser(authCredentialsDto);
   }
 
   @UseGuards(AccessControlGuard)
