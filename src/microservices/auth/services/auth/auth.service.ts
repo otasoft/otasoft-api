@@ -7,7 +7,6 @@ import { AuthCredentialsDto } from '../../rest/dto';
 import { RestAuthUser } from '../../rest/models';
 import { ClientService } from '../../../../utils/client';
 import { SendgridService } from '../../../mail/sendgrid/services/sendgrid.service';
-import { SendEmailDto } from 'src/microservices/mail/sendgrid/dto';
 
 @Injectable()
 export class AuthService {
@@ -58,14 +57,6 @@ export class AuthService {
       this.authClient,
       { role: 'authorization', cmd: 'getCookieWithJwtAccessToken' },
       id,
-    );
-  }
-
-  async getAuthenticatedUser(email: string, password: string) {
-    return this.clientService.sendMessageWithPayload(
-      this.authClient,
-      { role: 'authorization', cmd: 'getAuthenticatedUser' },
-      { email, password },
     );
   }
 }
