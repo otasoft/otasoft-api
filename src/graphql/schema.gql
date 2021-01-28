@@ -67,6 +67,7 @@ type Query {
   getUserId(email: AuthEmailInput!): GqlAuthUserId!
   confirmAccountCreation(token: String!): Boolean!
   authenticate: GqlUserModel!
+  getAuthenticatedUser(authCredentialsInput: AuthCredentialsInput!): GqlAuthUser!
   getBooking(id: Int!): GqlBooking!
   getSingleActivity(id: Float!): GqlActivityModel!
   getAllActivities: GqlActivityModel!
@@ -81,6 +82,11 @@ type Query {
 
 input AuthEmailInput {
   email: String!
+}
+
+input AuthCredentialsInput {
+  email: String!
+  password: String!
 }
 
 type Mutation {
@@ -110,11 +116,6 @@ type Mutation {
   createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
   removeCustomerProfile(id: Float!): Boolean!
   updateCustomerProfile(updateCustomerProfileData: UpdateCustomerProfileInput!, id: Float!): GqlCustomer!
-}
-
-input AuthCredentialsInput {
-  email: String!
-  password: String!
 }
 
 input ChangePasswordInput {
