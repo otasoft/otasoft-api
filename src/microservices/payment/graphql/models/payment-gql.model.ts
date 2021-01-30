@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { IsNumber } from 'class-validator';
+import { IsDate, IsNumber } from 'class-validator';
 
 @ObjectType()
 export class GqlPayment {
@@ -8,9 +8,9 @@ export class GqlPayment {
 
   @Field()
   @IsNumber()
-  customer_id: number;
+  booking_id: number;
 
   @Field()
-  @IsNumber()
-  booking_id: number;
+  @IsDate()
+  date: Date;
 }

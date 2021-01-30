@@ -8,8 +8,5 @@ export class RestPayment {
   date: Date;
 
   @IsNumber()
-  customer_id: number;
-
-  @IsNumber()
   booking_id: number;
 }
