@@ -6,15 +6,19 @@ import { PaymentController } from './rest/payment.controller';
 import { PaymentMutationResolver } from './graphql/payment-mutation.resolver';
 import { PaymentQueryResolver } from './graphql/payment-query.resolver';
 import { createClientAsyncOptions } from '../../utils/client';
+import { BookingModule } from '../booking/booking.module';
+import { BookingService } from '../booking/booking.service';
 
 @Module({
   imports: [
     ClientsModule.registerAsync([
       createClientAsyncOptions('auth'),
       createClientAsyncOptions('payment'),
+      createClientAsyncOptions('booking'),
     ]),
+    BookingModule,
   ],
   controllers: [PaymentController],
-  providers: [PaymentService, PaymentQueryResolver, PaymentMutationResolver],
+  providers: [PaymentService, PaymentQueryResolver, PaymentMutationResolver, BookingService],
 })
 export class PaymentModule {}
