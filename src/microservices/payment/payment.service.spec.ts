@@ -3,6 +3,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { UtilsModule } from '../..//utils/utils.module';
 import { createClientAsyncOptions } from '../../utils/client';
+import { BookingModule } from '../booking/booking.module';
+import { BookingService } from '../booking/booking.service';
 import { PaymentService } from './payment.service';
 
 describe('PaymentService', () => {
@@ -14,10 +16,12 @@ describe('PaymentService', () => {
         ClientsModule.registerAsync([
           createClientAsyncOptions('auth'),
           createClientAsyncOptions('payment'),
+          createClientAsyncOptions('booking'),
         ]),
         UtilsModule,
+        BookingModule
       ],
-      providers: [PaymentService],
+      providers: [PaymentService, BookingService],
     }).compile();
 
     service = module.get<PaymentService>(PaymentService);

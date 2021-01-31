@@ -5,6 +5,8 @@ import { PaymentService } from '../payment.service';
 import { PaymentController } from './payment.controller';
 import { createClientAsyncOptions } from '../../../utils/client';
 import { UtilsModule } from '../../../utils/utils.module';
+import { BookingModule } from '../../../microservices/booking/booking.module';
+import { BookingService } from '../../../microservices/booking/booking.service';
 
 describe('PaymentController', () => {
   let controller: PaymentController;
@@ -15,11 +17,13 @@ describe('PaymentController', () => {
         ClientsModule.registerAsync([
           createClientAsyncOptions('auth'),
           createClientAsyncOptions('payment'),
+          createClientAsyncOptions('booking'),
         ]),
         UtilsModule,
+        BookingModule
       ],
       controllers: [PaymentController],
-      providers: [PaymentService],
+      providers: [PaymentService, BookingService],
     }).compile();
 
     controller = module.get<PaymentController>(PaymentController);
