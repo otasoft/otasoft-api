@@ -5,9 +5,5 @@ import { IsNumber } from 'class-validator';
 export class CreatePaymentInput {
   @Field()
   @IsNumber()
-  customer_id: number;
-
-  @Field()
-  @IsNumber()
   booking_id: number;
 }
