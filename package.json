@@ -40,7 +40,7 @@
     "bull": "^3.20.0",
     "cache-manager": "^3.4.0",
     "cache-manager-redis-store": "^2.0.0",
-    "class-transformer": "^0.3.1",
+    "class-transformer": "^0.3.2",
     "class-validator": "^0.13.0",
     "compression": "^1.7.4",
     "connect-redis": "^5.0.0",
