@@ -7,14 +7,14 @@ export class HealthController {
   constructor(private readonly healthService: HealthService) {}
 
   @Get()
-  checkPing(): string {
-    return this.healthService.checkPing();
+  checkHealth(): string {
+    return this.healthService.checkHealth();
   }
 
-  @Get('/check-dns')
+  @Get('/check-ping')
   @HealthCheck()
-  checkDns() {
-    return this.healthService.checkDns();
+  checkPing() {
+    return this.healthService.checkPing();
   }
 
   @Get('/check-disk')

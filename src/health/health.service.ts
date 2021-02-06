@@ -4,8 +4,8 @@ import { Transport } from '@nestjs/microservices';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import {
   DiskHealthIndicator,
-  DNSHealthIndicator,
   HealthCheckService,
+  HttpHealthIndicator,
   MemoryHealthIndicator,
   MicroserviceHealthIndicator,
 } from '@nestjs/terminus';
@@ -14,21 +14,21 @@ import {
 export class HealthService {
   constructor(
     private readonly healthCheckService: HealthCheckService,
-    private readonly dnsHealthIndicator: DNSHealthIndicator,
+    private readonly httpHealthIndicator: HttpHealthIndicator,
     private readonly diskHealthIndicator: DiskHealthIndicator,
     private readonly memoryHealthIndicator: MemoryHealthIndicator,
     private readonly microserviceHealthIndicator: MicroserviceHealthIndicator,
     private readonly configService: ConfigService,
   ) {}
 
-  checkPing(): string {
+  checkHealth(): string {
     return 'API Gateway is working correctly';
   }
 
-  checkDns() {
+  checkPing() {
     return this.healthCheckService.check([
       () =>
-        this.dnsHealthIndicator.pingCheck(
+        this.httpHealthIndicator.pingCheck(
           'otasoft-api',
           this.configService.get<string>('CORE_URL'),
           { timeout: 3000, proxy: { host: '127.0.0.1', port: 443 } },
