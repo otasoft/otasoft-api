@@ -25,7 +25,7 @@ Otasoft Core is a Nest.js based booking engine for Online Travel Agencies (OTA's
 * Works great with both REST and GraphQL
 * Each microservice is a separate project(repo) that allows distributed development teams to work seamlessly
 * Modules are separate entities, so you can choose which services you would like to use in your system
-* Connect any modern frontend application. By default, we have Nuxt (Vue.js) and Gatsby (React.js) frontends already implemented and ready to use.
+* Connect any modern frontend application. By default, we have Nuxt (Vue.js) and Next.js (React.js) frontends already implemented and ready to use.
 
 Otasoft projects are and always will be open source (MIT Licence). Anyone can use and support the project. The project is currently in the development phase.
 
@@ -33,6 +33,7 @@ Otasoft projects are and always will be open source (MIT Licence). Anyone can us
 ## Table of Contents
 
 * [Getting Started](#getting-started)
+* [Documentation](#documentation)
 * [Architecture](#architecture)
 * [Layers](#layers)
 * [Core Team](#core-team)
@@ -74,6 +75,29 @@ yarn start:dev
 ```
 
 When running graphql playground remember to add `"request.credentials": "same-origin"` line to your playground settings. This way, you will be able to use cookie based authentication in GQL playground.
+
+<!-- Documentation -->
+## Documentation
+
+To generate REST Swagger documentation just run the following script:
+
+```
+yarn docs
+```
+
+To generate GraphQL schema and docs just run the project with:
+```
+yarn start:dev
+```
+
+And go to:
+```
+http://localhost:3000/graphql
+
+or
+
+https://api.otasoft.org/graphql -> If you have Nginx Reverse Proxy running and HTTPS certificate
+```
 
 ## Architecture
  
