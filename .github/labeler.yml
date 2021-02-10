@@ -9,8 +9,8 @@ source:
 
 # Add 'microservices' label to any change to src/microservices files
 microservices:
-- src/microservices/*
+- src/microservices/**/*
 
 # Add 'ci' label to any change to continuos integration files inside .github folder
 ci:
-- .github/*
+- .github/**/*
