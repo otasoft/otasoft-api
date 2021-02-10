@@ -10,6 +10,17 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
+    "incremental": true,
+    "moduleResolution": "node",
+    "paths": {
+      "@infrastructure/*": ["src/item/infrastructure/*"],
+      "@auth/*": ["src/microservices/auth/*"],
+      "@booking/*": ["src/microservices/booking/*"],
+      "@catalog/*": ["src/microservices/catalog/*"],
+      "@customer/*": ["src/microservices/customer/*"],
+      "@mail/*": ["src/microservices/mail/*"],
+      "@utils/*": ["src/utils/*"],
+      "@test/*": ["test/*"]
+    }
   }
 }

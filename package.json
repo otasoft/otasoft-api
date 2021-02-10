@@ -101,6 +101,24 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "@auth/(.*)": "<rootDir>/microservices/auth/$1",
+      "@booking/(.*)": "<rootDir>/microservices/booking/$1",
+      "@catalog/(.*)": "<rootDir>/microservices/catalog/$1",
+      "@customer/(.*)": "<rootDir>/microservices/customer/$1",
+      "@mail/(.*)": "<rootDir>/microservices/mail/$1",
+      "@utils/(.*)": "<rootDir>/utils/$1",
+      "@test/(.*)": "<rootDir>/../test/$1"
+    }
+  },
+  "_moduleAliases": {
+    "@infrastructure": "dist/item/infrastructure",
+    "@auth": "dist/microservices/auth",
+    "@booking": "dist/microservices/booking",
+    "@catalog": "dist/microservices/catalog",
+    "@customer": "dist/microservices/customer",
+    "@mail": "dist/microservices/mail",
+    "@utils": "dist/utils"
   }
 }
