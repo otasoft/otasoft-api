@@ -1,0 +1,20 @@
+# Add 'repo' label to any root file changes
+repo:
+  - ./*
+
+# Add 'test' label to any change to *.spec.js files within the source dir and test folder
+test:
+  - src/**/*.spec.js
+  - test/**/*.spec.js
+
+# Add 'source' label to any change to src files within the source dir EXCEPT for the microservices sub-folder
+source:
+- any: ['src/**/*', '!src/microservices/*']
+
+# Add 'microservices' label to any change to src/microservices files
+microservices:
+- src/microservices/**/*
+
+# Add 'ci' label to any change to continuos integration files inside .github folder
+ci:
+- .github/**/*
