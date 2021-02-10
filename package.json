@@ -51,6 +51,7 @@
     "graphql": "^15.5.0",
     "graphql-tools": "^7.0.2",
     "helmet": "^4.4.1",
+    "module-alias": "^2.2.2",
     "openid-client": "^4.4.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
@@ -100,6 +101,24 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "@auth/(.*)": "<rootDir>/microservices/auth/$1",
+      "@booking/(.*)": "<rootDir>/microservices/booking/$1",
+      "@catalog/(.*)": "<rootDir>/microservices/catalog/$1",
+      "@customer/(.*)": "<rootDir>/microservices/customer/$1",
+      "@mail/(.*)": "<rootDir>/microservices/mail/$1",
+      "@utils/(.*)": "<rootDir>/utils/$1",
+      "@test/(.*)": "<rootDir>/../test/$1"
+    }
+  },
+  "_moduleAliases": {
+    "@infrastructure": "dist/item/infrastructure",
+    "@auth": "dist/microservices/auth",
+    "@booking": "dist/microservices/booking",
+    "@catalog": "dist/microservices/catalog",
+    "@customer": "dist/microservices/customer",
+    "@mail": "dist/microservices/mail",
+    "@utils": "dist/utils"
   }
 }

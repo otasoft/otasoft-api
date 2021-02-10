@@ -5,7 +5,7 @@ import { OfferController } from './rest/controllers';
 import { OfferService } from './services';
 import { OfferMutationResolver } from './graphql/mutations';
 import { OfferQueryResolver } from './graphql/queries';
-import { createClientAsyncOptions } from '../../utils/client';
+import { createClientAsyncOptions } from '@utils/client';
 
 @Module({
   imports: [ClientsModule.registerAsync([createClientAsyncOptions('catalog')])],

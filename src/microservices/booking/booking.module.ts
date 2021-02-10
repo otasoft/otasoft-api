@@ -5,7 +5,7 @@ import { BookingService } from './booking.service';
 import { BookingController } from './rest/booking.controller';
 import { BookingMutationResolver } from './graphql/booking-mutation.resolver';
 import { BookingQueryResolver } from './graphql/booking-query.resolver';
-import { createClientAsyncOptions } from '../../utils/client';
+import { createClientAsyncOptions } from '@utils/client';
 
 @Module({
   imports: [

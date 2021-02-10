@@ -8,8 +8,8 @@ import {
 import { ClientProxy } from '@nestjs/microservices';
 import { Request } from 'express';
 
-import { ClientService } from '../../../utils/client';
-import { IAccessControl } from '../interfaces/access-control.interface';
+import { ClientService } from '@utils/client';
+import { IAccessControl } from '../interfaces';
 
 export class AccessControlGuard implements CanActivate {
   constructor(

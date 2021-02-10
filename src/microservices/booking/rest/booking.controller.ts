@@ -14,7 +14,7 @@ import {
 import { BookingService } from '../booking.service';
 import { RestBooking } from './models/booking-rest';
 import { CreateBookingDto } from './dto/create-booking.dto';
-import { AccessControlGuard } from '../../auth/guards/access-control.guard';
+import { AccessControlGuard } from '@auth/guards/access-control.guard';
 
 @Controller('booking')
 export class BookingController {

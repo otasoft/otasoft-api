@@ -16,6 +16,7 @@ import {
   AuthEmailDto,
   ChangePasswordDto,
   SetNewPasswordDto,
+  GetRefreshUserDto
 } from '../../rest/dto';
 import {
   AuthCredentialsInput,
@@ -23,9 +24,8 @@ import {
   ChangePasswordInput,
   SetNewPasswordInput,
 } from '../../graphql/input';
-import { GetRefreshUserDto } from '../../rest/dto';
-import { ClientService } from '../../../../utils/client';
-import { SendgridService } from '../../../mail/sendgrid/services/sendgrid.service';
+import { ClientService } from '@utils/client';
+import { SendgridService } from '@mail/sendgrid/services/sendgrid.service';
 
 @Injectable()
 export class UserService {

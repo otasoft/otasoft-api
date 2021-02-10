@@ -5,8 +5,8 @@ import { AuthCredentialsInput } from '../../graphql/input';
 import { GqlAuthUser } from '../../graphql/models';
 import { AuthCredentialsDto } from '../../rest/dto';
 import { RestAuthUser } from '../../rest/models';
-import { ClientService } from '../../../../utils/client';
-import { SendgridService } from '../../../mail/sendgrid/services/sendgrid.service';
+import { ClientService } from '@utils/client';
+import { SendgridService } from '@mail/sendgrid/services/sendgrid.service';
 
 @Injectable()
 export class AuthService {
