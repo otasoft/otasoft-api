@@ -1,14 +1,14 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { ActivityService } from '../../services';
-import { ActivityController } from './activity.controller';
+import { OfferService } from '../../services';
+import { OfferController } from './offer.controller';
 import { RedisCacheModule } from '../../../../cache/redis-cache.module';
 import { createClientAsyncOptions } from '../../../../utils/client';
 import { UtilsModule } from '../../../../utils/utils.module';
 
-describe('ActivityController', () => {
-  let controller: ActivityController;
+describe('OfferController', () => {
+  let controller: OfferController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -17,11 +17,11 @@ describe('ActivityController', () => {
         RedisCacheModule,
         UtilsModule,
       ],
-      controllers: [ActivityController],
-      providers: [ActivityService],
+      controllers: [OfferController],
+      providers: [OfferService],
     }).compile();
 
-    controller = module.get<ActivityController>(ActivityController);
+    controller = module.get<OfferController>(OfferController);
   });
 
   it('should be defined', () => {

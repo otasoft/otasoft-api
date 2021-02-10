@@ -1,6 +1,6 @@
 import { IsInt, IsString } from 'class-validator';
 
-export class RestActivityModel {
+export class RestOfferModel {
   @IsInt()
   activity_id: number;
 

@@ -1,1 +1,1 @@
-export * from './activity-query.resolver';
+export * from './offer-query.resolver';

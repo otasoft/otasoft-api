@@ -1,1 +1,1 @@
-export * from './activity-mutation.resolver';
+export * from './offer-mutation.resolver';

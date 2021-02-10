@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class GqlActivityModel {
+export class GqlOfferModel {
   @Field((type) => ID)
   activity_id: number;
 

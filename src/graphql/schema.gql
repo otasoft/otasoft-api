@@ -29,7 +29,7 @@ type GqlBooking {
   customer_id: Float!
 }
 
-type GqlActivityModel {
+type GqlOfferModel {
   activity_id: ID!
   name: String!
   description: String!
@@ -37,24 +37,6 @@ type GqlActivityModel {
 
 type GqlTextResponseModel {
   response: String!
-}
-
-type GqlCarsModel {
-  cars_id: ID!
-  name: String!
-  description: String!
-}
-
-type GqlFlightModel {
-  activity_id: ID!
-  name: String!
-  description: String!
-}
-
-type GqlHotelModel {
-  activity_id: ID!
-  name: String!
-  description: String!
 }
 
 type GqlCustomer {
@@ -69,14 +51,9 @@ type Query {
   authenticate: GqlUserModel!
   getAuthenticatedUser(authCredentialsInput: AuthCredentialsInput!): GqlAuthUser!
   getBooking(id: Int!): GqlBooking!
-  getSingleActivity(id: Float!): GqlActivityModel!
-  getAllActivities: GqlActivityModel!
-  getSingleCars(id: Float!): GqlCarsModel!
-  getAllCars: GqlCarsModel!
-  getSingleFlight(id: Float!): GqlFlightModel!
-  getAllFlights: GqlFlightModel!
-  getSingleHotel(id: Float!): GqlHotelModel!
-  getAllHotels: GqlHotelModel!
+  getSingleOffer(id: Float!): GqlOfferModel!
+  getAllOffers: GqlOfferModel!
+  getOffersByQuery(query: String!): GqlOfferModel!
   getCustomerProfile(id: Int!): GqlCustomer!
 }
 
@@ -101,18 +78,9 @@ type Mutation {
   createBooking(createBookingData: CreateBookingInput!): GqlBooking!
   deleteBooking(id: Float!): Boolean!
   updateBooking(updateBookingData: CreateBookingInput!, id: Float!): GqlBooking!
-  createActivity(createActivityInput: CreateActivityInput!): GqlActivityModel!
-  updateActivity(updateActivityInput: UpdateActivityInput!, id: Float!): GqlActivityModel!
-  deleteActivity(id: Float!): GqlTextResponseModel!
-  createHotel(createHotelInput: CreateHotelInput!): GqlHotelModel!
-  updateHotel(updateHotelInput: UpdateHotelInput!, id: Float!): GqlHotelModel!
-  deleteHotel(id: Float!): GqlTextResponseModel!
-  createCars(createCarsInput: CreateCarsInput!): GqlCarsModel!
-  updateCars(updateCarsInput: UpdateCarsInput!, id: Float!): GqlCarsModel!
-  deleteCars(id: Float!): GqlTextResponseModel!
-  createFlight(createFlightInput: CreateFlightInput!): GqlFlightModel!
-  updateFlight(updateFlightInput: UpdateFlightInput!, id: Float!): GqlFlightModel!
-  deleteFlight(id: Float!): GqlTextResponseModel!
+  createOffer(createOfferInput: CreateOfferInput!): GqlOfferModel!
+  updateOffer(updateOfferInput: UpdateOfferInput!, id: Float!): GqlOfferModel!
+  deleteOffer(id: Float!): GqlTextResponseModel!
   createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
   removeCustomerProfile(id: Float!): Boolean!
   updateCustomerProfile(updateCustomerProfileData: UpdateCustomerProfileInput!, id: Float!): GqlCustomer!
@@ -131,42 +99,12 @@ input CreateBookingInput {
   customer_id: Float!
 }
 
-input CreateActivityInput {
+input CreateOfferInput {
   name: String!
   description: String!
 }
 
-input UpdateActivityInput {
-  name: String!
-  description: String!
-}
-
-input CreateHotelInput {
-  name: String!
-  description: String!
-}
-
-input UpdateHotelInput {
-  name: String!
-  description: String!
-}
-
-input CreateCarsInput {
-  name: String!
-  description: String!
-}
-
-input UpdateCarsInput {
-  name: String!
-  description: String!
-}
-
-input CreateFlightInput {
-  name: String!
-  description: String!
-}
-
-input UpdateFlightInput {
+input UpdateOfferInput {
   name: String!
   description: String!
 }

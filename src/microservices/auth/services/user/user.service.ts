@@ -1,8 +1,16 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
-import { RestAuthChangeResponse, RestAuthUser, RestAuthUserId } from '../../rest/models';
-import { GqlAuthChangeResponse, GqlAuthUser, GqlAuthUserId } from '../../graphql/models';
+import {
+  RestAuthChangeResponse,
+  RestAuthUser,
+  RestAuthUserId,
+} from '../../rest/models';
+import {
+  GqlAuthChangeResponse,
+  GqlAuthUser,
+  GqlAuthUserId,
+} from '../../graphql/models';
 import {
   AuthCredentialsDto,
   AuthEmailDto,
@@ -56,7 +64,9 @@ export class UserService {
     );
   }
 
-  async getAuthenticatedUser(authCredentialsData: AuthCredentialsDto | AuthCredentialsInput): Promise<RestAuthUser | GqlAuthUser> {
+  async getAuthenticatedUser(
+    authCredentialsData: AuthCredentialsDto | AuthCredentialsInput,
+  ): Promise<RestAuthUser | GqlAuthUser> {
     return this.clientService.sendMessageWithPayload(
       this.authClient,
       { role: 'user', cmd: 'getAuthenticatedUser' },

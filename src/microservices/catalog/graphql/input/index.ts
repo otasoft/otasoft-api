@@ -1,2 +1,2 @@
-export * from './create-activity.input';
-export * from './update-activity.input';
+export * from './create-offer.input';
+export * from './update-offer.input';

@@ -1,1 +1,1 @@
-export * from './activity.service';
+export * from './offer.service';

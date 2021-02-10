@@ -1,6 +1,6 @@
 import { IsString, Length } from 'class-validator';
 
-export class UpdateActivityDto {
+export class CreateOfferDto {
   @IsString()
   @Length(5, 30)
   name: string;

@@ -1,1 +1,1 @@
-export * from './update-activity.interface';
+export * from './update-offer.interface';
