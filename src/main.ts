@@ -9,7 +9,7 @@ import * as passport from 'passport';
 import * as csurf from 'csurf';
 
 import { AppModule } from './app.module';
-import { swaggerOptions } from './doc/config';
+import { swaggerOptions } from './doc';
 import {
   rateLimitConfigObject,
   createRedisSession,

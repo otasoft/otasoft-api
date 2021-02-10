@@ -32,7 +32,9 @@ export class AuthQueryResolver {
   }
 
   @Query((returns) => GqlAuthUser)
-  getAuthenticatedUser(@Args('authCredentialsInput') authCredentialsInput: AuthCredentialsInput): Promise<GqlAuthUser> {
+  getAuthenticatedUser(
+    @Args('authCredentialsInput') authCredentialsInput: AuthCredentialsInput,
+  ): Promise<GqlAuthUser> {
     return this.userService.getAuthenticatedUser(authCredentialsInput);
   }
 }

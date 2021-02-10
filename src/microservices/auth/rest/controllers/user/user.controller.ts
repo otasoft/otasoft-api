@@ -14,7 +14,11 @@ import { AccessControlGuard } from '../../../guards/access-control.guard';
 import { UserService } from '../../../services/user/user.service';
 import { AuthCredentialsDto, AuthEmailDto, ChangePasswordDto } from '../../dto';
 import { SetNewPasswordDto } from '../../dto/set-new-password.dto';
-import { RestAuthChangeResponse, RestAuthUser, RestAuthUserId } from '../../models';
+import {
+  RestAuthChangeResponse,
+  RestAuthUser,
+  RestAuthUserId,
+} from '../../models';
 
 @Controller('user')
 export class UserController {
@@ -29,7 +33,9 @@ export class UserController {
   }
 
   @Get('/get-authenticated-user')
-  async getAuthenticatedUser(authCredentialsDto: AuthCredentialsDto): Promise<RestAuthUser> {
+  async getAuthenticatedUser(
+    authCredentialsDto: AuthCredentialsDto,
+  ): Promise<RestAuthUser> {
     return this.userService.getAuthenticatedUser(authCredentialsDto);
   }
 
