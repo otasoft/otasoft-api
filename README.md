@@ -1,7 +1,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/otasoft/otasoft-core">
-    <img src="src/doc/images/otasoft-api-logo.png" alt="Otasoft Logo" width="128" height="128">
+    <img src="doc/otasoft-api-logo.png" alt="Otasoft Logo" width="128" height="128">
   </a>
 
   <h1 align="center">Otasoft API - Booking engine for Online Travel Agencies</h1>
@@ -103,7 +103,7 @@ https://api.otasoft.org/graphql -> If you have Nginx Reverse Proxy running and H
  
 The Otasoft API acts as a gateway/proxy for the different microservices it exposes. The GraphQL resolvers and REST controllers make calls to the RabbitMQ microservices through client-server communication. All elements of the Otasoft Core system are packed into docker images and can be run as containers.
 
-![Architecture Diagram](src/doc/images/otasoft-core-new-architecture.png)
+![Architecture Diagram](doc/otasoft-core-new-architecture.png)
 
 This architecture implements the following Microservice Design Patterns:
 
