@@ -1,5 +1,6 @@
 import { CacheModule, Global, Module } from '@nestjs/common';
-import { CacheConfigService } from './cache-config.service';
+
+import { CacheConfigService } from './config';
 
 @Global()
 @Module({
