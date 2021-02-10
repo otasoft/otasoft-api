@@ -1,6 +1,7 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { ActivityService } from '../../../services/activity/activity.service';
-import { GqlActivityModel } from '../../models/activity/gql-activity.model';
+
+import { ActivityService } from '../../services';
+import { GqlActivityModel } from '../models';
 
 @Resolver()
 export class ActivityQueryResolver {

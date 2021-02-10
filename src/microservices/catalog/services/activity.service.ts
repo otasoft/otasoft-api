@@ -11,14 +11,13 @@ import { ClientProxy } from '@nestjs/microservices';
 import {
   CreateActivityInput,
   UpdateActivityInput,
-} from '../../graphql/input/activity';
-import { GqlActivityModel } from '../../graphql/models/activity/gql-activity.model';
-import { GqlTextResponseModel } from '../../graphql/models/gql-text-response.model';
-import { IUpdateActivity } from '../../interfaces/activity/update-activity.interface';
-import { CreateActivityDto, UpdateActivityDto } from '../../rest/dto/activity';
-import { RestActivityModel } from '../../rest/models/activity/rest-activity.model';
-import { RestTextResponseModel } from '../../rest/models/rest-text-response.model';
-import { ClientService } from '../../../../utils/client';
+} from '../graphql/input';
+import { GqlActivityModel, GqlTextResponseModel } from '../graphql/models';
+import { IUpdateActivity } from '../interfaces';
+import { CreateActivityDto, UpdateActivityDto } from '../rest/dto';
+import { RestActivityModel } from '../rest/models';
+import { RestTextResponseModel } from '../rest/models';
+import { ClientService } from '../../../utils/client';
 
 @Injectable()
 export class ActivityService {

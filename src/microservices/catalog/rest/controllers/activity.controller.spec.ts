@@ -1,11 +1,11 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { ActivityService } from '../../../services/activity/activity.service';
+import { ActivityService } from '../../services';
 import { ActivityController } from './activity.controller';
-import { RedisCacheModule } from '../../../../../cache/redis-cache.module';
-import { createClientAsyncOptions } from '../../../../../utils/client';
-import { UtilsModule } from '../../../../../utils/utils.module';
+import { RedisCacheModule } from '../../../../cache/redis-cache.module';
+import { createClientAsyncOptions } from '../../../../utils/client';
+import { UtilsModule } from '../../../../utils/utils.module';
 
 describe('ActivityController', () => {
   let controller: ActivityController;

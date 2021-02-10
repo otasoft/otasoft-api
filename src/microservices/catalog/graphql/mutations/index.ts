@@ -1,5 +1,1 @@
-import { ActivityMutationResolver } from './activity/activity-mutation.resolver';
-
-export const CatalogMutations = [
-  ActivityMutationResolver,
-];
+export * from './activity-mutation.resolver';

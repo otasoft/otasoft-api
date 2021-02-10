@@ -1,9 +1,8 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { ActivityService } from '../../../services/activity/activity.service';
-import { CreateActivityInput } from '../../input/activity/create-activity.input';
-import { UpdateActivityInput } from '../../input/activity/update-activity.input';
-import { GqlActivityModel } from '../../models/activity/gql-activity.model';
-import { GqlTextResponseModel } from '../../models/gql-text-response.model';
+
+import { ActivityService } from '../../services';
+import { CreateActivityInput, UpdateActivityInput } from '../input';
+import { GqlActivityModel, GqlTextResponseModel } from '../models';
 
 @Resolver()
 export class ActivityMutationResolver {

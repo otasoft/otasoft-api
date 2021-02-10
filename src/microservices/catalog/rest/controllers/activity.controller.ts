@@ -8,10 +8,10 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { ActivityService } from '../../../services/activity/activity.service';
-import { CreateActivityDto, UpdateActivityDto } from '../../dto/activity';
-import { RestActivityModel } from '../../models/activity/rest-activity.model';
-import { RestTextResponseModel } from '../../models/rest-text-response.model';
+import { ActivityService } from '../../services';
+import { CreateActivityDto, UpdateActivityDto } from '../dto';
+import { RestActivityModel } from '../models';
+import { RestTextResponseModel } from '../models';
 
 @Controller('activity')
 export class ActivityController {

@@ -1,5 +1,1 @@
-import { ActivityQueryResolver } from './activity/activity-query.resolver';
-
-export const CatalogQueries = [
-  ActivityQueryResolver,
-];
+export * from './activity-query.resolver';

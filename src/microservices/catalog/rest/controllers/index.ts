@@ -1,5 +1,2 @@
-import { ActivityController } from './activity/activity.controller';
+export * from './activity.controller';
 
-export const CatalogControllers = [
-  ActivityController,
-];

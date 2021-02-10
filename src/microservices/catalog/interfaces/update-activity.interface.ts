@@ -1,4 +1,4 @@
-import { UpdateActivityDto } from '../../rest/dto/activity';
+import { UpdateActivityDto } from '../rest/dto';
 /**
  * @interface IUpdateActivity
  *

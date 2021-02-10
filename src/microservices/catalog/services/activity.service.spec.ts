@@ -1,10 +1,10 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { RedisCacheModule } from '../../../../cache/redis-cache.module';
+import { RedisCacheModule } from '../../../cache/redis-cache.module';
 import { ActivityService } from './activity.service';
-import { createClientAsyncOptions } from '../../../../utils/client';
-import { UtilsModule } from '../../../../utils/utils.module';
+import { createClientAsyncOptions } from '../../../utils/client';
+import { UtilsModule } from '../../../utils/utils.module';
 
 describe('ActivityService', () => {
   let service: ActivityService;

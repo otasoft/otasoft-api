@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule } from '@nestjs/microservices';
 
-import { CatalogControllers } from './rest/controllers';
-import { CatalogServices } from './services';
-import { CatalogMutations } from './graphql/mutations';
-import { CatalogQueries } from './graphql/queries';
+import { ActivityController } from './rest/controllers';
+import { ActivityService } from './services';
+import { ActivityMutationResolver } from './graphql/mutations';
+import { ActivityQueryResolver } from './graphql/queries';
 import { createClientAsyncOptions } from '../../utils/client';
 
 @Module({
   imports: [ClientsModule.registerAsync([createClientAsyncOptions('catalog')])],
-  controllers: [...CatalogControllers],
-  providers: [...CatalogServices, ...CatalogMutations, ...CatalogQueries],
+  controllers: [ActivityController],
+  providers: [ActivityService, ActivityMutationResolver, ActivityQueryResolver],
 })
 export class CatalogModule {}
