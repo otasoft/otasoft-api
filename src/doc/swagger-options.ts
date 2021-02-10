@@ -5,5 +5,5 @@ export const swaggerOptions = new DocumentBuilder()
   .setDescription(
     'An API for microservice booking engine for Online Travel Agencies',
   )
-  .setVersion('0.0.1')
+  .setVersion(process.env.npm_package_version)
   .build();
