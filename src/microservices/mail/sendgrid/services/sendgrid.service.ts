@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
-import { ClientService } from '../../../../utils/client';
+import { ClientService } from '@utils/client';
 import { SendEmailDto } from '../dto';
 import { SuccessResponseModel } from '../models';
 

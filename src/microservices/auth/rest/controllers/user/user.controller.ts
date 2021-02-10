@@ -10,10 +10,9 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { AccessControlGuard } from '../../../guards/access-control.guard';
+import { AccessControlGuard } from '../../../guards';
 import { UserService } from '../../../services/user/user.service';
-import { AuthCredentialsDto, AuthEmailDto, ChangePasswordDto } from '../../dto';
-import { SetNewPasswordDto } from '../../dto/set-new-password.dto';
+import { AuthCredentialsDto, AuthEmailDto, ChangePasswordDto, SetNewPasswordDto } from '../../dto';
 import {
   RestAuthChangeResponse,
   RestAuthUser,

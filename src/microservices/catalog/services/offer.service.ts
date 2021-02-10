@@ -14,7 +14,7 @@ import { IUpdateOffer } from '../interfaces';
 import { CreateOfferDto, UpdateOfferDto } from '../rest/dto';
 import { RestOfferModel } from '../rest/models';
 import { RestTextResponseModel } from '../rest/models';
-import { ClientService } from '../../../utils/client';
+import { ClientService } from '@utils/client';
 
 @Injectable()
 export class OfferService {

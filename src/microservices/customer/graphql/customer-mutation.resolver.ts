@@ -4,7 +4,7 @@ import { CustomerService } from '../customer.service';
 import { CreateCustomerProfileInput } from './input/create-customer-profile.input';
 import { UpdateCustomerProfileInput } from './input/update-customer-profile.input';
 import { UseGuards } from '@nestjs/common';
-import { GqlJwtAuthGuard } from '../../auth/graphql/guards';
+import { GqlJwtAuthGuard } from '@auth/graphql/guards';
 
 @Resolver((of) => GqlCustomer)
 export class CustomerMutationResolver {
