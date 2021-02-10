@@ -51,6 +51,7 @@
     "graphql": "^15.5.0",
     "graphql-tools": "^7.0.2",
     "helmet": "^4.4.1",
+    "module-alias": "^2.2.2",
     "openid-client": "^4.4.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
