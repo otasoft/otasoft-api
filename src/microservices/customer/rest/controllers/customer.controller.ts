@@ -8,11 +8,11 @@ import {
   Delete,
   Put,
 } from '@nestjs/common';
-import { CustomerService } from '../customer.service';
+
 import { RestJwtAuthGuard } from '@auth/rest/guards';
-import { CreateCustomerProfileDto } from './dto/create-customer-profile.dto';
-import { RestCustomer } from './models/customer-rest.model';
-import { UpdateCustomerProfileDto } from './dto/update-customer-profile.dto';
+import { CustomerService } from '../../services';
+import { CreateCustomerProfileDto, UpdateCustomerProfileDto } from '../dto';
+import { RestCustomer } from '../models';
 
 @Controller('customer')
 export class CustomerController {
