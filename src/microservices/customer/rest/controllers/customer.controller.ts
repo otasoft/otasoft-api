@@ -10,10 +10,10 @@ import {
 } from '@nestjs/common';
 
 import { RestJwtAuthGuard } from '@auth/rest/guards';
-import { CustomerService } from '../services';
-import { CreateCustomerProfileDto } from './dto/create-customer-profile.dto';
-import { RestCustomer } from './models/customer-rest.model';
-import { UpdateCustomerProfileDto } from './dto/update-customer-profile.dto';
+import { CustomerService } from '../../services';
+import { CreateCustomerProfileDto } from '../dto/create-customer-profile.dto';
+import { RestCustomer } from '../models/customer-rest.model';
+import { UpdateCustomerProfileDto } from '../dto/update-customer-profile.dto';
 
 @Controller('customer')
 export class CustomerController {
