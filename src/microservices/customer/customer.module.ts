@@ -5,7 +5,7 @@ import { createClientAsyncOptions } from '@utils/client';
 import { CustomerController } from './rest/controllers';
 import { CustomerService } from './services';
 import { CustomerQueryResolver } from './graphql/customer-query.resolver';
-import { CustomerMutationResolver } from './graphql/customer-mutation.resolver';
+import { CustomerMutationResolver } from './graphql/mutations';
 
 @Module({
   imports: [
