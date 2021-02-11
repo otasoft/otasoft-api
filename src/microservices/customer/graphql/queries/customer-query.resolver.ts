@@ -2,7 +2,7 @@ import { NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Resolver, Int, Query } from '@nestjs/graphql';
 
 import { GqlJwtAuthGuard } from '@auth/graphql/guards';
-import { GqlCustomer } from '../models/customer-gql.model';
+import { GqlCustomer } from '../models';
 import { CustomerService } from '../../services';
 
 @Resolver((of) => GqlCustomer)
