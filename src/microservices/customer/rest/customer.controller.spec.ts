@@ -1,8 +1,8 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { createClientAsyncOptions } from '../../../utils/client';
-import { CustomerService } from '../customer.service';
+import { createClientAsyncOptions } from '@utils/client';
+import { CustomerService } from '../services';
 import { CustomerController } from './customer.controller';
 
 describe('CustomerController', () => {

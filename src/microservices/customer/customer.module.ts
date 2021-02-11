@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { CustomerController } from './rest/customer.controller';
 import { ClientsModule } from '@nestjs/microservices';
 
-import { CustomerService } from './customer.service';
+import { createClientAsyncOptions } from '@utils/client';
+import { CustomerService } from './services';
 import { CustomerQueryResolver } from './graphql/customer-query.resolver';
 import { CustomerMutationResolver } from './graphql/customer-mutation.resolver';
-import { createClientAsyncOptions } from '@utils/client';
 
 @Module({
   imports: [
