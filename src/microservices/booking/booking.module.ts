@@ -3,7 +3,7 @@ import { ClientsModule } from '@nestjs/microservices';
 
 import { createClientAsyncOptions } from '@utils/client';
 import { BookingService } from './services';
-import { BookingController } from './rest/booking.controller';
+import { BookingController } from './rest/controllers';
 import { BookingMutationResolver } from './graphql/mutations';
 import { BookingQueryResolver } from './graphql/queries/';
 

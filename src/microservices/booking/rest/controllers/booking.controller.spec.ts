@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { createClientAsyncOptions } from '@utils/client';
 import { UtilsModule } from '@utils/utils.module';
-import { BookingService } from '../services';
+import { BookingService } from '../../services';
 import { BookingController } from './booking.controller';
 
 describe('BookingController', () => {

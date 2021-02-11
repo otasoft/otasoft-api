@@ -13,9 +13,9 @@ import {
 } from '@nestjs/common';
 
 import { AccessControlGuard } from '@auth/guards';
-import { BookingService } from '../services';
-import { RestBooking } from './models/booking-rest';
-import { CreateBookingDto } from './dto/create-booking.dto';
+import { BookingService } from '../../services';
+import { RestBooking } from '../models/booking-rest';
+import { CreateBookingDto } from '../dto/create-booking.dto';
 
 @Controller('booking')
 export class BookingController {
