@@ -1,7 +1,7 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { createClientAsyncOptions } from '../../utils/client';
+import { createClientAsyncOptions } from '@utils/client';
 import { BookingService } from './booking.service';
 
 describe('BookingService', () => {

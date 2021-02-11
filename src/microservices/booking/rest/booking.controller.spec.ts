@@ -1,10 +1,10 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { BookingService } from '../booking.service';
+import { createClientAsyncOptions } from '@utils/client';
+import { UtilsModule } from '@utils/utils.module';
+import { BookingService } from '../services';
 import { BookingController } from './booking.controller';
-import { createClientAsyncOptions } from '../../../utils/client';
-import { UtilsModule } from '../../../utils/utils.module';
 
 describe('BookingController', () => {
   let controller: BookingController;

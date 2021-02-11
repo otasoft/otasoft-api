@@ -11,10 +11,11 @@ import {
   ValidationPipe,
   ParseIntPipe,
 } from '@nestjs/common';
-import { BookingService } from '../booking.service';
+
+import { AccessControlGuard } from '@auth/guards';
+import { BookingService } from '../services';
 import { RestBooking } from './models/booking-rest';
 import { CreateBookingDto } from './dto/create-booking.dto';
-import { AccessControlGuard } from '@auth/guards/access-control.guard';
 
 @Controller('booking')
 export class BookingController {

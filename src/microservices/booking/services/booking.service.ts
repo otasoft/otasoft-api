@@ -1,7 +1,8 @@
 import { Inject, Injectable, HttpException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { CreateBookingDto } from './rest/dto/create-booking.dto';
-import { RestBooking } from './rest/models/booking-rest';
+
+import { CreateBookingDto } from '../rest/dto/create-booking.dto';
+import { RestBooking } from '../rest/models/booking-rest';
 
 @Injectable()
 export class BookingService {
