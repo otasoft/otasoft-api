@@ -1,6 +1,6 @@
 {
   "name": "otasoft-api",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "API Gateway for Otasoft ecosystem",
   "author": "Jakub Andrzejewski",
   "license": "MIT",

@@ -1,9 +1,10 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { GqlBooking } from './models/booking-gql.model';
-import { CreateBookingInput } from './input/create-booking.input';
 import { UseGuards } from '@nestjs/common';
-import { GqlJwtAuthGuard } from '../../auth/graphql/guards';
-import { BookingService } from '../booking.service';
+
+import { GqlJwtAuthGuard } from '@auth/graphql/guards';
+import { GqlBooking } from '../models';
+import { CreateBookingInput } from '../input/';
+import { BookingService } from '../../services';
 
 @Resolver((of) => GqlBooking)
 export class BookingMutationResolver {
