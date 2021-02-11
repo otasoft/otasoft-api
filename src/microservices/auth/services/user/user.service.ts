@@ -16,7 +16,7 @@ import {
   AuthEmailDto,
   ChangePasswordDto,
   SetNewPasswordDto,
-  GetRefreshUserDto
+  GetRefreshUserDto,
 } from '../../rest/dto';
 import {
   AuthCredentialsInput,

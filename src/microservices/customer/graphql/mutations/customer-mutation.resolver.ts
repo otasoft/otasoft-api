@@ -4,7 +4,10 @@ import { UseGuards } from '@nestjs/common';
 import { GqlJwtAuthGuard } from '@auth/graphql/guards';
 import { GqlCustomer } from '../models';
 import { CustomerService } from '../../services';
-import { CreateCustomerProfileInput, UpdateCustomerProfileInput } from '../input';
+import {
+  CreateCustomerProfileInput,
+  UpdateCustomerProfileInput,
+} from '../input';
 
 @Resolver((of) => GqlCustomer)
 export class CustomerMutationResolver {

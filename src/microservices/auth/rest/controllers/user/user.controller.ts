@@ -12,7 +12,12 @@ import {
 
 import { AccessControlGuard } from '../../../guards';
 import { UserService } from '../../../services/user/user.service';
-import { AuthCredentialsDto, AuthEmailDto, ChangePasswordDto, SetNewPasswordDto } from '../../dto';
+import {
+  AuthCredentialsDto,
+  AuthEmailDto,
+  ChangePasswordDto,
+  SetNewPasswordDto,
+} from '../../dto';
 import {
   RestAuthChangeResponse,
   RestAuthUser,

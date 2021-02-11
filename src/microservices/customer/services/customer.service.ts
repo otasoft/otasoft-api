@@ -1,8 +1,14 @@
 import { Injectable, Inject, BadRequestException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
-import { CreateCustomerProfileDto, UpdateCustomerProfileDto } from '../rest/dto';
-import { CreateCustomerProfileInput, UpdateCustomerProfileInput } from '../graphql/input';
+import {
+  CreateCustomerProfileDto,
+  UpdateCustomerProfileDto,
+} from '../rest/dto';
+import {
+  CreateCustomerProfileInput,
+  UpdateCustomerProfileInput,
+} from '../graphql/input';
 import { RestCustomer } from '../rest/models';
 import { GqlCustomer } from '../graphql/models';
 import { IUpdateCustomerObject } from '../interfaces';
