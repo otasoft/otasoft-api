@@ -4,7 +4,7 @@ import { ClientsModule } from '@nestjs/microservices';
 import { createClientAsyncOptions } from '@utils/client';
 import { CustomerController } from './rest/controllers';
 import { CustomerService } from './services';
-import { CustomerQueryResolver } from './graphql/customer-query.resolver';
+import { CustomerQueryResolver } from './graphql/queries';
 import { CustomerMutationResolver } from './graphql/mutations';
 
 @Module({
