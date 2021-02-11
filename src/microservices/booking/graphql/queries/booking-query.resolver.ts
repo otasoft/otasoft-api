@@ -2,8 +2,8 @@ import { NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Resolver, Int, Query } from '@nestjs/graphql';
 
 import { GqlJwtAuthGuard } from '@auth/graphql/guards';
-import { BookingService } from '../services';
-import { GqlBooking } from './models/booking-gql.model';
+import { BookingService } from '../../services';
+import { GqlBooking } from '../models/booking-gql.model';
 
 @Resolver((of) => GqlBooking)
 export class BookingQueryResolver {
