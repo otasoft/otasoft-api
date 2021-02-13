@@ -45,6 +45,17 @@ type GqlCustomer {
   last_name: String!
 }
 
+type GqlPayment {
+  id: ID!
+  booking_id: Float!
+  date: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
   getUserId(email: AuthEmailInput!): GqlAuthUserId!
   confirmAccountCreation(token: String!): Boolean!
@@ -55,6 +66,7 @@ type Query {
   getAllOffers: GqlOfferModel!
   getOffersByQuery(query: String!): GqlOfferModel!
   getCustomerProfile(id: Int!): GqlCustomer!
+  getPayment(id: Int!): GqlPayment!
 }
 
 input AuthEmailInput {
@@ -84,6 +96,8 @@ type Mutation {
   createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
   removeCustomerProfile(id: Float!): Boolean!
   updateCustomerProfile(updateCustomerProfileData: UpdateCustomerProfileInput!, id: Float!): GqlCustomer!
+  createPayment(createPaymentData: CreatePaymentInput!): GqlPayment!
+  updatePayment(updatePaymentData: CreatePaymentInput!, id: Float!): GqlPayment!
 }
 
 input ChangePasswordInput {
@@ -117,4 +131,8 @@ input CreateCustomerProfileInput {
 input UpdateCustomerProfileInput {
   first_name: String!
   last_name: String!
+}
+
+input CreatePaymentInput {
+  booking_id: Float!
 }

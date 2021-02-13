@@ -3,6 +3,7 @@ import { BookingModule } from './booking/booking.module';
 import { CatalogModule } from './catalog/catalog.module';
 import { CustomerModule } from './customer/customer.module';
 import { MailModule } from './mail/mail.module';
+import { PaymentModule } from './payment/payment.module';
 
 export const MicroservicesModules = [
   AuthModule,
@@ -10,4 +11,5 @@ export const MicroservicesModules = [
   CatalogModule,
   CustomerModule,
   MailModule,
+  PaymentModule,
 ];
