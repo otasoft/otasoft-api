@@ -7,7 +7,7 @@ import { PaymentMutationResolver } from './graphql/payment-mutation.resolver';
 import { PaymentQueryResolver } from './graphql/payment-query.resolver';
 import { createClientAsyncOptions } from '../../utils/client';
 import { BookingModule } from '../booking/booking.module';
-import { BookingService } from '../booking/booking.service';
+import { BookingService } from '../booking/services/booking.service';
 
 @Module({
   imports: [
