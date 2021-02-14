@@ -6,7 +6,7 @@ import { PaymentController } from './payment.controller';
 import { createClientAsyncOptions } from '../../../utils/client';
 import { UtilsModule } from '../../../utils/utils.module';
 import { BookingModule } from '../../../microservices/booking/booking.module';
-import { BookingService } from '../../../microservices/booking/booking.service';
+import { BookingService } from '../../../microservices/booking/services/booking.service';
 
 describe('PaymentController', () => {
   let controller: PaymentController;

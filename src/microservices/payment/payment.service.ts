@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
 import { ClientService } from '../../utils/client';
-import { BookingService } from '../booking/booking.service';
+import { BookingService } from '../booking/services/booking.service';
 import { CreatePaymentInput } from './graphql/input';
 import { GqlPayment } from './graphql/models';
 import { CreatePaymentDto } from './rest/dto';
