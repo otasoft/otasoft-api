@@ -1,4 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
+import { OpenIdService } from '../services';
 import { OpenIdController } from './open-id.controller';
 
 describe('OpenIdController', () => {
@@ -7,6 +9,7 @@ describe('OpenIdController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [OpenIdController],
+      providers: [OpenIdService]
     }).compile();
 
     controller = module.get<OpenIdController>(OpenIdController);
