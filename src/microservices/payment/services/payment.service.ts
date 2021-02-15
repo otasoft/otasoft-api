@@ -6,13 +6,12 @@ import { BookingService } from '@booking/services';
 import { CreatePaymentInput } from '../graphql/input';
 import { GqlPayment } from '../graphql/models';
 import { CreatePaymentDto } from '../rest/dto';
-import { RestPayment } from '../rest/models/payment-rest';
+import { RestPayment } from '../rest/models';
 
 @Injectable()
 export class PaymentService {
   constructor(
     @Inject('PAYMENT_MICROSERVICE')
-    @Inject('BOOKING_MICROSERVICE')
     public readonly paymentClient: ClientProxy,
     private readonly clientService: ClientService,
     private readonly bookingService: BookingService,

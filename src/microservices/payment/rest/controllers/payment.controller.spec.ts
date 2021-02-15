@@ -4,7 +4,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { createClientAsyncOptions } from '@utils/client';
 import { UtilsModule } from '@utils/utils.module';
 import { BookingModule } from '@booking/booking.module';
-import { BookingService } from '@booking/services/booking.service';
 import { PaymentService } from '../../services';
 import { PaymentController } from './payment.controller';
 
@@ -23,7 +22,7 @@ describe('PaymentController', () => {
         BookingModule
       ],
       controllers: [PaymentController],
-      providers: [PaymentService, BookingService],
+      providers: [PaymentService],
     }).compile();
 
     controller = module.get<PaymentController>(PaymentController);

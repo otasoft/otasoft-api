@@ -16,5 +16,6 @@ import { BookingQueryResolver } from './graphql/queries/';
   ],
   controllers: [BookingController],
   providers: [BookingService, BookingQueryResolver, BookingMutationResolver],
+  exports: [BookingService],
 })
 export class BookingModule {}
