@@ -10,19 +10,17 @@ export class OpenIdController {
 
   @UseGuards(OpenIdGuard)
   @Get('/login')
-  login() {
-    return this.openIdService.login();
-  }
+  login() {}
 
   @Get('/user')
   user(@Req() req) {
-    return this.openIdService.user(req);
+    return req.user;
   }
 
   @UseGuards(OpenIdGuard)
   @Get('/callback')
   loginCallback(@Res() res: Response) {
-    return this.openIdService.loginCallback(res);
+    return res.redirect('/api/open-id/user');
   }
 
   @Get('/logout')
