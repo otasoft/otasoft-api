@@ -1,5 +1,6 @@
 import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
+import { OpenIdGuard } from '../guards';
 
 import { OpenIdService } from '../services';
 
@@ -7,7 +8,7 @@ import { OpenIdService } from '../services';
 export class OpenIdController {
   constructor(private readonly openIdService: OpenIdService) {}
 
-  //   @UseGuards(OpenIDGuard)
+  @UseGuards(OpenIdGuard)
   @Get('/login')
   login() {
     return this.openIdService.login();
@@ -18,7 +19,7 @@ export class OpenIdController {
     return this.openIdService.user(req);
   }
 
-  //   @UseGuards(OpenIDGuard)
+  @UseGuards(OpenIdGuard)
   @Get('/callback')
   loginCallback(@Res() res: Response) {
     return this.openIdService.loginCallback(res);

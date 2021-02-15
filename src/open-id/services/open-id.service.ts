@@ -11,7 +11,7 @@ export class OpenIdService {
   }
 
   async loginCallback(res: Response) {
-    res.redirect('/api/oidc/user');
+    res.redirect('/api/open-id/user');
   }
 
   async logout(req, res: Response) {
