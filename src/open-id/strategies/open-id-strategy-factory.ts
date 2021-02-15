@@ -1,6 +1,6 @@
-import { buildOpenIdClient } from "../helpers";
-import { OpenIdService } from "../services";
-import { OpenIdStrategy } from "./open-id.strategy";
+import { buildOpenIdClient } from '../helpers';
+import { OpenIdService } from '../services';
+import { OpenIdStrategy } from './open-id.strategy';
 
 export const OpenIdStrategyFactory = {
   provide: 'OpenIdStrategy',

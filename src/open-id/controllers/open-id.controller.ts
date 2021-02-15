@@ -7,7 +7,7 @@ import { OpenIdService } from '../services';
 export class OpenIdController {
   constructor(private readonly openIdService: OpenIdService) {}
 
-//   @UseGuards(OpenIDGuard)
+  //   @UseGuards(OpenIDGuard)
   @Get('/login')
   login() {
     return this.openIdService.login();
@@ -18,7 +18,7 @@ export class OpenIdController {
     return this.openIdService.user(req);
   }
 
-//   @UseGuards(OpenIDGuard)
+  //   @UseGuards(OpenIDGuard)
   @Get('/callback')
   loginCallback(@Res() res: Response) {
     return this.openIdService.loginCallback(res);

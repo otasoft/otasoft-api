@@ -22,16 +22,16 @@ export class OpenIdStrategy extends PassportStrategy(Strategy, 'openid') {
   }
 
   async validate(tokenset: TokenSet): Promise<any> {
-      try {
-        const userInfo: UserinfoResponse = await this.client.userinfo(tokenset);
-        const { id_token, access_token, refresh_token } = tokenset;
-        
-        const user = {
-            id_token: id_token,
-            access_token: access_token,
-            refresh_token: refresh_token,
-            userInfo,
-        };
+    try {
+      const userInfo: UserinfoResponse = await this.client.userinfo(tokenset);
+      const { id_token, access_token, refresh_token } = tokenset;
+
+      const user = {
+        id_token: id_token,
+        access_token: access_token,
+        refresh_token: refresh_token,
+        userInfo,
+      };
 
       return user;
     } catch (error) {
