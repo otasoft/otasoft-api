@@ -17,7 +17,7 @@ describe('PaymentService', () => {
           createClientAsyncOptions('booking'),
         ]),
         UtilsModule,
-        BookingModule
+        BookingModule,
       ],
       providers: [PaymentService],
     }).compile();

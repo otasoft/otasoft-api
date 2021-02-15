@@ -19,7 +19,7 @@ describe('PaymentController', () => {
           createClientAsyncOptions('booking'),
         ]),
         UtilsModule,
-        BookingModule
+        BookingModule,
       ],
       controllers: [PaymentController],
       providers: [PaymentService],

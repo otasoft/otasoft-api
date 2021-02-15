@@ -28,12 +28,12 @@ export class PaymentService {
   async createPayment(
     newPayment: CreatePaymentDto | CreatePaymentInput,
   ): Promise<RestPayment | GqlPayment> {
-    const booking = this.bookingService.getBookingById(newPayment.booking_id)
+    const booking = this.bookingService.getBookingById(newPayment.booking_id);
 
     return this.clientService.sendMessageWithPayload(
       this.paymentClient,
       { role: 'payment', cmd: 'create' },
-      {newPayment, booking},
+      { newPayment, booking },
     );
   }
 
