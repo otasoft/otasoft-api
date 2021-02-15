@@ -10,7 +10,7 @@ import { AuthControllers } from './rest/controllers';
 import { AuthMutations } from './graphql/mutations';
 import { AuthQueries } from './graphql/queries';
 import { JwtRefreshTokenStrategy, JwtStrategy } from './strategies';
-import { SessionSerializer } from '../../security/serializers';
+import { SessionSerializer } from '@security/serializers';
 
 @Module({
   imports: [
