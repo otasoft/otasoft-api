@@ -1,10 +1,10 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
+import { GqlJwtAuthGuard } from '@auth/graphql/guards';
 import { GqlPayment } from './models';
 import { CreatePaymentInput } from './input';
-import { UseGuards } from '@nestjs/common';
-import { GqlJwtAuthGuard } from '../../auth/graphql/guards';
-import { PaymentService } from '../payment.service';
+import { PaymentService } from '../services';
 
 @Resolver((of) => GqlPayment)
 export class PaymentMutationResolver {

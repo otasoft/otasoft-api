@@ -135,4 +135,6 @@ input UpdateCustomerProfileInput {
 
 input CreatePaymentInput {
   booking_id: Float!
+  amount: Float!
+  card_token: Float!
 }

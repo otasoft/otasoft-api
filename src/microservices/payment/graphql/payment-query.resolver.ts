@@ -1,8 +1,8 @@
-import { NotFoundException, UseGuards } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { Args, Resolver, Int, Query } from '@nestjs/graphql';
 
-import { GqlJwtAuthGuard } from '../../auth/graphql/guards';
-import { PaymentService } from '../payment.service';
+import { GqlJwtAuthGuard } from '@auth/graphql/guards';
+import { PaymentService } from '../services';
 import { GqlPayment } from './models/payment-gql.model';
 
 @Resolver((of) => GqlPayment)
