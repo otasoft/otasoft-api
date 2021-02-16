@@ -1,1 +1,1 @@
-export * from './booking-rest';
+export * from './booking-rest.model';
