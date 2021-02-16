@@ -14,7 +14,7 @@ import {
 
 import { AccessControlGuard } from '@auth/guards';
 import { BookingService } from '../../services';
-import { RestBooking } from '../models';
+import { RestBookingModel } from '../models';
 import { CreateBookingDto } from '../dto';
 
 @Controller('booking')
@@ -25,7 +25,7 @@ export class BookingController {
   @Get('/:id')
   async getBookingById(
     @Param('id', ParseIntPipe) id: number,
-  ): Promise<RestBooking> {
+  ): Promise<RestBookingModel> {
     return this.bookingService.getBookingById(id);
   }
 
@@ -34,7 +34,7 @@ export class BookingController {
   @Post('/')
   async createBooking(
     @Body() newBooking: CreateBookingDto,
-  ): Promise<RestBooking> {
+  ): Promise<RestBookingModel> {
     return this.bookingService.createBooking(newBooking);
   }
 
@@ -44,7 +44,7 @@ export class BookingController {
   async updateBooking(
     @Param('id', ParseIntPipe) id: number,
     @Body() updatedBooking: CreateBookingDto,
-  ): Promise<RestBooking> {
+  ): Promise<RestBookingModel> {
     return this.bookingService.updateBooking(id, updatedBooking);
   }
 
@@ -53,7 +53,7 @@ export class BookingController {
   @Delete('/:id')
   async deleteBookingById(
     @Param('id', ParseIntPipe) id: number,
-  ): Promise<RestBooking> {
+  ): Promise<RestBookingModel> {
     return this.bookingService.deleteBookingById(id);
   }
 }
