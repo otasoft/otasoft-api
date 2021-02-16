@@ -1,2 +1,2 @@
-export * from './create-offer.input';
-export * from './update-offer.input';
+export * from './create-offer/create-offer.input';
+export * from './update-offer/update-offer.input';
