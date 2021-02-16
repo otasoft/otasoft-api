@@ -4,4 +4,8 @@ import { Field, ObjectType } from '@nestjs/graphql';
 export class GqlTextResponseModel {
   @Field()
   response: string;
+
+  constructor(response: string) {
+    this.response = response;
+  }
 }
