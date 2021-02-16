@@ -52,7 +52,7 @@ describe('OfferQueryResolver', () => {
   it('should get all offers and return Offer models', async () => {
     const offers = await resolver.getAllOffers();
 
-    expect(typeof offers).toBe('array');
+    expect(typeof offers).toBe('object');
     offers.map((offer) => {
       expect(offer.offer_id).toBe(1);
       expect(offer.name).toBe('Test');
@@ -64,7 +64,7 @@ describe('OfferQueryResolver', () => {
   it('should get offers by query and return Offer models', async () => {
     const offers = await resolver.getOffersByQuery('Test');
 
-    expect(typeof offers).toBe('array');
+    expect(typeof offers).toBe('object');
     offers.map((offer) => {
       expect(offer.offer_id).toBe(1);
       expect(offer.name).toBe('Test');

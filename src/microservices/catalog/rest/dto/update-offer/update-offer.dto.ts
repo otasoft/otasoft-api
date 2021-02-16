@@ -8,4 +8,9 @@ export class UpdateOfferDto {
   @IsString()
   @Length(20, 200)
   description: string;
+
+  constructor(name: string, description: string) {
+    this.name = name;
+    this.description = description;
+  }
 }
