@@ -1,9 +1,11 @@
+import { GqlBookingModel } from '@booking/graphql/models';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
 import { ClientService } from '@utils/client';
+import { CreateBookingInput } from '../graphql/input';
 import { CreateBookingDto } from '../rest/dto';
-import { RestBooking } from '../rest/models';
+import { RestBookingModel } from '../rest/models';
 
 @Injectable()
 export class BookingService {
@@ -13,7 +15,7 @@ export class BookingService {
     private readonly clientService: ClientService,
   ) {}
 
-  async getBookingById(id: number): Promise<RestBooking> {
+  async getBookingById(id: number): Promise<RestBookingModel> {
     return this.clientService.sendMessageWithPayload(
       this.bookingClient,
       { role: 'booking', cmd: 'get' },
@@ -21,7 +23,9 @@ export class BookingService {
     );
   }
 
-  async createBooking(newBooking: CreateBookingDto): Promise<RestBooking> {
+  async createBooking(
+    newBooking: CreateBookingDto | CreateBookingInput,
+  ): Promise<RestBookingModel | GqlBookingModel> {
     return this.clientService.sendMessageWithPayload(
       this.bookingClient,
       { role: 'booking', cmd: 'create' },
@@ -31,8 +35,8 @@ export class BookingService {
 
   async updateBooking(
     id: number,
-    updatedBooking: CreateBookingDto,
-  ): Promise<RestBooking> {
+    updatedBooking: CreateBookingDto | CreateBookingInput,
+  ): Promise<RestBookingModel | GqlBookingModel> {
     return this.clientService.sendMessageWithPayload(
       this.bookingClient,
       { role: 'booking', cmd: 'update' },
@@ -40,7 +44,9 @@ export class BookingService {
     );
   }
 
-  async deleteBookingById(id: number): Promise<RestBooking> {
+  async deleteBookingById(
+    id: number,
+  ): Promise<RestBookingModel | GqlBookingModel> {
     return this.clientService.sendMessageWithPayload(
       this.bookingClient,
       { role: 'booking', cmd: 'remove' },
