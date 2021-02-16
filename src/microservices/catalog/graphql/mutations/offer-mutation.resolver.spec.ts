@@ -75,7 +75,7 @@ describe('OfferMutationResolver', () => {
     expect(offer instanceof GqlOfferModel).toBe(true);
   });
 
-  it('should delete offer by ID and return Offer model', async () => {
+  it('should delete offer by ID and return text response', async () => {
     const offerIdToTest = 1;
     const offer = await resolver.deleteOffer(offerIdToTest);
 
