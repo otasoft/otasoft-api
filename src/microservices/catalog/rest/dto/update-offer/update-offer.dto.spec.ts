@@ -5,7 +5,7 @@ describe('UpdateOfferDto', () => {
     const testUpdateOfferDto = { name: 'Test', description: 'Description' };
 
     expect(new UpdateOfferDto('Test', 'Description')).toEqual(
-        testUpdateOfferDto,
+      testUpdateOfferDto,
     );
   });
 });

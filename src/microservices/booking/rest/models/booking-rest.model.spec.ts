@@ -1,17 +1,17 @@
 import { RestBookingModel } from './booking-rest.model';
 
-describe('RestBookingModelModel', () => {
-  it('should create new RestBookingModelModel', () => {
+describe('RestBookingMode', () => {
+  it('should create new RestBookingModel', () => {
     const bookingIdToTest = 1;
     const customerIdToTest = 1;
 
-    const restBookingModelModel = new RestBookingModel(
+    const restBookingModel = new RestBookingModel(
       bookingIdToTest,
       new Date(),
       customerIdToTest,
     );
-    expect(restBookingModelModel.id).toBe(bookingIdToTest);
-    expect(restBookingModelModel.customer_id).toBe(customerIdToTest);
-    expect(restBookingModelModel instanceof RestBookingModel).toBe(true);
+    expect(restBookingModel.id).toBe(bookingIdToTest);
+    expect(restBookingModel.customer_id).toBe(customerIdToTest);
+    expect(restBookingModel instanceof RestBookingModel).toBe(true);
   });
 });

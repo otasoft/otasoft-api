@@ -9,4 +9,10 @@ export class RestOfferModel {
 
   @IsString()
   description: string;
+
+  constructor(offer_id: number, name: string, description: string) {
+    this.offer_id = offer_id;
+    this.name = name;
+    this.description = description;
+  }
 }
