@@ -1,25 +1,19 @@
-import { NotFoundException, UseGuards } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { Args, Resolver, Int, Query } from '@nestjs/graphql';
 
 import { GqlJwtAuthGuard } from '@auth/graphql/guards';
 import { BookingService } from '../../services';
-import { GqlBooking } from '../models';
+import { GqlBookingModel } from '../models';
 
-@Resolver((of) => GqlBooking)
+@Resolver((of) => GqlBookingModel)
 export class BookingQueryResolver {
   constructor(private readonly bookingService: BookingService) {}
 
   @UseGuards(GqlJwtAuthGuard)
-  @Query((returns) => GqlBooking)
-  async getBooking(
+  @Query((returns) => GqlBookingModel)
+  async getBookingById(
     @Args('id', { type: () => Int }) id: number,
-  ): Promise<GqlBooking> {
-    const booking = await this.bookingService.getBookingById(id);
-
-    if (!booking) {
-      throw new NotFoundException('Customer with that id does not exist');
-    }
-
-    return booking;
+  ): Promise<GqlBookingModel> {
+    return this.bookingService.getBookingById(id);
   }
 }
