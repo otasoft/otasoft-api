@@ -2,7 +2,7 @@ import { IsInt, IsString } from 'class-validator';
 
 export class RestOfferModel {
   @IsInt()
-  activity_id: number;
+  offer_id: number;
 
   @IsString()
   name: string;
