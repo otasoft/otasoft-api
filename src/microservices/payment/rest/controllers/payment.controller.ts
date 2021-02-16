@@ -11,10 +11,10 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 
-import { PaymentService } from '../payment.service';
-import { RestPayment } from './models/payment-rest';
-import { CreatePaymentDto } from './dto';
-import { AccessControlGuard } from '../../auth/guards';
+import { AccessControlGuard } from '@auth/guards';
+import { PaymentService } from '../../services';
+import { RestPayment } from '../models';
+import { CreatePaymentDto } from '../dto';
 
 @Controller('payment')
 export class PaymentController {

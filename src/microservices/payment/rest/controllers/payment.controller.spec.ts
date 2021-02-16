@@ -1,12 +1,11 @@
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { PaymentService } from '../payment.service';
+import { createClientAsyncOptions } from '@utils/client';
+import { UtilsModule } from '@utils/utils.module';
+import { BookingModule } from '@booking/booking.module';
+import { PaymentService } from '../../services';
 import { PaymentController } from './payment.controller';
-import { createClientAsyncOptions } from '../../../utils/client';
-import { UtilsModule } from '../../../utils/utils.module';
-import { BookingModule } from '../../../microservices/booking/booking.module';
-import { BookingService } from '../../../microservices/booking/services/booking.service';
 
 describe('PaymentController', () => {
   let controller: PaymentController;
@@ -20,10 +19,10 @@ describe('PaymentController', () => {
           createClientAsyncOptions('booking'),
         ]),
         UtilsModule,
-        BookingModule
+        BookingModule,
       ],
       controllers: [PaymentController],
-      providers: [PaymentService, BookingService],
+      providers: [PaymentService],
     }).compile();
 
     controller = module.get<PaymentController>(PaymentController);
