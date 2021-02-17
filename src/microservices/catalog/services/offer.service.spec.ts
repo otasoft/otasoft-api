@@ -13,7 +13,6 @@ import { RestOfferModel, RestTextResponseModel } from '@catalog/rest/models';
 import { CreateOfferDto, UpdateOfferDto } from '@catalog/rest/dto';
 
 
-// FIXME
 describe('OfferService', () => {
   let service: OfferService;
 
@@ -40,9 +39,8 @@ describe('OfferService', () => {
                       new RestOfferModel(1, 'Test', 'Description'),
                       new RestOfferModel(1, 'Test', 'Description'),
                     ];
-                  case 'getOffersByQuery':
+                  case 'getOfferByQuery':
                     return [
-                      new RestOfferModel(1, 'Test', 'Description'),
                       new RestOfferModel(1, 'Test', 'Description'),
                       new RestOfferModel(1, 'Test', 'Description'),
                     ];
@@ -58,8 +56,8 @@ describe('OfferService', () => {
                       payload.updateOfferDto.name,
                       payload.updateOfferDto.description,
                     );
-                  case 'remove':
-                    return new RestOfferModel(payload, 'Test', 'Description');
+                  case 'delete':
+                    return new RestTextResponseModel('Success');
                 }
               },
             ),
@@ -86,7 +84,7 @@ describe('OfferService', () => {
     expect(offer instanceof RestOfferModel).toBe(true);
   });
 
-  it('should get offer by ID and return Offer model', async () => {
+  it('should get all offers and return Offer models', async () => {
     const offers = await service.getAllOffers();
 
     expect(typeof offers).toBe('object');
@@ -98,7 +96,7 @@ describe('OfferService', () => {
     });
   });
 
-  it('should get offer by ID and return Offer model', async () => {
+  it('should get offer by query and return Offer models', async () => {
     const offers = await service.getOffersByQuery('Test');
 
     expect(typeof offers).toBe('object');
@@ -120,7 +118,7 @@ describe('OfferService', () => {
     expect(typeof offer).toBe('object');
     expect(offer.offer_id).toBe(1);
     expect(offer.name).toBe(createOfferDto.name);
-    expect(offer.name).toBe(createOfferDto.description);
+    expect(offer.description).toBe(createOfferDto.description);
     expect(offer instanceof RestOfferModel).toBe(true);
   });
 
