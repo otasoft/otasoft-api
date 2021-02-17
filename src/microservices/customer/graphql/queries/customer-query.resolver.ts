@@ -2,7 +2,7 @@ import { NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Resolver, Int, Query } from '@nestjs/graphql';
 
 import { GqlJwtAuthGuard } from '@auth/graphql/guards';
-import { GqlCustomer } from '../models';
+import { GqlCustomer, GqlMessageModel } from '../models';
 import { CustomerService } from '../../services';
 
 @Resolver((of) => GqlCustomer)
@@ -21,5 +21,12 @@ export class CustomerQueryResolver {
     }
 
     return customer;
+  }
+
+  @Query((returns) => GqlMessageModel)
+  async getCustomerMessages(
+    @Args('id') id: number,
+  ): Promise<GqlMessageModel[]> {
+    return this.customerService.getCustomerMessages(id);
   }
 }

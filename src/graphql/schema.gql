@@ -45,6 +45,11 @@ type GqlCustomer {
   last_name: String!
 }
 
+type GqlMessageModel {
+  message_id: ID!
+  content: String!
+}
+
 type GqlPayment {
   id: ID!
   booking_id: Float!
@@ -66,6 +71,7 @@ type Query {
   getAllOffers: GqlOfferModel!
   getOffersByQuery(query: String!): GqlOfferModel!
   getCustomerProfile(id: Int!): GqlCustomer!
+  getCustomerMessages(id: Float!): GqlMessageModel!
   getPayment(id: Int!): GqlPayment!
 }
 
@@ -96,6 +102,7 @@ type Mutation {
   createCustomerProfile(createCustomerProfileData: CreateCustomerProfileInput!): GqlCustomer!
   removeCustomerProfile(id: Float!): Boolean!
   updateCustomerProfile(updateCustomerProfileData: UpdateCustomerProfileInput!, id: Float!): GqlCustomer!
+  deleteMessage(id: Float!): GqlTextResponseModel!
   createPayment(createPaymentData: CreatePaymentInput!): GqlPayment!
   updatePayment(updatePaymentData: CreatePaymentInput!, id: Float!): GqlPayment!
 }

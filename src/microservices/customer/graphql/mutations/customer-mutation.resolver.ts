@@ -8,6 +8,7 @@ import {
   CreateCustomerProfileInput,
   UpdateCustomerProfileInput,
 } from '../input';
+import { GqlTextResponseModel } from '@catalog/graphql/models';
 
 @Resolver((of) => GqlCustomer)
 export class CustomerMutationResolver {
@@ -44,5 +45,12 @@ export class CustomerMutationResolver {
     );
 
     return updatedCustomerProfile;
+  }
+
+  @Mutation((returns) => GqlTextResponseModel)
+  async deleteMessage(
+    @Args('id') id: number,
+  ): Promise<GqlTextResponseModel> {
+    return this.customerService.deleteMessage(id);
   }
 }
