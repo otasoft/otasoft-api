@@ -12,7 +12,8 @@ import {
 import { RestJwtAuthGuard } from '@auth/rest/guards';
 import { CustomerService } from '../../services';
 import { CreateCustomerProfileDto, UpdateCustomerProfileDto } from '../dto';
-import { RestCustomer } from '../models';
+import { RestCustomer, RestMessageModel } from '../models';
+import { RestTextResponseModel } from '@catalog/rest/models';
 
 @Controller('customer')
 export class CustomerController {
@@ -22,6 +23,16 @@ export class CustomerController {
   @Get('/profile/:id')
   async getCustomerProfile(@Param('id') id: number): Promise<RestCustomer> {
     return this.customerService.getCustomerProfile(id);
+  }
+
+  @Get('/get-customer-messages/:id')
+  async getCustomerMessages(@Param('id') id: number): Promise<RestMessageModel[]> {
+    return this.customerService.getCustomerMessages(id);
+  }
+
+  @Delete('delete-message/:id')
+  async deleteMessage(@Param('id') id: number): Promise<RestTextResponseModel> {
+    return this.customerService.deleteMessage(id);
   }
 
   @Post('/create')
