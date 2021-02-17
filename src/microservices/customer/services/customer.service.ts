@@ -9,15 +9,19 @@ import {
   CreateCustomerProfileInput,
   UpdateCustomerProfileInput,
 } from '../graphql/input';
-import { RestCustomer } from '../rest/models';
-import { GqlCustomer } from '../graphql/models';
+import { RestCustomer, RestMessageModel } from '../rest/models';
+import { GqlCustomer, GqlMessageModel } from '../graphql/models';
 import { IUpdateCustomerObject } from '../interfaces';
+import { ClientService } from '@utils/client';
+import { RestTextResponseModel } from '@catalog/rest/models';
+import { GqlTextResponseModel } from '@catalog/graphql/models';
 
 @Injectable()
 export class CustomerService {
   constructor(
     @Inject('CUSTOMER_MICROSERVICE')
     public readonly customerClient: ClientProxy,
+    private readonly clientService: ClientService
   ) {}
 
   async getCustomerProfile(id: number): Promise<GqlCustomer | RestCustomer> {
@@ -25,6 +29,22 @@ export class CustomerService {
       .send({ role: 'customer', cmd: 'get' }, id)
       .toPromise();
     return customerProfile;
+  }
+
+  async getCustomerMessages(id: number): Promise<RestMessageModel[] | GqlMessageModel[]> {
+    return this.clientService.sendMessageWithPayload(
+      this.customerClient,
+      { role: 'customer', cmd: 'getCustomerMessages' },
+      id,
+    )
+  }
+
+  async deleteMessage(id: number): Promise<RestTextResponseModel | GqlTextResponseModel> {
+    return this.clientService.sendMessageWithPayload(
+      this.customerClient,
+      { role: 'customer', cmd: 'deleteMessage' },
+      id,
+    )
   }
 
   async createCustomerProfile(
