@@ -8,6 +8,7 @@ import { HealthModule } from './health/health.module';
 import { MicroservicesModules } from './microservices';
 import { BullQueueModule } from './queues/bull-queue.module';
 import { UtilsModule } from './utils/utils.module';
+import { OpenIdModule } from './open-id/open-id.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UtilsModule } from './utils/utils.module';
     BullQueueModule,
     HealthModule,
     UtilsModule,
+    OpenIdModule,
     ...MicroservicesModules,
   ],
 })
