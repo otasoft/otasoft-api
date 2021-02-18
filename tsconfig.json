@@ -20,7 +20,8 @@
       "@customer/*": ["src/microservices/customer/*"],
       "@mail/*": ["src/microservices/mail/*"],
       "@utils/*": ["src/utils/*"],
-      "@test/*": ["test/*"]
+      "@test/*": ["test/*"],
+      "@security/*": ["src/security/*"],
     }
   }
 }

@@ -109,7 +109,8 @@
       "@customer/(.*)": "<rootDir>/microservices/customer/$1",
       "@mail/(.*)": "<rootDir>/microservices/mail/$1",
       "@utils/(.*)": "<rootDir>/utils/$1",
-      "@test/(.*)": "<rootDir>/../test/$1"
+      "@test/(.*)": "<rootDir>/../test/$1",
+      "@security/(.*)": "<rootDir>/security/$1"
     }
   },
   "_moduleAliases": {
@@ -119,6 +120,7 @@
     "@catalog": "dist/microservices/catalog",
     "@customer": "dist/microservices/customer",
     "@mail": "dist/microservices/mail",
-    "@utils": "dist/utils"
+    "@utils": "dist/utils",
+    "@security": "dist/security"
   }
 }
