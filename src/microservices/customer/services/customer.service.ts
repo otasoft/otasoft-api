@@ -12,19 +12,18 @@ import {
 import { RestCustomer } from '../rest/models';
 import { GqlCustomer } from '../graphql/models';
 import { IUpdateCustomerObject } from '../interfaces';
+import { ClientService } from '@utils/client';
 
 @Injectable()
 export class CustomerService {
   constructor(
     @Inject('CUSTOMER_MICROSERVICE')
     public readonly customerClient: ClientProxy,
+    public readonly clientService: ClientService
   ) {}
 
   async getCustomerProfile(id: number): Promise<GqlCustomer | RestCustomer> {
-    const customerProfile = await this.customerClient
-      .send({ role: 'customer', cmd: 'get' }, id)
-      .toPromise();
-    return customerProfile;
+    return this.clientService.sendMessageWithPayload(this.customerClient, { role: 'customer', cmd: 'get' }, id);
   }
 
   async createCustomerProfile(
@@ -32,18 +31,11 @@ export class CustomerService {
       | CreateCustomerProfileInput
       | CreateCustomerProfileDto,
   ): Promise<GqlCustomer | RestCustomer> {
-    const newCustomerProfile = await this.customerClient
-      .send({ role: 'customer', cmd: 'create' }, createCustomerProfileData)
-      .toPromise();
-    if (!newCustomerProfile) throw new BadRequestException(); // Change to more appropriate exception
-    return newCustomerProfile;
+    return this.clientService.sendMessageWithPayload(this.customerClient, { role: 'customer', cmd: 'create' }, createCustomerProfileData);
   }
 
   async removeCustomerProfile(id: number): Promise<Boolean> {
-    const customerRemoved = await this.customerClient
-      .send({ role: 'customer', cmd: 'remove' }, id)
-      .toPromise();
-    return customerRemoved;
+    return this.clientService.sendMessageWithPayload(this.customerClient, { role: 'customer', cmd: 'remove' }, id);
   }
 
   async updateCustomerProfile(
@@ -56,9 +48,7 @@ export class CustomerService {
       id,
       updateCustomerProfileData,
     };
-    const updatedProfile = await this.customerClient
-      .send({ role: 'customer', cmd: 'update' }, updateProfileObject)
-      .toPromise();
-    return updatedProfile;
+
+    return this.clientService.sendMessageWithPayload(this.customerClient, { role: 'customer', cmd: 'update' }, updateProfileObject);
   }
 }
