@@ -1,2 +1,2 @@
-export * from './create-customer-profile.input';
-export * from './update-customer-profile.input';
+export * from './create-customer-profile';
+export * from './update-customer-profile';
