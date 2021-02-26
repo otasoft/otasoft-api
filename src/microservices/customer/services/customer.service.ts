@@ -19,11 +19,15 @@ export class CustomerService {
   constructor(
     @Inject('CUSTOMER_MICROSERVICE')
     public readonly customerClient: ClientProxy,
-    public readonly clientService: ClientService
+    public readonly clientService: ClientService,
   ) {}
 
   async getCustomerProfile(id: number): Promise<GqlCustomer | RestCustomer> {
-    return this.clientService.sendMessageWithPayload(this.customerClient, { role: 'customer', cmd: 'get' }, id);
+    return this.clientService.sendMessageWithPayload(
+      this.customerClient,
+      { role: 'customer', cmd: 'get' },
+      id,
+    );
   }
 
   async createCustomerProfile(
@@ -31,11 +35,19 @@ export class CustomerService {
       | CreateCustomerProfileInput
       | CreateCustomerProfileDto,
   ): Promise<GqlCustomer | RestCustomer> {
-    return this.clientService.sendMessageWithPayload(this.customerClient, { role: 'customer', cmd: 'create' }, createCustomerProfileData);
+    return this.clientService.sendMessageWithPayload(
+      this.customerClient,
+      { role: 'customer', cmd: 'create' },
+      createCustomerProfileData,
+    );
   }
 
   async removeCustomerProfile(id: number): Promise<Boolean> {
-    return this.clientService.sendMessageWithPayload(this.customerClient, { role: 'customer', cmd: 'remove' }, id);
+    return this.clientService.sendMessageWithPayload(
+      this.customerClient,
+      { role: 'customer', cmd: 'remove' },
+      id,
+    );
   }
 
   async updateCustomerProfile(
@@ -49,6 +61,10 @@ export class CustomerService {
       updateCustomerProfileData,
     };
 
-    return this.clientService.sendMessageWithPayload(this.customerClient, { role: 'customer', cmd: 'update' }, updateProfileObject);
+    return this.clientService.sendMessageWithPayload(
+      this.customerClient,
+      { role: 'customer', cmd: 'update' },
+      updateProfileObject,
+    );
   }
 }

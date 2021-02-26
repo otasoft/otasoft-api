@@ -1,9 +1,16 @@
-import { CreateCustomerProfileDto, UpdateCustomerProfileDto } from '@customer/rest/dto';
+import {
+  CreateCustomerProfileDto,
+  UpdateCustomerProfileDto,
+} from '@customer/rest/dto';
 import { RestCustomer } from '@customer/rest/models';
 import { ClientsModule } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { ClientService, createClientAsyncOptions, IMessagePattern } from '@utils/client';
+import {
+  ClientService,
+  createClientAsyncOptions,
+  IMessagePattern,
+} from '@utils/client';
 import { UtilsModule } from '@utils/utils.module';
 import { CustomerService } from './customer.service';
 
@@ -17,7 +24,7 @@ describe('CustomerService', () => {
           createClientAsyncOptions('auth'),
           createClientAsyncOptions('customer'),
         ]),
-        UtilsModule
+        UtilsModule,
       ],
       providers: [
         CustomerService,
@@ -75,8 +82,9 @@ describe('CustomerService', () => {
       first_name: 'John',
       last_name: 'Doe',
     };
-    const customer = await service.createCustomerProfile(createCustomerProfileDto);
-
+    const customer = await service.createCustomerProfile(
+      createCustomerProfileDto,
+    );
 
     expect(typeof customer).toBe('object');
     expect(customer.id).toBe(1);
@@ -91,7 +99,10 @@ describe('CustomerService', () => {
       first_name: 'John',
       last_name: 'Doe',
     };
-    const customer = await service.updateCustomerProfile(customerIdToTest, updateCustomerProfileDto);
+    const customer = await service.updateCustomerProfile(
+      customerIdToTest,
+      updateCustomerProfileDto,
+    );
 
     expect(typeof customer).toBe('object');
     expect(customer.id).toBe(customerIdToTest);

@@ -35,16 +35,17 @@ describe('CustomerController', () => {
                 ),
             ),
             updateCustomerProfile: jest.fn(
-              (id: number, updateCustomerProfileDto: UpdateCustomerProfileDto) =>
+              (
+                id: number,
+                updateCustomerProfileDto: UpdateCustomerProfileDto,
+              ) =>
                 new RestCustomer(
                   id,
                   updateCustomerProfileDto.first_name,
                   updateCustomerProfileDto.last_name,
                 ),
             ),
-            removeCustomerProfile: jest.fn(
-              (id: number) => true,
-            ),
+            removeCustomerProfile: jest.fn((id: number) => true),
           }),
         },
       ],
@@ -72,7 +73,9 @@ describe('CustomerController', () => {
       first_name: 'John',
       last_name: 'Doe',
     };
-    const customer = await controller.createCustomerProfile(createCustomerProfileDto);
+    const customer = await controller.createCustomerProfile(
+      createCustomerProfileDto,
+    );
 
     expect(typeof customer).toBe('object');
     expect(customer.id).toBe(1);
@@ -87,7 +90,10 @@ describe('CustomerController', () => {
       first_name: 'John',
       last_name: 'Doe',
     };
-    const customer = await controller.updateCustomerProfile(customerIdIdToTest, updateCustomerProfileDto);
+    const customer = await controller.updateCustomerProfile(
+      customerIdIdToTest,
+      updateCustomerProfileDto,
+    );
 
     expect(typeof customer).toBe('object');
     expect(customer.id).toBe(customerIdIdToTest);

@@ -9,7 +9,7 @@ describe('OpenIdController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [OpenIdController],
-      providers: [OpenIdService]
+      providers: [OpenIdService],
     }).compile();
 
     controller = module.get<OpenIdController>(OpenIdController);

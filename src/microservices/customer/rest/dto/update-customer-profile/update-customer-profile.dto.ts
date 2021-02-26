@@ -1,10 +1,10 @@
-import { IsString, Length } from "class-validator";
+import { IsString, Length } from 'class-validator';
 
 export class UpdateCustomerProfileDto {
   @IsString()
   @Length(1, 30)
   first_name: string;
-  
+
   @IsString()
   @Length(1, 30)
   last_name: string;

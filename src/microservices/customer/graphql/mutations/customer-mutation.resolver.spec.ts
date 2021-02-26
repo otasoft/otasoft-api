@@ -1,6 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { CreateCustomerProfileInput, UpdateCustomerProfileInput } from '../input';
+import {
+  CreateCustomerProfileInput,
+  UpdateCustomerProfileInput,
+} from '../input';
 import { GqlCustomer } from '../models';
 import { CustomerService } from '@customer/services';
 import { CustomerMutationResolver } from './customer-mutation.resolver';
@@ -24,16 +27,17 @@ describe('CustomerMutationResolver', () => {
                 ),
             ),
             updateCustomerProfile: jest.fn(
-              (id: number, updateCustomerProfileInput: UpdateCustomerProfileInput) =>
+              (
+                id: number,
+                updateCustomerProfileInput: UpdateCustomerProfileInput,
+              ) =>
                 new GqlCustomer(
                   id,
                   updateCustomerProfileInput.first_name,
                   updateCustomerProfileInput.last_name,
                 ),
             ),
-            removeCustomerProfile: jest.fn(
-              (id: number) => true,
-            ),
+            removeCustomerProfile: jest.fn((id: number) => true),
           }),
         },
       ],
@@ -51,7 +55,9 @@ describe('CustomerMutationResolver', () => {
       first_name: 'John',
       last_name: 'Doe',
     };
-    const customer = await resolver.createCustomerProfile(createCustomerProfileInput);
+    const customer = await resolver.createCustomerProfile(
+      createCustomerProfileInput,
+    );
 
     expect(typeof customer).toBe('object');
     expect(customer.id).toBe(1);
@@ -63,10 +69,13 @@ describe('CustomerMutationResolver', () => {
   it('should update customer profile and return Customer model', async () => {
     const customerIdIdToTest = 1;
     const updateCustomerProfileInput: UpdateCustomerProfileInput = {
-        first_name: 'John',
-        last_name: 'Doe',
+      first_name: 'John',
+      last_name: 'Doe',
     };
-    const customer = await resolver.updateCustomerProfile(customerIdIdToTest, updateCustomerProfileInput);
+    const customer = await resolver.updateCustomerProfile(
+      customerIdIdToTest,
+      updateCustomerProfileInput,
+    );
 
     expect(typeof customer).toBe('object');
     expect(customer.id).toBe(customerIdIdToTest);

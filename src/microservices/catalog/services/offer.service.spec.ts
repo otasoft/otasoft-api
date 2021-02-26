@@ -12,7 +12,6 @@ import { UtilsModule } from '@utils/utils.module';
 import { RestOfferModel, RestTextResponseModel } from '@catalog/rest/models';
 import { CreateOfferDto, UpdateOfferDto } from '@catalog/rest/dto';
 
-
 describe('OfferService', () => {
   let service: OfferService;
 
