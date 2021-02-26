@@ -1,2 +1,2 @@
-export * from './create-customer-profile.dto';
-export * from './update-customer-profile.dto';
+export * from './create-customer-profile';
+export * from './update-customer-profile';
