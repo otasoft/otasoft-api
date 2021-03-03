@@ -46,7 +46,7 @@
     "connect-redis": "^5.0.0",
     "cookie-parser": "^1.4.5",
     "csurf": "^1.11.0",
-    "express-rate-limit": "^5.2.3",
+    "express-rate-limit": "^5.2.5",
     "express-session": "^1.17.1",
     "graphql": "^15.5.0",
     "graphql-tools": "^7.0.2",
