@@ -2367,10 +2367,10 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
-amqp-connection-manager@^3.2.0:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/amqp-connection-manager/-/amqp-connection-manager-3.2.1.tgz#ac33ddb3effb577f2f8e45f6714be5dbdd5b2b1d"
-  integrity sha512-dDs2hg8MEtuYlXMzIqWwFx4N5Fjm8vXAQNyukDavyrYsgnQVt+rtJ+oosMP7eOXukSdquCoVqOaWr/Ih6txwTA==
+amqp-connection-manager@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/amqp-connection-manager/-/amqp-connection-manager-3.2.2.tgz#73c820b6ed440b451de24c1eb9cf3541a10635d9"
+  integrity sha512-o+6Kb4p+xFYwU8MuFxnrPQzhefCE2dcCd8dnevWLTRgQCtOTVC9AQ434hQyjB+Bpq6Vl9cDMWTOZT11ajB6ZSg==
   dependencies:
     promise-breaker "^5.0.0"
 
