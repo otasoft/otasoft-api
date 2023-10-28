@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@nestjs/bull": "^0.3.1",
-    "@nestjs/common": "^7.6.11",
+    "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^0.6.3",
     "@nestjs/core": "^7.6.11",
     "@nestjs/graphql": "^7.9.8",
